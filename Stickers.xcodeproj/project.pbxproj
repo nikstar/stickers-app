@@ -1,0 +1,548 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		582EB092268746AB00F4C2D2 /* IPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08C268746AA00F4C2D2 /* IPC.swift */; };
+		582EB093268746AB00F4C2D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08D268746AA00F4C2D2 /* Helpers.swift */; };
+		582EB094268746AB00F4C2D2 /* Limits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08E268746AA00F4C2D2 /* Limits.swift */; };
+		582EB095268746AB00F4C2D2 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08F268746AA00F4C2D2 /* Sticker.swift */; };
+		582EB096268746AB00F4C2D2 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB090268746AA00F4C2D2 /* Errors.swift */; };
+		582EB097268746AB00F4C2D2 /* StickerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB091268746AA00F4C2D2 /* StickerSet.swift */; };
+		582EB09A2687479000F4C2D2 /* StickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0992687479000F4C2D2 /* StickerRow.swift */; };
+		582EB09C2687491000F4C2D2 /* libStickerImport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 582EB0852687469200F4C2D2 /* libStickerImport.a */; };
+		582EB0A42687765D00F4C2D2 /* StickerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A32687765D00F4C2D2 /* StickerSet.swift */; };
+		582EB0A62687770200F4C2D2 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A52687770200F4C2D2 /* Sticker.swift */; };
+		582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A8268777CF00F4C2D2 /* Store.swift */; };
+		582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */; };
+		58BB966526876CB200B62A74 /* StickersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB966426876CB200B62A74 /* StickersApp.swift */; };
+		58BB966726876CB200B62A74 /* StickerSetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB966626876CB200B62A74 /* StickerSetList.swift */; };
+		58BB966926876CB300B62A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58BB966826876CB300B62A74 /* Assets.xcassets */; };
+		58BB966C26876CB300B62A74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58BB966B26876CB300B62A74 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		582EB09D2687491000F4C2D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58BB965926876CB200B62A74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 582EB0842687469200F4C2D2;
+			remoteInfo = StickerImport;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		582EB0832687469200F4C2D2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		582EB0852687469200F4C2D2 /* libStickerImport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStickerImport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		582EB08C268746AA00F4C2D2 /* IPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPC.swift; sourceTree = "<group>"; };
+		582EB08D268746AA00F4C2D2 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		582EB08E268746AA00F4C2D2 /* Limits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Limits.swift; sourceTree = "<group>"; };
+		582EB08F268746AA00F4C2D2 /* Sticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
+		582EB090268746AA00F4C2D2 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		582EB091268746AA00F4C2D2 /* StickerSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerSet.swift; sourceTree = "<group>"; };
+		582EB0992687479000F4C2D2 /* StickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerRow.swift; sourceTree = "<group>"; };
+		582EB0A32687765D00F4C2D2 /* StickerSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSet.swift; sourceTree = "<group>"; };
+		582EB0A52687770200F4C2D2 /* Sticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
+		582EB0A8268777CF00F4C2D2 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetEditor.swift; sourceTree = "<group>"; };
+		58BB966126876CB200B62A74 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58BB966426876CB200B62A74 /* StickersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickersApp.swift; sourceTree = "<group>"; };
+		58BB966626876CB200B62A74 /* StickerSetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetList.swift; sourceTree = "<group>"; };
+		58BB966826876CB300B62A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		58BB966B26876CB300B62A74 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		58BB966D26876CB300B62A74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		582EB0822687469200F4C2D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58BB965E26876CB200B62A74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				582EB09C2687491000F4C2D2 /* libStickerImport.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		582EB0862687469200F4C2D2 /* StickerImport */ = {
+			isa = PBXGroup;
+			children = (
+				582EB090268746AA00F4C2D2 /* Errors.swift */,
+				582EB08D268746AA00F4C2D2 /* Helpers.swift */,
+				582EB08C268746AA00F4C2D2 /* IPC.swift */,
+				582EB08E268746AA00F4C2D2 /* Limits.swift */,
+				582EB08F268746AA00F4C2D2 /* Sticker.swift */,
+				582EB091268746AA00F4C2D2 /* StickerSet.swift */,
+			);
+			path = StickerImport;
+			sourceTree = "<group>";
+		};
+		582EB0982687472600F4C2D2 /* Support FIles */ = {
+			isa = PBXGroup;
+			children = (
+				58BB966426876CB200B62A74 /* StickersApp.swift */,
+				58BB966826876CB300B62A74 /* Assets.xcassets */,
+				58BB966D26876CB300B62A74 /* Info.plist */,
+				58BB966A26876CB300B62A74 /* Preview Content */,
+			);
+			name = "Support FIles";
+			sourceTree = "<group>";
+		};
+		582EB09B2687491000F4C2D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		582EB09F2687747A00F4C2D2 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				58BB966626876CB200B62A74 /* StickerSetList.swift */,
+				582EB0992687479000F4C2D2 /* StickerRow.swift */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		582EB0A0268774C000F4C2D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				582EB0A32687765D00F4C2D2 /* StickerSet.swift */,
+				582EB0A52687770200F4C2D2 /* Sticker.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		582EB0A12687750400F4C2D2 /* StickerSetEditor */ = {
+			isa = PBXGroup;
+			children = (
+				582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */,
+			);
+			name = StickerSetEditor;
+			sourceTree = "<group>";
+		};
+		582EB0A22687758200F4C2D2 /* StickerEditor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = StickerEditor;
+			sourceTree = "<group>";
+		};
+		582EB0A7268777C500F4C2D2 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				582EB0A8268777CF00F4C2D2 /* Store.swift */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
+		58BB965826876CB200B62A74 = {
+			isa = PBXGroup;
+			children = (
+				58BB966326876CB200B62A74 /* Stickers */,
+				582EB0862687469200F4C2D2 /* StickerImport */,
+				58BB966226876CB200B62A74 /* Products */,
+				582EB09B2687491000F4C2D2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		58BB966226876CB200B62A74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				58BB966126876CB200B62A74 /* Stickers.app */,
+				582EB0852687469200F4C2D2 /* libStickerImport.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		58BB966326876CB200B62A74 /* Stickers */ = {
+			isa = PBXGroup;
+			children = (
+				582EB0A7268777C500F4C2D2 /* Store */,
+				582EB0A0268774C000F4C2D2 /* Model */,
+				582EB09F2687747A00F4C2D2 /* List */,
+				582EB0A12687750400F4C2D2 /* StickerSetEditor */,
+				582EB0A22687758200F4C2D2 /* StickerEditor */,
+				582EB0982687472600F4C2D2 /* Support FIles */,
+			);
+			path = Stickers;
+			sourceTree = "<group>";
+		};
+		58BB966A26876CB300B62A74 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				58BB966B26876CB300B62A74 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		582EB0842687469200F4C2D2 /* StickerImport */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 582EB08B2687469200F4C2D2 /* Build configuration list for PBXNativeTarget "StickerImport" */;
+			buildPhases = (
+				582EB0812687469200F4C2D2 /* Sources */,
+				582EB0822687469200F4C2D2 /* Frameworks */,
+				582EB0832687469200F4C2D2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StickerImport;
+			productName = StickerImport;
+			productReference = 582EB0852687469200F4C2D2 /* libStickerImport.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		58BB966026876CB200B62A74 /* Stickers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58BB967026876CB300B62A74 /* Build configuration list for PBXNativeTarget "Stickers" */;
+			buildPhases = (
+				58BB965D26876CB200B62A74 /* Sources */,
+				58BB965E26876CB200B62A74 /* Frameworks */,
+				58BB965F26876CB200B62A74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				582EB09E2687491000F4C2D2 /* PBXTargetDependency */,
+			);
+			name = Stickers;
+			productName = Stickers;
+			productReference = 58BB966126876CB200B62A74 /* Stickers.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58BB965926876CB200B62A74 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					582EB0842687469200F4C2D2 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					58BB966026876CB200B62A74 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = 58BB965C26876CB200B62A74 /* Build configuration list for PBXProject "Stickers" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 58BB965826876CB200B62A74;
+			productRefGroup = 58BB966226876CB200B62A74 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58BB966026876CB200B62A74 /* Stickers */,
+				582EB0842687469200F4C2D2 /* StickerImport */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		58BB965F26876CB200B62A74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58BB966C26876CB300B62A74 /* Preview Assets.xcassets in Resources */,
+				58BB966926876CB300B62A74 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		582EB0812687469200F4C2D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				582EB092268746AB00F4C2D2 /* IPC.swift in Sources */,
+				582EB094268746AB00F4C2D2 /* Limits.swift in Sources */,
+				582EB097268746AB00F4C2D2 /* StickerSet.swift in Sources */,
+				582EB093268746AB00F4C2D2 /* Helpers.swift in Sources */,
+				582EB096268746AB00F4C2D2 /* Errors.swift in Sources */,
+				582EB095268746AB00F4C2D2 /* Sticker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58BB965D26876CB200B62A74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				582EB0A42687765D00F4C2D2 /* StickerSet.swift in Sources */,
+				58BB966726876CB200B62A74 /* StickerSetList.swift in Sources */,
+				58BB966526876CB200B62A74 /* StickersApp.swift in Sources */,
+				582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */,
+				582EB09A2687479000F4C2D2 /* StickerRow.swift in Sources */,
+				582EB0A62687770200F4C2D2 /* Sticker.swift in Sources */,
+				582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		582EB09E2687491000F4C2D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 582EB0842687469200F4C2D2 /* StickerImport */;
+			targetProxy = 582EB09D2687491000F4C2D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		582EB0892687469200F4C2D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6RX8GEVB43;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		582EB08A2687469200F4C2D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6RX8GEVB43;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		58BB966E26876CB300B62A74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		58BB966F26876CB300B62A74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58BB967126876CB300B62A74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Stickers/Preview Content\"";
+				DEVELOPMENT_TEAM = 6RX8GEVB43;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Stickers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.nikstar.Stickers;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		58BB967226876CB300B62A74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Stickers/Preview Content\"";
+				DEVELOPMENT_TEAM = 6RX8GEVB43;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Stickers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.nikstar.Stickers;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		582EB08B2687469200F4C2D2 /* Build configuration list for PBXNativeTarget "StickerImport" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				582EB0892687469200F4C2D2 /* Debug */,
+				582EB08A2687469200F4C2D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58BB965C26876CB200B62A74 /* Build configuration list for PBXProject "Stickers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58BB966E26876CB300B62A74 /* Debug */,
+				58BB966F26876CB300B62A74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58BB967026876CB300B62A74 /* Build configuration list for PBXNativeTarget "Stickers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58BB967126876CB300B62A74 /* Debug */,
+				58BB967226876CB300B62A74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58BB965926876CB200B62A74 /* Project object */;
+}
