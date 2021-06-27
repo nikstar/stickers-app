@@ -19,24 +19,30 @@ struct StickerRow: View {
                     if let data = sticker.imageData, let image = UIImage(data: data) {
                         Image(uiImage: image)
                             .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(height: 128, alignment: .center)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: 96, maxHeight: 96, alignment: .center)
                             
                     }
                 }
                 if stickerSet.stickers.isEmpty {
                     noStickers
+                    noStickers
+                    noStickers
+                    noStickers
+                    noStickers
                 }
             }
         }
+        .padding(.vertical, 12)
+        .background(Color.secondary.opacity(0.08))
     }
     
     var noStickers: some View {
-        Image(systemName: "circle.dashed")
+        Image(systemName: "square.dashed")
             .resizable()
             .aspectRatio(1, contentMode: .fit)
-            .padding(6)
-            .frame(height: 128, alignment: .center)
+            .padding(12)
+            .frame(height: 96, alignment: .center)
             .opacity(0.2)
     }
 }
