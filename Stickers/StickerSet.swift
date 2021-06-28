@@ -11,6 +11,6 @@ struct StickerSet: Identifiable, Hashable, Codable {
     
     let id: UUID
     
-    var stickers: [Sticker]
+    var stickers: [UUID]
     
 }

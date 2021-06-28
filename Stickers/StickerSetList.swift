@@ -37,15 +37,16 @@ struct StickerSetList: View {
             }
         }
         .sheet(isPresented: $isPresented, onDismiss: {
-            let id = presentedStickerSetID?.0
-            let shouldDelete = store.stickerSets.first(where: { $0.id == id })?.stickers.isEmpty ?? false
             presentedStickerSetID = nil
-            if shouldDelete {
-                store.stickerSets.removeAll(where: { $0.id == id })
+            if let id = presentedStickerSetID?.0 {
+                let shouldDelete = store.stickerSets.first(where: { $0.id == id })?.stickers.isEmpty ?? false
+                if shouldDelete {
+                    store.removeStickerSet(id: id)
+                }
             }
         }) {
             if let id = presentedStickerSetID {
-                StickerSetEditor(stickerSet: store.binding(forStickerSet: id.0), isNew: id.1, isPresented: $isPresented)
+                StickerSetEditor(stickerSet: store.binding(forStickerSet: id.0), isNew: id.1, isPresented: $isPresented).environmentObject(store)
             }
         }
     }
@@ -72,6 +73,6 @@ struct StickerSetList: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        StickerSetList().environmentObject(Store.testDefault)
+        StickerSetList().environmentObject(Store.default())
     }
 }

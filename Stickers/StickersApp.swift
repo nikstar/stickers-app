@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-let store = Store.default()
 
 @main
 struct StickersApp: App {
+    
+    @StateObject var store = Store.default()
+
     var body: some Scene {
         WindowGroup {
             StickerSetList()

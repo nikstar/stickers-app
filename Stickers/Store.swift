@@ -8,36 +8,63 @@
 import SwiftUI
 import Combine
 
-fileprivate let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-final class Store: ObservableObject, Codable {
+final class Store: ObservableObject {
 
-    @Published var stickerSets: [StickerSet]
+    @Published private(set) var stickerSets: [StickerSet] {
+        didSet {
+            writeToDisk()
+        }
+    }
+    @Published private(set) var stickers: [Sticker] {
+        didSet {
+            writeToDisk()
+        }
+    }
+    
+    
+    var originalImages: OriginalImages = OriginalImages()
+    lazy var modifiedImages: ModifiedImages = ModifiedImages(store: self)
+    
     private var cancellables: Set<AnyCancellable> = []
     
-    fileprivate init(stickerSets: [StickerSet]) {
+    init(stickerSets: [StickerSet], stickers: [Sticker]) {
         self.stickerSets = stickerSets
+        self.stickers = stickers
+//        $stickerSets
+//            .receive(on: DispatchQueue.global(qos: .utility))
+//            .removeDuplicates()
+//            .debounce(for: 0.1, scheduler: RunLoop.main)
+//            .sink { _ in
+//                self.writeToDisk()
+//            }
+//            .store(in: &cancellables)
+//        $stickers
+//            .receive(on: DispatchQueue.global(qos: .utility))
+//            .removeDuplicates()
+//            .debounce(for: 0.1, scheduler: RunLoop.main)
+//            .sink { _ in
+//                self.writeToDisk()
+//            }
+//            .store(in: &cancellables)
+        
     }
     
-    func startObservers() -> Self {
-        $stickerSets
-            .receive(on: DispatchQueue.global(qos: .utility))
-            .removeDuplicates()
-            .debounce(for: 0.1, scheduler: RunLoop.main)
-            .map(Store.init)
-            .sink(receiveValue: writeToDisk(_:))
-            .store(in: &cancellables)
-        return self
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.stickerSets = try container.decode([StickerSet].self)
+    func addNewStickerSet(id: UUID) {
+        stickerSets.append(StickerSet(id: id, stickers: []))
     }
     
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(stickerSets)
+    func removeStickerSet(id: UUID) {
+        stickerSets.removeAll(where: { $0.id == id })
+    }
+    
+    func addNewSticker(id: UUID, setID: UUID, data: Data) {
+        originalImages.add(id: id, data: data)
+        stickers.append(Sticker(id: id, removeBackground: false))
+        if let setIndex = stickerSets.firstIndex(where: { $0.id == setID}) {
+            stickerSets[setIndex].stickers.append(id)
+        }
+        
     }
     
     func binding(forStickerSet id: UUID) -> Binding<StickerSet> {
@@ -59,338 +86,29 @@ final class Store: ObservableObject, Codable {
 
     }
     
-    func binding(forSticker id: UUID, inSet setID: UUID) -> Binding<Sticker> {
+    func binding(forSticker id: UUID) -> Binding<Sticker> {
         Binding {
-            if let stickerSet = self.stickerSets.first(where: { $0.id == setID }), let sticker = stickerSet.stickers.first(where: { $0.id == id }) {
+            if let sticker = self.stickers.first(where: { $0.id == id }) {
                 return sticker
             } else {
                 // error
-                return Sticker(id: UUID(), imageData: Data())
+                return Sticker(id: UUID())
             }
         } set: { newValue in
-            if let setIdx = self.stickerSets.firstIndex(where: { $0.id == id }), let idx = self.stickerSets[setIdx].stickers.firstIndex(where: { $0.id == id }) {
-                self.stickerSets[setIdx].stickers[idx] = newValue
+            if let idx = self.stickers.firstIndex(where: { $0.id == id }) {
+                self.stickers[idx] = newValue
+                self.modifiedImages.invalidate(id)
             } else {
                 // error
-//                self.stickerSets.insert(newValue, at: 0)
+                self.stickers.insert(newValue, at: 0)
             }
         }
 
     }
     
-}
-
-
-func writeToDisk(_ store: Store) {
-    do {
-        let data = try JSONEncoder().encode(store)
-        let dataFile = documents.appendingPathComponent("data.json")
-        try data.write(to: dataFile)
-        
-        let imagesDir = documents.appendingPathComponent("images")
-        try FileManager.default.createDirectory(at: imagesDir, withIntermediateDirectories: true, attributes: nil)
-        let allStickers = store.stickerSets.flatMap(\.stickers)
-        for sticker in allStickers {
-            let url = imagesDir.appendingPathComponent(sticker.id.uuidString)
-            if !FileManager.default.fileExists(atPath: url.path) {
-                try sticker.imageData.write(to: url)
-            }
-        }
-    } catch (let error) {
-        print(error)
+    
+    func image(for stickerID: UUID) -> UIImage? {
+        modifiedImages.get(id: stickerID)
     }
 }
 
-
-extension Store {
-    
-    static func `default`() -> Store {
-        do {
-            let dataFile = documents.appendingPathComponent("data.json")
-            let data = try Data(contentsOf: dataFile)
-            let store = try JSONDecoder().decode(Store.self, from: data)
-            let imagesDir = documents.appendingPathComponent("images")
-            
-            for (setIdx, set) in store.stickerSets.enumerated() {
-                for (idx, sticker) in set.stickers.enumerated() {
-                    let url = imagesDir.appendingPathComponent(sticker.id.uuidString)
-                    let data = try Data(contentsOf: url)
-                    store.stickerSets[setIdx].stickers[idx].imageData = data
-                }
-            }
-            return store.startObservers()
-        } catch (let error) {
-            print(error)
-            return Store.examples.startObservers()
-        }
-    }
-    
-    static var examples: Store {
-        
-        Store(stickerSets: [
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!)
-            ])
-        ])
-    }
-}
-
-
-extension Store {
-    
-    static var testDefault: Store {
-        Store(stickerSets: [
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!)
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-            ]),
-            StickerSet(id: UUID(), stickers: [
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!)
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!)
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-            ]),
-            StickerSet(id: UUID(), stickers: [
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!)
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!)
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-            ]),
-            StickerSet(id: UUID(), stickers: [
-            ]),
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!)
-            ]),
-            
-        ])
-    }
-    
-    static var testEmpty: Store {
-        Store(stickerSets: [
-            StickerSet(id: UUID(), stickers: [
-            ])
-        ])
-    }
-    
-    static var testMany: Store {
-        Store(stickerSets: [
-            StickerSet(id: UUID(), stickers: [
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-1")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-2")!.pngData()!),
-                Sticker(id: UUID(), imageData: UIImage(named: "s-3")!.pngData()!),
-            ].shuffled())
-        ])
-    }
-    
-}

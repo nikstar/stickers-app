@@ -54,27 +54,28 @@ struct StickerSetEditor: View {
             print("imagePickerPresented: \(value)")
         })
         .sheet(isPresented: $imagePickerPresented, onDismiss: loadImage) {
-            ImagePicker(loadedImagesData: $loadedImagesData)
+            ImagePicker(loadedImagesData: $loadedImagesData).environmentObject(store)
         }
         .sheet(isPresented: $stickerEditorPresented, onDismiss: {
             presentedStickerID = nil
         }) {
             if let id = presentedStickerID {
-                StickerEditor(sticker: store.binding(forSticker: id.1, inSet: id.0))
+                StickerEditor(sticker: store.binding(forSticker: id.1)).environmentObject(store)
             } else {
                 Color.red
             }
         }
+        .environmentObject(store) // crashes without it. bug?
     }
     
     var grid: some View {
         LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], alignment: .center, spacing: 4, pinnedViews: [], content: {
             
-            ForEach(stickerSet.stickers) { sticker in
+            ForEach(stickerSet.stickers, id: \.self) {  stickerID in
                 Button {
-                    presentedStickerID = (stickerSet.id, sticker.id)
+                    presentedStickerID = (stickerSet.id, stickerID)
                 } label: {
-                    stickerView(sticker)
+                    stickerView(stickerID)
                 }
             }
             addImage
@@ -82,16 +83,16 @@ struct StickerSetEditor: View {
         })
     }
     
-    func stickerView(_ sticker: Sticker) -> some View {
+    func stickerView(_ sticker: UUID) -> some View {
         ZStack {
-            if let data = sticker.imageData, let image = UIImage(data: data) {
+            Color.secondary.opacity(0.08)
+                .cornerRadius(12)
+            if let image = store.image(for: sticker) {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(6)
             }
-            Color.secondary.opacity(0.08)
-                .cornerRadius(12)
         }
         .aspectRatio(1, contentMode: .fit)
     }
@@ -112,7 +113,7 @@ struct StickerSetEditor: View {
     
     var importToTelegram: some View {
         Button {
-            `import`(stickerSet)
+            store.`import`(stickerSet)
         } label: {
             Text("Import to Telegram")
                 .font(.title.bold())
@@ -138,10 +139,9 @@ extension StickerSetEditor {
     func loadImage() {
         guard !loadedImagesData.isEmpty else { return }
         print(loadedImagesData)
-        let newStickers = loadedImagesData.map {
-            Sticker(id: UUID(), imageData: $0)
+        loadedImagesData.forEach { data in
+            store.addNewSticker(id: UUID(), setID: stickerSet.id, data: data)
         }
-        stickerSet.stickers.append(contentsOf: newStickers)
         loadedImagesData = []
     }
 }
@@ -152,7 +152,7 @@ extension StickerSetEditor {
 struct StickerSetEditor_Previews: PreviewProvider {
     static var previews: some View {
         //        StickerSetEditor(stickerSet: .constant(Store.testEmpty.stickerSets.first!), isNew: true, isPresented: .constant(true))
-        StickerSetEditor(stickerSet: .constant(Store.testDefault.stickerSets.first!), isNew: false, isPresented: .constant(true))
-            .environmentObject(Store.testDefault)
+        StickerSetEditor(stickerSet: .constant(Store.default().stickerSets.first!), isNew: false, isPresented: .constant(true))
+            .environmentObject(Store.default())
     }
 }
