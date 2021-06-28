@@ -16,24 +16,6 @@ struct StickerSetList: View {
     @State var presentedStickerSetID: (UUID, Bool)?  = nil
     @State var isPresented: Bool = false
     
-    var newStickerSet: some View {
-        Button {
-            presentedStickerSetID = (UUID(), true)
-        } label: {
-            Text("New Sticker Set")
-                .font(.title.bold())
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, minHeight: 66, maxHeight: 66, alignment: .center)
-                .background(
-                    gradient1
-                        .cornerRadius(24, antialiased: true)
-                )
-                .padding(.horizontal, 8)
-        }
-        .padding(.top, 22)
-        .padding(.bottom, 10)
-    }
-    
     var body: some View {
         ScrollView {
             newStickerSet
@@ -67,6 +49,25 @@ struct StickerSetList: View {
             }
         }
     }
+    
+    var newStickerSet: some View {
+        Button {
+            presentedStickerSetID = (UUID(), true)
+        } label: {
+            Text("New Sticker Set")
+                .font(.title.bold())
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, minHeight: 66, maxHeight: 66, alignment: .center)
+                .background(
+                    gradient1
+                        .cornerRadius(24, antialiased: true)
+                )
+                .padding(.horizontal, 8)
+        }
+        .padding(.top, 22)
+        .padding(.bottom, 10)
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

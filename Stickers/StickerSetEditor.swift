@@ -23,42 +23,18 @@ struct StickerSetEditor: View {
     @State var stickerEditorPresented: Bool = false
     @State var presentedStickerID: (UUID, UUID)? = nil
     
+    // MARK: - Views
+    
     var body: some View {
         NavigationView {
             ScrollView {
-                
                 VStack(alignment: .leading) {
-                    
                     if isEmpty {
                         Text("Start by adding your images").font(.headline)
                     }
-                    
-                    LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], alignment: .center, spacing: 4, pinnedViews: [], content: {
-                        
-                        ForEach(stickerSet.stickers) { sticker in
-                            Button {
-                                presentedStickerID = (stickerSet.id, sticker.id)
-                            } label: {
-                                stickerView(sticker)
-                            }
-                        }
-                        addImage
-                        
-                    })
-                    
+                    grid
                     if !isEmpty {
                         Text("Tap images above to edit or remove").font(.headline)
-                    }
-                    
-                    Button(action: { print("add") }, label: {
-                        Text("Add sticker")
-                    })
-                    
-                    Button(action: { print("delete") }, label: {
-                        Text("Delete Set")
-                    })
-                    
-                    if !isEmpty {
                         importToTelegram
                     }
                 }
@@ -67,48 +43,70 @@ struct StickerSetEditor: View {
             }
             .navigationBarTitle(isNew ? "New Set" : "")
             .navigationBarItems(trailing: Button("Done", action: { self.isPresented = false }))
-            .onChange(of: presentedStickerID?.1) { id in
-                if stickerEditorPresented == false {
-                    stickerEditorPresented = id != nil
-                }
-            }
-            .sheet(isPresented: $stickerEditorPresented) {
-                if let id = presentedStickerID {
-                    StickerEditor(sticker: store.binding(forSticker: id.1, inSet: id.0))
-                } else {
-                    Color.orange
-                }
-            }
             
         }
-        
-        
+        .onChange(of: presentedStickerID?.1) { id in
+            if stickerEditorPresented == false {
+                stickerEditorPresented = id != nil
+            }
+        }
+        .onChange(of: imagePickerPresented, perform: { value in
+            print("imagePickerPresented: \(value)")
+        })
+        .sheet(isPresented: $imagePickerPresented, onDismiss: loadImage) {
+            ImagePicker(loadedImagesData: $loadedImagesData)
+        }
+        .sheet(isPresented: $stickerEditorPresented, onDismiss: {
+            presentedStickerID = nil
+        }) {
+            if let id = presentedStickerID {
+                StickerEditor(sticker: store.binding(forSticker: id.1, inSet: id.0))
+            } else {
+                Color.red
+            }
+        }
+    }
+    
+    var grid: some View {
+        LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], alignment: .center, spacing: 4, pinnedViews: [], content: {
+            
+            ForEach(stickerSet.stickers) { sticker in
+                Button {
+                    presentedStickerID = (stickerSet.id, sticker.id)
+                } label: {
+                    stickerView(sticker)
+                }
+            }
+            addImage
+            
+        })
     }
     
     func stickerView(_ sticker: Sticker) -> some View {
-        Group {
+        ZStack {
             if let data = sticker.imageData, let image = UIImage(data: data) {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(6)
-                    //                            .frame(height: 128, alignment: .center)
-                    .background(Color.secondary.opacity(0.08).cornerRadius(12))
             }
+            Color.secondary.opacity(0.08)
+                .cornerRadius(12)
         }
-        
+        .aspectRatio(1, contentMode: .fit)
     }
     
     var addImage: some View {
         Button {
             imagePickerPresented = true
         } label: {
-            gradient1.mask(Image(systemName: "plus.square").resizable().aspectRatio(1, contentMode: .fit))
-                .frame(height: 128, alignment: .center)
-                .opacity(0.8)
-        }
-        .sheet(isPresented: $imagePickerPresented, onDismiss: loadImage) {
-            ImagePicker(loadedImagesData: $loadedImagesData)
+            gradient1.mask(
+                Image(systemName: "plus.square")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            )
+            .aspectRatio(1, contentMode: .fit)
+            .padding(4)
         }
     }
     
@@ -124,11 +122,19 @@ struct StickerSetEditor: View {
                     gradient1
                         .cornerRadius(24, antialiased: true)
                 )
-            //                .padding(.horizontal, 8)
         }
         .padding(.top, 22)
         .padding(.bottom, 10)
     }
+    
+    
+}
+
+
+// MARK: - Actions
+
+extension StickerSetEditor {
+    
     func loadImage() {
         guard !loadedImagesData.isEmpty else { return }
         print(loadedImagesData)
@@ -138,9 +144,10 @@ struct StickerSetEditor: View {
         stickerSet.stickers.append(contentsOf: newStickers)
         loadedImagesData = []
     }
-    
-    
 }
+
+
+// MARK: - Preview
 
 struct StickerSetEditor_Previews: PreviewProvider {
     static var previews: some View {

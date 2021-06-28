@@ -59,9 +59,9 @@ final class Store: ObservableObject, Codable {
 
     }
     
-    func binding(forSticker id: UUID, inSet: UUID) -> Binding<Sticker> {
+    func binding(forSticker id: UUID, inSet setID: UUID) -> Binding<Sticker> {
         Binding {
-            if let stickerSet = self.stickerSets.first(where: { $0.id == id }), let sticker = stickerSet.stickers.first(where: { $0.id == id }) {
+            if let stickerSet = self.stickerSets.first(where: { $0.id == setID }), let sticker = stickerSet.stickers.first(where: { $0.id == id }) {
                 return sticker
             } else {
                 // error

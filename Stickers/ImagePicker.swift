@@ -11,6 +11,33 @@ import StickerImport
 
 struct ImagePicker: UIViewControllerRepresentable {
     
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var loadedImagesData: [Data]
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> PHPickerViewController {
+        var configuration = PHPickerConfiguration(photoLibrary: .shared())
+        configuration.filter = .images
+        configuration.preferredAssetRepresentationMode = .compatible
+        configuration.selectionLimit = StickerImport.Limits.stickerSetStickerMaxCount
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+        
+    }
+}
+
+
+// MARK: - Coordinaror
+
+extension ImagePicker {
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
         
         let parent: ImagePicker
@@ -88,28 +115,8 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
     
-    @Environment(\.presentationMode) var presentationMode
-    @Binding var loadedImagesData: [Data]
-    
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> PHPickerViewController {
-        var configuration = PHPickerConfiguration(photoLibrary: .shared())
-        configuration.filter = .images
-        configuration.preferredAssetRepresentationMode = .compatible
-        configuration.selectionLimit = StickerImport.Limits.stickerSetStickerMaxCount
-        
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: UIViewControllerRepresentableContext<ImagePicker>) {
-        
-    }
 }
+
 
 struct ImagePicker_Previews: PreviewProvider {
     static var previews: some View {

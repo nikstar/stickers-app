@@ -14,15 +14,22 @@ struct StickerRow: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(alignment: .center, spacing: 16) {
+            HStack(alignment: .center, spacing: 12) {
+                
                 ForEach(stickerSet.stickers) { sticker in
-                    if let data = sticker.imageData, let image = UIImage(data: data) {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: 96, maxHeight: 96, alignment: .center)
+                    ZStack {
+                        if let data = sticker.imageData, let image = UIImage(data: data) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
                             
+                        }
+//                        Color.orange.opacity(0.2)
+                        Color.clear
                     }
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(maxWidth: 96, maxHeight: 96, alignment: .center)
+
                 }
                 if stickerSet.stickers.isEmpty {
                     noStickers
@@ -32,6 +39,7 @@ struct StickerRow: View {
                     noStickers
                 }
             }
+            .padding(.horizontal, 8)
         }
         .padding(.vertical, 12)
         .background(Color.secondary.opacity(0.08))

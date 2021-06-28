@@ -116,7 +116,6 @@
 				58BB966D26876CB300B62A74 /* Info.plist */,
 				58BB966A26876CB300B62A74 /* Preview Content */,
 				58A090DF2687AB5F005785A0 /* Style.swift */,
-				58A090E12687CDB6005785A0 /* ImagePicker.swift */,
 			);
 			name = "Support FIles";
 			sourceTree = "<group>";
@@ -151,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */,
+				58A090E12687CDB6005785A0 /* ImagePicker.swift */,
 			);
 			name = StickerSetEditor;
 			sourceTree = "<group>";
@@ -494,7 +494,7 @@
 				DEVELOPMENT_TEAM = 6RX8GEVB43;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Stickers/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -516,7 +516,7 @@
 				DEVELOPMENT_TEAM = 6RX8GEVB43;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Stickers/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
