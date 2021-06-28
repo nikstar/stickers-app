@@ -63,7 +63,7 @@ struct StickerSetList: View {
             }
         }) {
             if let id = presentedStickerSetID {
-                StickerSetEditor(stickerSet: store.binding(for: id.0), isNew: id.1, isPresented: $isPresented)
+                StickerSetEditor(stickerSet: store.binding(forStickerSet: id.0), isNew: id.1, isPresented: $isPresented)
             }
         }
     }

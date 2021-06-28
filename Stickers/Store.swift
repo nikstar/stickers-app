@@ -40,7 +40,7 @@ final class Store: ObservableObject, Codable {
         try container.encode(stickerSets)
     }
     
-    func binding(for id: UUID) -> Binding<StickerSet> {
+    func binding(forStickerSet id: UUID) -> Binding<StickerSet> {
         Binding {
             if let stickerSet = self.stickerSets.first(where: { $0.id == id }) {
                 return stickerSet
@@ -58,6 +58,26 @@ final class Store: ObservableObject, Codable {
         }
 
     }
+    
+    func binding(forSticker id: UUID, inSet: UUID) -> Binding<Sticker> {
+        Binding {
+            if let stickerSet = self.stickerSets.first(where: { $0.id == id }), let sticker = stickerSet.stickers.first(where: { $0.id == id }) {
+                return sticker
+            } else {
+                // error
+                return Sticker(id: UUID(), imageData: Data())
+            }
+        } set: { newValue in
+            if let setIdx = self.stickerSets.firstIndex(where: { $0.id == id }), let idx = self.stickerSets[setIdx].stickers.firstIndex(where: { $0.id == id }) {
+                self.stickerSets[setIdx].stickers[idx] = newValue
+            } else {
+                // error
+//                self.stickerSets.insert(newValue, at: 0)
+            }
+        }
+
+    }
+    
 }
 
 

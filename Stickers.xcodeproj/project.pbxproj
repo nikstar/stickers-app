@@ -21,6 +21,8 @@
 		582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */; };
 		58A090E02687AB5F005785A0 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090DF2687AB5F005785A0 /* Style.swift */; };
 		58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090E12687CDB6005785A0 /* ImagePicker.swift */; };
+		58A090E426889625005785A0 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090E326889625005785A0 /* Import.swift */; };
+		58A1E94D268A1224001A93FE /* StickerEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1E94C268A1224001A93FE /* StickerEditor.swift */; };
 		58BB966526876CB200B62A74 /* StickersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB966426876CB200B62A74 /* StickersApp.swift */; };
 		58BB966726876CB200B62A74 /* StickerSetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB966626876CB200B62A74 /* StickerSetList.swift */; };
 		58BB966926876CB300B62A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58BB966826876CB300B62A74 /* Assets.xcassets */; };
@@ -64,6 +66,8 @@
 		582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetEditor.swift; sourceTree = "<group>"; };
 		58A090DF2687AB5F005785A0 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		58A090E12687CDB6005785A0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		58A090E326889625005785A0 /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
+		58A1E94C268A1224001A93FE /* StickerEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerEditor.swift; sourceTree = "<group>"; };
 		58BB966126876CB200B62A74 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BB966426876CB200B62A74 /* StickersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickersApp.swift; sourceTree = "<group>"; };
 		58BB966626876CB200B62A74 /* StickerSetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetList.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 			children = (
 				582EB0A32687765D00F4C2D2 /* StickerSet.swift */,
 				582EB0A52687770200F4C2D2 /* Sticker.swift */,
+				58A090E326889625005785A0 /* Import.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 		582EB0A22687758200F4C2D2 /* StickerEditor */ = {
 			isa = PBXGroup;
 			children = (
+				58A1E94C268A1224001A93FE /* StickerEditor.swift */,
 			);
 			name = StickerEditor;
 			sourceTree = "<group>";
@@ -312,7 +318,9 @@
 				582EB0A42687765D00F4C2D2 /* StickerSet.swift in Sources */,
 				58BB966726876CB200B62A74 /* StickerSetList.swift in Sources */,
 				58BB966526876CB200B62A74 /* StickersApp.swift in Sources */,
+				58A1E94D268A1224001A93FE /* StickerEditor.swift in Sources */,
 				58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */,
+				58A090E426889625005785A0 /* Import.swift in Sources */,
 				582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */,
 				582EB09A2687479000F4C2D2 /* StickerRow.swift in Sources */,
 				58A090E02687AB5F005785A0 /* Style.swift in Sources */,
