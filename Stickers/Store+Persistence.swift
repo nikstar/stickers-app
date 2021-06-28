@@ -22,7 +22,7 @@ extension Store: Codable {
     convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let stickerSets = try container.decode([StickerSet].self, forKey: .stickerSets)
-         let stickers = try container.decode([Sticker].self, forKey: .stickers)
+        let stickers = try container.decode([Sticker].self, forKey: .stickers)
         self.init(stickerSets: stickerSets, stickers: stickers)
     }
     

@@ -31,23 +31,6 @@ final class Store: ObservableObject {
     init(stickerSets: [StickerSet], stickers: [Sticker]) {
         self.stickerSets = stickerSets
         self.stickers = stickers
-//        $stickerSets
-//            .receive(on: DispatchQueue.global(qos: .utility))
-//            .removeDuplicates()
-//            .debounce(for: 0.1, scheduler: RunLoop.main)
-//            .sink { _ in
-//                self.writeToDisk()
-//            }
-//            .store(in: &cancellables)
-//        $stickers
-//            .receive(on: DispatchQueue.global(qos: .utility))
-//            .removeDuplicates()
-//            .debounce(for: 0.1, scheduler: RunLoop.main)
-//            .sink { _ in
-//                self.writeToDisk()
-//            }
-//            .store(in: &cancellables)
-        
     }
     
     func addNewStickerSet(id: UUID) {
@@ -97,7 +80,7 @@ final class Store: ObservableObject {
         } set: { newValue in
             if let idx = self.stickers.firstIndex(where: { $0.id == id }) {
                 self.stickers[idx] = newValue
-                self.modifiedImages.invalidate(id)
+                self.invalidateStickerCache(id: id)
             } else {
                 // error
                 self.stickers.insert(newValue, at: 0)
@@ -110,5 +93,23 @@ final class Store: ObservableObject {
     func image(for stickerID: UUID) -> UIImage? {
         modifiedImages.get(id: stickerID)
     }
+    
+    func invalidateStickerCache(id: UUID) {
+        if let idx = stickers.firstIndex(where: { $0.id == id }) {
+            DispatchQueue.main.async {
+                self.stickers[idx].modifiedImageCached = false
+            }
+        }
+        modifiedImages.invalidate(id)
+    }
+    
+    func modifiedImageCached(id: UUID) {
+        if let idx = stickers.firstIndex(where: { $0.id == id }) {
+            DispatchQueue.main.async {
+                self.stickers[idx].modifiedImageCached = true
+            }
+        }
+    }
+    
 }
 

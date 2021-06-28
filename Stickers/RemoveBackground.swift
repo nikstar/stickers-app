@@ -24,7 +24,7 @@ public final class RemoveBackgroundEffect {
             let model = try VNCoreMLModel(for: DeepLabV3(configuration: configuration).model)
             
             let request = VNCoreMLRequest(model: model)
-            request.imageCropAndScaleOption = .scaleFit // check this
+            request.imageCropAndScaleOption = .scaleFill // check this. fill works better?
             let handler = VNImageRequestHandler(cgImage: inputImage.cgImage!, options: [:])
             try handler.perform([request])
             
