@@ -38,6 +38,7 @@
 		58D8A024268A476200935A31 /* ModifiedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A023268A476200935A31 /* ModifiedImages.swift */; };
 		58D8A026268A47F100935A31 /* Store+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A025268A47F100935A31 /* Store+Test.swift */; };
 		58D8A029268A602400935A31 /* OriginalImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A028268A602400935A31 /* OriginalImages.swift */; };
+		58D8A02B268B3DCD00935A31 /* Checkerboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A02A268B3DCD00935A31 /* Checkerboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		58D8A023268A476200935A31 /* ModifiedImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedImages.swift; sourceTree = "<group>"; };
 		58D8A025268A47F100935A31 /* Store+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+Test.swift"; sourceTree = "<group>"; };
 		58D8A028268A602400935A31 /* OriginalImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalImages.swift; sourceTree = "<group>"; };
+		58D8A02A268B3DCD00935A31 /* Checkerboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkerboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				58A1E94C268A1224001A93FE /* StickerEditor.swift */,
+				58D8A02A268B3DCD00935A31 /* Checkerboard.swift */,
 			);
 			name = StickerEditor;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				58A090E02687AB5F005785A0 /* Style.swift in Sources */,
 				58D8A018268A317F00935A31 /* MLMultiArray+Image.swift in Sources */,
 				582EB0A62687770200F4C2D2 /* Sticker.swift in Sources */,
+				58D8A02B268B3DCD00935A31 /* Checkerboard.swift in Sources */,
 				58D8A022268A469500935A31 /* Math.swift in Sources */,
 				58D8A020268A465900935A31 /* CGImage+RawBytes.swift in Sources */,
 				58D8A014268A2E2400935A31 /* RemoveBackground.swift in Sources */,

@@ -27,8 +27,7 @@ struct StickerEditor: View {
         Group {
             if let image = store.image(for: sticker.id) {
                 ZStack {
-                    Color.secondary.opacity(0.08)
-                        .cornerRadius(30)
+                    backgroundPattern
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -44,6 +43,13 @@ struct StickerEditor: View {
                     .padding(.bottom, 16)
             }
         }
+    }
+    
+    var backgroundPattern: some View {
+        Checkerboard(rows: 16, columns: 16)
+            .fill(Color.secondary.opacity(0.08))
+            .background(Color.secondary.opacity(0.08))
+            .cornerRadius(30)
     }
     
     var editOptions: some View {
