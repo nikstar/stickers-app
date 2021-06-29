@@ -47,18 +47,29 @@ struct StickerEditor: View {
     
     var backgroundPattern: some View {
         Checkerboard(rows: 16, columns: 16)
-            .fill(Color.secondary.opacity(0.08))
-            .background(Color.secondary.opacity(0.08))
+            .fill(Color.secondary.opacity(0.10))
+            .background(Color.secondary.opacity(0.06))
             .cornerRadius(30)
     }
     
     var editOptions: some View {
         List {
-            Toggle("Remove background", isOn: $sticker.removeBackground.animation())
-            if sticker.removeBackground {
-                Toggle("Add white border", isOn: $sticker.addBorder)
+            Section(header: Text("Emoji"), footer: Text("Sticker can be asociated with an emoji")) {
+                TextField("Emoji", text: $sticker.emoji, onEditingChanged: { isEditing in
+                    print("Editing changed: \(isEditing)")
+                    sticker.emoji = sticker.emoji.filter { $0.isEmoji }
+                }, onCommit: {
+                    sticker.emoji = sticker.emoji.filter { $0.isEmoji }
+                })
+                
             }
             
+            Section(header: Text("Background")) {
+                Toggle("Remove background", isOn: $sticker.removeBackground.animation())
+                if sticker.removeBackground {
+                    Toggle("Add white border", isOn: $sticker.addBorder)
+                }
+            }
             Text("Hello")
         }
         .background(Color.orange)
@@ -70,8 +81,20 @@ struct StickerEditor: View {
 
 struct StickerEditor_Previews: PreviewProvider {
     static var previews: some View {
-        let sticker = Sticker(id: UUID(), removeBackground: false)
-        return StickerEditor(sticker: .constant(sticker))
+        let store = Store.default()
+        let sticker = store.stickerSets[0].stickers[0]
+        let binding = store.binding(forSticker: sticker)
+        return StickerEditor(sticker: binding)
+            .environmentObject(store)
             
+    }
+}
+
+
+extension Character {
+    var isEmoji: Bool {
+        guard let first = unicodeScalars.first else { return false }
+        print(self, first.properties.isEmoji && ( unicodeScalars.count > 1 || first.properties.isEmojiPresentation))
+        return first.properties.isEmoji && ( unicodeScalars.count > 1 || first.properties.isEmojiPresentation)
     }
 }

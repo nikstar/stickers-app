@@ -9,14 +9,15 @@ import Foundation
 import StickerImport
 
 extension Store {
-    func `import`(_ stickerSet: StickerSet) {
+    func export(_ stickerSet: StickerSet) {
         do {
             let convertedStickers = stickerSet.stickers.compactMap { stickerID -> StickerImport.Sticker? in
-//                let sticker = stickers.first(where: $0.id == stickerID)
+                let sticker = self.getSticker(id: stickerID)
+                let emoji = sticker.emoji.map { "\($0)" }
                 guard let image = modifiedImages.get(id: stickerID), let data = image.pngData() else { return nil }
                 return StickerImport.Sticker(
                     data: StickerImport.Sticker.StickerData.image(data),
-                    emojis: []
+                    emojis: emoji
                 )
             }
             try StickerImport.StickerSet(id: UUID(), software: "Stickers for Telegram", isAnimated: false, stickers: convertedStickers).import()

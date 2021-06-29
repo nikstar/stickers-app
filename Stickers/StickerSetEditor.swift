@@ -113,7 +113,7 @@ struct StickerSetEditor: View {
     
     var importToTelegram: some View {
         Button {
-            store.`import`(stickerSet)
+            store.export(stickerSet)
         } label: {
             Text("Import to Telegram")
                 .font(.title.bold())

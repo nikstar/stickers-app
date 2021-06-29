@@ -6,8 +6,11 @@ struct Sticker: Identifiable, Hashable, Codable {
     
     var id: UUID
     
+    var emoji: String = ""
+    
     var removeBackground: Bool = false
     var addBorder: Bool = false
+    
     
     var modifiedImageCached: Bool = false { didSet { print("\(id.uuidString.prefix(6)): cached \(modifiedImageCached)") } }
     
