@@ -10,7 +10,9 @@ import Combine
 
 
 final class Store: ObservableObject {
-
+    
+    // MARK: Properties
+    
     @Published private(set) var stickerSets: [StickerSet] {
         didSet {
             writeToDisk()
@@ -22,10 +24,8 @@ final class Store: ObservableObject {
         }
     }
     
-    
     var originalImages: OriginalImages = OriginalImages()
     lazy var modifiedImages: ModifiedImages = ModifiedImages(store: self)
-    
     private var cancellables: Set<AnyCancellable> = []
     
     init(stickerSets: [StickerSet], stickers: [Sticker]) {
@@ -33,21 +33,14 @@ final class Store: ObservableObject {
         self.stickers = stickers
     }
     
+    // MARK: - Sticker sets
+    
     func addNewStickerSet(id: UUID) {
         stickerSets.append(StickerSet(id: id, stickers: []))
     }
     
     func removeStickerSet(id: UUID) {
         stickerSets.removeAll(where: { $0.id == id })
-    }
-    
-    func addNewSticker(id: UUID, setID: UUID, data: Data) {
-        originalImages.add(id: id, data: data)
-        stickers.append(Sticker(id: id, removeBackground: false))
-        if let setIndex = stickerSets.firstIndex(where: { $0.id == setID}) {
-            stickerSets[setIndex].stickers.append(id)
-        }
-        
     }
     
     func binding(forStickerSet id: UUID) -> Binding<StickerSet> {
@@ -66,8 +59,25 @@ final class Store: ObservableObject {
                 self.stickerSets.insert(newValue, at: 0)
             }
         }
-
     }
+    
+    
+    // MARK: - Stickers
+    
+    func getSticker(id: UUID) -> Sticker {
+        return stickers.first { $0.id == id }!
+    }
+    
+    func addNewSticker(id: UUID, setID: UUID, data: Data) {
+        originalImages.add(id: id, data: data)
+        stickers.append(Sticker(id: id, removeBackground: false))
+        if let setIndex = stickerSets.firstIndex(where: { $0.id == setID}) {
+            stickerSets[setIndex].stickers.append(id)
+        }
+        
+    }
+    
+    
     
     func binding(forSticker id: UUID) -> Binding<Sticker> {
         Binding {

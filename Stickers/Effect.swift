@@ -8,5 +8,5 @@
 import Foundation
 
 enum Effect {
-    case removeBackground
+    case removeBackground(addBorder: Bool)
 }

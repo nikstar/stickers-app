@@ -33,6 +33,9 @@ struct StickerEditor: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .padding(16)
+                    if !sticker.modifiedImageCached {
+                        ProgressView()
+                    }
                     
                 }
                     .aspectRatio(1, contentMode: .fit)
@@ -45,7 +48,11 @@ struct StickerEditor: View {
     
     var editOptions: some View {
         List {
-            Toggle("Remove background", isOn: $sticker.removeBackground)
+            Toggle("Remove background", isOn: $sticker.removeBackground.animation())
+            if sticker.removeBackground {
+                Toggle("Add white border", isOn: $sticker.addBorder)
+            }
+            
             Text("Hello")
         }
         .background(Color.orange)

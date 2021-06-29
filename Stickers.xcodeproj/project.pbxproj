@@ -164,7 +164,6 @@
 		582EB0A0268774C000F4C2D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				58A090E326889625005785A0 /* Import.swift */,
 				582EB0A52687770200F4C2D2 /* Sticker.swift */,
 				582EB0A32687765D00F4C2D2 /* StickerSet.swift */,
 			);
@@ -196,6 +195,7 @@
 				582EB0A8268777CF00F4C2D2 /* Store.swift */,
 				58D8A01D268A451D00935A31 /* Store+Persistence.swift */,
 				58D8A025268A47F100935A31 /* Store+Test.swift */,
+				58A090E326889625005785A0 /* Import.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";

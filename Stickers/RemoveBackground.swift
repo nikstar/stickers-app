@@ -6,15 +6,15 @@ public final class RemoveBackgroundEffect {
     
     private var inputImage: UIImage
     private var outputImage: UIImage?
-    private var callback: (UIImage) -> ()
+    private var addBorder: Bool
     
-    private init(inputImage: UIImage, callback: @escaping (UIImage) -> () = { _ in }) {
+    private init(inputImage: UIImage, addBorder: Bool) {
         self.inputImage = inputImage
-        self.callback = callback
+        self.addBorder = addBorder
     }
     
-    public static func apply(to image: UIImage) -> UIImage {
-        let effect = RemoveBackgroundEffect(inputImage: image)
+    public static func apply(to image: UIImage, addBorder: Bool) -> UIImage {
+        let effect = RemoveBackgroundEffect(inputImage: image, addBorder: addBorder)
         return effect.removeBackground()
     }
     
@@ -32,7 +32,13 @@ public final class RemoveBackgroundEffect {
                 let segmentationMap = results.first?.featureValue.multiArrayValue {
                 let segmentationMask = segmentationMap.image(min: 0, max: 1)
                 let maskImage = segmentationMask!.resizedImage(for: self.inputImage.size)!
-                return applyMask(maskImage)
+                var masked = applyMask(maskImage)
+                
+                if addBorder {
+                    masked = _addBorder(baseImage: masked, maskImage: maskImage)
+                }
+                
+                return masked
                 
             } else {
                 print(request.results as Any)
@@ -46,7 +52,7 @@ public final class RemoveBackgroundEffect {
     
     func applyMask(_ maskImage: UIImage) -> UIImage {
         
-        let backgroundImage = UIImage.imageFromColor(color: .orange, size: inputImage.size, scale: inputImage.scale)!
+        let backgroundImage = UIImage.imageFromColor(color: .clear, size: inputImage.size, scale: inputImage.scale)!
 
         let original = CIImage(cgImage: inputImage.cgImage!)
         let background = CIImage(cgImage: backgroundImage.cgImage!)
@@ -64,5 +70,28 @@ public final class RemoveBackgroundEffect {
             
         }
         return inputImage
+    }
+    
+    func _addBorder(baseImage: UIImage, maskImage: UIImage) -> UIImage {
+        
+        let base = CIImage(cgImage: baseImage.cgImage!)
+        let mask = CIImage(cgImage: maskImage.cgImage!)
+        
+        let edges = mask.applyingFilter("CIEdges", parameters: [
+            kCIInputIntensityKey: 1.0
+        ])
+        
+        let borderWidth = 0.02 * min(baseImage.size.width, baseImage.size.height)
+        let wideEdges = edges.applyingFilter("CIMorphologyMaximum", parameters: [
+            kCIInputRadiusKey: borderWidth
+        ])
+        
+        let background = wideEdges.applyingFilter("CIMaskToAlpha")
+        
+        let composited = base.composited(over: background)
+        
+        let context = CIContext(options: nil)
+        let cgImageRef = context.createCGImage(composited, from: composited.extent)!
+        return UIImage(cgImage: cgImageRef)
     }
 }

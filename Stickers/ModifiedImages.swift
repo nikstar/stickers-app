@@ -12,11 +12,6 @@ import Combine
 fileprivate let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 fileprivate let cacheDir = documents.appendingPathComponent("cache")
 
-extension Store {
-    fileprivate func sticker(id: UUID) -> Sticker {
-        stickers.first { $0.id == id }!
-    }
-}
 
 final class ModifiedImages {
     
@@ -31,7 +26,7 @@ final class ModifiedImages {
     func get(id: UUID) -> UIImage? {
         if let image = stickers[id] {
             return image
-        } else if let data = try? Data(contentsOf: cacheDir.appendingPathComponent(id.uuidString)), let image = UIImage(data: data) {
+        } else if store.getSticker(id: id).modifiedImageCached, let data = try? Data(contentsOf: cacheDir.appendingPathComponent(id.uuidString)), let image = UIImage(data: data) {
             stickers[id] = image
             return image
         }
@@ -40,8 +35,8 @@ final class ModifiedImages {
 
         for effect in sticker.effects {
             switch effect {
-            case .removeBackground:
-                workImage = RemoveBackgroundEffect.apply(to: workImage)
+            case .removeBackground(let addBorder):
+                workImage = RemoveBackgroundEffect.apply(to: workImage, addBorder: addBorder)
             }
         }
         stickers[id] = workImage
