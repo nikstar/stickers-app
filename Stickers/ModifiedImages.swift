@@ -26,7 +26,7 @@ final class ModifiedImages {
     func get(id: UUID) -> UIImage? {
         if let image = stickers[id] {
             return image
-        } else if store.getSticker(id: id).modifiedImageCached, let data = try? Data(contentsOf: cacheDir.appendingPathComponent(id.uuidString)), let image = UIImage(data: data) {
+        } else if store.getSticker(id: id)?.modifiedImageCached == true, let data = try? Data(contentsOf: cacheDir.appendingPathComponent(id.uuidString)), let image = UIImage(data: data) {
             stickers[id] = image
             return image
         }

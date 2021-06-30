@@ -64,8 +64,8 @@ final class Store: ObservableObject {
     
     // MARK: - Stickers
     
-    func getSticker(id: UUID) -> Sticker {
-        return stickers.first { $0.id == id }!
+    func getSticker(id: UUID) -> Sticker? {
+        return stickers.first { $0.id == id }
     }
     
     func addNewSticker(id: UUID, setID: UUID, data: Data) {
@@ -75,6 +75,15 @@ final class Store: ObservableObject {
             stickerSets[setIndex].stickers.append(id)
         }
         
+    }
+    
+    func removeSticker(id: UUID) {
+        // TODO: remove files
+        for idx in stickerSets.indices {
+            stickerSets[idx].stickers.removeAll(where: { $0 == id })
+        }
+//        stickers.removeAll(where: { $0.id == id })
+        // FIXME: check out why this doesn't quite work. Maybe remove on launch or something?
     }
     
     

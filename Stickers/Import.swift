@@ -12,7 +12,7 @@ extension Store {
     func export(_ stickerSet: StickerSet) {
         do {
             let convertedStickers = stickerSet.stickers.compactMap { stickerID -> StickerImport.Sticker? in
-                let sticker = self.getSticker(id: stickerID)
+                guard let sticker = self.getSticker(id: stickerID) else { return nil }
                 let emoji = sticker.emoji.map { "\($0)" }
                 guard let image = modifiedImages.get(id: stickerID), let data = image.pngData() else { return nil }
                 return StickerImport.Sticker(

@@ -9,47 +9,74 @@ import SwiftUI
 
 struct StickerEditor: View {
     
-    @EnvironmentObject var store: Store
     
     @Binding var sticker: Sticker
+    
+    @EnvironmentObject var store: Store
+    @Environment(\.presentationMode) var presentationMode
 
+    @State var deleteAlertPresented = false
+    
     var body: some View {
-//        ScrollView {
-//            Color.orange
-            VStack(alignment: .center, spacing: 8) {
-                stickerPreview
-                editOptions
+        VStack(alignment: .center, spacing: 0) {
+            stickerPreview
+                
+            editOptions
+                .shadow(radius: 10)
+        }
+        .overlay(HStack {
+            SmallButton(text: "Delete", color: .red) {
+               deleteAlertPresented = true
             }
-//        }
+            Spacer()
+            SmallButton(text: "Done", color: .blue) {
+                presentationMode.wrappedValue.dismiss()
+            }
+            
+        }.padding(2)
+        , alignment: .top)
+        .alert(isPresented: $deleteAlertPresented) {
+            Alert(
+                title: Text("Delete sticker"),
+                message: Text("Are you sure you want to delete this sticker? This action cannot be undone."),
+                primaryButton: .destructive(Text("Delete")) {
+                    store.removeSticker(id: sticker.id)
+                    
+                    presentationMode.wrappedValue.dismiss()
+                },
+                secondaryButton: .cancel()
+            )
+        }
     }
     
     var stickerPreview: some View {
         Group {
             if let image = store.image(for: sticker.id) {
                 ZStack {
-                    backgroundPattern
+                    Color.clear
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .padding(16)
+                        .padding(.vertical, 30)
+                        .padding(.horizontal, 24)
                     if !sticker.modifiedImageCached {
                         ProgressView()
                     }
                     
                 }
-                    .aspectRatio(1, contentMode: .fit)
-                    .padding(.horizontal, 44)
-                    .padding(.top, 16)
-                    .padding(.bottom, 16)
+//                .frame(maxWidth: .infinity, maxHeight: 256)
+                .aspectRatio(1.5, contentMode: .fit)
+                .background(backgroundPattern)
             }
         }
+//        .fixedSize()
+//        .frame(maxHeight: 250)
     }
     
     var backgroundPattern: some View {
-        Checkerboard(rows: 16, columns: 16)
+        Checkerboard(rows: 16, columns: 24)
             .fill(Color.secondary.opacity(0.10))
             .background(Color.secondary.opacity(0.06))
-            .cornerRadius(30)
     }
     
     var editOptions: some View {

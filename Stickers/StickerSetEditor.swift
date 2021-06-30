@@ -9,11 +9,9 @@ import SwiftUI
 
 struct StickerSetEditor: View {
     
-    @EnvironmentObject var store: Store
     
     @Binding var stickerSet: StickerSet
     var isNew: Bool
-    @Binding var isPresented: Bool
     
     var isEmpty: Bool { stickerSet.stickers.isEmpty }
     
@@ -23,27 +21,29 @@ struct StickerSetEditor: View {
     @State var stickerEditorPresented: Bool = false
     @State var presentedStickerID: (UUID, UUID)? = nil
     
+    @State var deleteAlertPresented = false
+    
+    @EnvironmentObject var store: Store
+    @Environment(\.presentationMode) var presentationMode
+    
+    
     // MARK: - Views
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    if isEmpty {
-                        Text("Start by adding your images").font(.headline)
-                    }
-                    grid
-                    if !isEmpty {
-                        Text("Tap images above to edit or remove").font(.headline)
-                        importToTelegram
-                    }
+        ScrollView {
+            VStack(alignment: .leading) {
+                if isEmpty {
+                    Text("Start by adding your images").font(.headline)
                 }
-                .padding(.leading, 20)
-                .padding(.trailing, 16)
+                grid
+                if !isEmpty {
+                    Text("Tap images above to edit or remove").font(.headline)
+                    importToTelegram
+                }
             }
-            .navigationBarTitle(isNew ? "New Set" : "")
-            .navigationBarItems(trailing: Button("Done", action: { self.isPresented = false }))
-            
+            .padding(.top, 60)
+            .padding(.leading, 20)
+            .padding(.trailing, 16)
         }
         .onChange(of: presentedStickerID?.1) { id in
             if stickerEditorPresented == false {
@@ -65,7 +65,33 @@ struct StickerSetEditor: View {
                 Color.red
             }
         }
-        .environmentObject(store) // crashes without it. bug?
+        .overlay(HStack {
+            SmallButton(text: "Delete", color: .red) {
+               deleteAlertPresented = true
+            }
+            Spacer()
+            SmallButton(text: "Done", color: .blue) {
+                presentationMode.wrappedValue.dismiss()
+            }
+            
+        }.padding(2)
+        , alignment: .top)
+        .alert(isPresented: $deleteAlertPresented) {
+            Alert(
+                title: Text("Delete sticker set"),
+                message: Text("Are you sure you want to delete this sticker set? This action cannot be undone."),
+                primaryButton: .destructive(Text("Delete")) {
+                    store.removeStickerSet(id: stickerSet.id)
+                    presentationMode.wrappedValue.dismiss()
+                },
+                secondaryButton: .cancel()
+            )
+        }
+        
+        
+        
+        .environmentObject(store) // crashes without it. bug in Swift UI?
+        
     }
     
     var grid: some View {
@@ -84,8 +110,8 @@ struct StickerSetEditor: View {
     }
     
     func stickerView(_ sticker: UUID) -> some View {
-        
-        ZStack {
+        print(sticker)
+        return ZStack {
             Color.secondary.opacity(0.08)
                 .cornerRadius(12)
             if let image = store.image(for: sticker) {
@@ -96,7 +122,7 @@ struct StickerSetEditor: View {
             }
         }
         .overlay(Group {
-            if let emoji = store.getSticker(id: sticker).emoji, emoji.count > 0 {
+            if let emoji = store.getSticker(id: sticker)?.emoji, emoji.count > 0 {
                 Text(emoji.prefix(3)) // improve?
                     .padding(8)
             }
@@ -133,6 +159,7 @@ struct StickerSetEditor: View {
                         .cornerRadius(24, antialiased: true)
                 )
         }
+        .shadow(radius: 10)
         .padding(.top, 22)
         .padding(.bottom, 10)
     }
@@ -161,7 +188,7 @@ extension StickerSetEditor {
 struct StickerSetEditor_Previews: PreviewProvider {
     static var previews: some View {
         //        StickerSetEditor(stickerSet: .constant(Store.testEmpty.stickerSets.first!), isNew: true, isPresented: .constant(true))
-        StickerSetEditor(stickerSet: .constant(Store.default().stickerSets.first!), isNew: false, isPresented: .constant(true))
+        StickerSetEditor(stickerSet: .constant(Store.default().stickerSets.first!), isNew: false)
             .environmentObject(Store.default())
     }
 }

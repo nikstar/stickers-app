@@ -15,19 +15,26 @@ struct StickerSetRow: View {
     var stickerSet: StickerSet
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(alignment: .center, spacing: 12) {
-                
-                ForEach(stickerSet.stickers, id: \.self) { stickerID in
-                    Group {
-                    stickerView(stickerID)
+        ZStack {
+    
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .foregroundColor(Color.secondary.opacity(0.08))
+                .shadow(radius: 10)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center, spacing: 12) {
+                    
+                    ForEach(stickerSet.stickers, id: \.self) { stickerID in
+                        Group {
+                            stickerView(stickerID)
+                        }
                     }
                 }
+                .padding(.horizontal, 10)
             }
-            .padding(.horizontal, 8)
+            .padding(.vertical, 12)
         }
-        .padding(.vertical, 12)
-        .background(Color.secondary.opacity(0.08))
+        .padding(.horizontal, 8)
     }
     
     func stickerView(_ stickerID: UUID) -> some View {
@@ -46,12 +53,13 @@ struct StickerSetRow: View {
 
 struct StickerRow_Previews: PreviewProvider {
     static var previews: some View {
-        StickerSetRow(stickerSet: Store.examples.stickerSets.first!)
-            .previewLayout(.sizeThatFits)
+        //        StickerSetRow(stickerSet: Store.examples.stickerSets.first!)
+        //            .previewLayout(.sizeThatFits)
         StickerSetRow(stickerSet: Store.default().stickerSets.first!)
+            .environmentObject(Store.default())
             .previewLayout(.sizeThatFits)
-        StickerSetRow(stickerSet: StickerSet(id: UUID(), stickers: []))
-            .previewLayout(.sizeThatFits)
+        //        StickerSetRow(stickerSet: StickerSet(id: UUID(), stickers: []))
+        //            .previewLayout(.sizeThatFits)
     }
 }
 
