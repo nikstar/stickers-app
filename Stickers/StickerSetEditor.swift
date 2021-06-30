@@ -84,6 +84,7 @@ struct StickerSetEditor: View {
     }
     
     func stickerView(_ sticker: UUID) -> some View {
+        
         ZStack {
             Color.secondary.opacity(0.08)
                 .cornerRadius(12)
@@ -94,8 +95,16 @@ struct StickerSetEditor: View {
                     .padding(6)
             }
         }
+        .overlay(Group {
+            if let emoji = store.getSticker(id: sticker).emoji, emoji.count > 0 {
+                Text(emoji.prefix(3)) // improve?
+                    .padding(8)
+            }
+        }, alignment: .bottomTrailing)
         .aspectRatio(1, contentMode: .fit)
     }
+    
+    
     
     var addImage: some View {
         Button {

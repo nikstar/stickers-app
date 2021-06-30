@@ -25,7 +25,7 @@ struct StickerSetList: View {
                     Button {
                         presentedStickerSetID = (stickerSet.id, false)
                     } label: {
-                        StickerRow(stickerSet: stickerSet)
+                        StickerSetRow(stickerSet: stickerSet)
                     }
                 }
         

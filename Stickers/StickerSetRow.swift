@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct StickerRow: View {
+struct StickerSetRow: View {
     
     @EnvironmentObject var store: Store
     
@@ -32,7 +32,7 @@ struct StickerRow: View {
     
     func stickerView(_ stickerID: UUID) -> some View {
         ZStack {
-            Color.orange
+            Color.clear
             if let image = store.image(for: stickerID) {
                 Image(uiImage: image)
                     .resizable()
@@ -46,11 +46,11 @@ struct StickerRow: View {
 
 struct StickerRow_Previews: PreviewProvider {
     static var previews: some View {
-        StickerRow(stickerSet: Store.examples.stickerSets.first!)
+        StickerSetRow(stickerSet: Store.examples.stickerSets.first!)
             .previewLayout(.sizeThatFits)
-        StickerRow(stickerSet: Store.default().stickerSets.first!)
+        StickerSetRow(stickerSet: Store.default().stickerSets.first!)
             .previewLayout(.sizeThatFits)
-        StickerRow(stickerSet: StickerSet(id: UUID(), stickers: []))
+        StickerSetRow(stickerSet: StickerSet(id: UUID(), stickers: []))
             .previewLayout(.sizeThatFits)
     }
 }

@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
             endingLineNumber = "15"
-            landmarkName = "StickerRow"
+            landmarkName = "StickerSetRow"
             landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
@@ -142,8 +142,8 @@
             filePath = "Stickers/StickerSetEditor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "loadImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,9 +506,9 @@
             filePath = "Stickers/ModifiedImages.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "get(id:)"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "invalidate(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -522,8 +522,8 @@
             filePath = "Stickers/ModifiedImages.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "get(id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -620,7 +620,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
             endingLineNumber = "27"
-            landmarkName = "init(store:)"
+            landmarkName = "get(id:)"
             landmarkType = "7">
             <Actions>
                <BreakpointActionProxy
@@ -644,8 +644,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
-            landmarkName = "ModifiedImages"
-            landmarkType = "3">
+            landmarkName = "get(id:)"
+            landmarkType = "7">
             <Actions>
                <BreakpointActionProxy
                   ActionExtensionID = "Xcode.BreakpointAction.Log">
@@ -717,8 +717,8 @@
             filePath = "Stickers/StickerEditor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "editOptions"
             landmarkType = "24">
             <Locations>
@@ -765,8 +765,8 @@
             filePath = "Stickers/StickerEditor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "editOptions"
             landmarkType = "24">
             <Locations>
@@ -816,6 +816,22 @@
             startingLineNumber = "25"
             endingLineNumber = "25"
             landmarkName = "export(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "583E1CFE-7BCE-48D7-8369-6DFFD2CD8C11"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stickers/AddText.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "addText()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

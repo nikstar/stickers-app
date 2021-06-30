@@ -14,27 +14,3 @@ let gradient1 = LinearGradient(gradient: Gradient(colors: [
 ]), startPoint: .bottomLeading, endPoint: .topTrailing)
 
 
-//struct ButtonStyles: View {
-//    var body: some View {
-//        Button {
-//
-//        } label: {
-//            Text("New Sticker Set")
-//        }
-//        .buttonStyle(PrettyButtonStyle())
-//
-//    }
-//}
-//
-//struct PrettyButtonStyle: ButtonStyle {
-//
-//    func makeBody(configuration: Configuration) -> some View {
-//        configuration.label
-//    }
-//}
-//
-//struct ButtonStyles_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ButtonStyles()
-//    }
-//}

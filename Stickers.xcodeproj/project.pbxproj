@@ -13,7 +13,7 @@
 		582EB095268746AB00F4C2D2 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08F268746AA00F4C2D2 /* Sticker.swift */; };
 		582EB096268746AB00F4C2D2 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB090268746AA00F4C2D2 /* Errors.swift */; };
 		582EB097268746AB00F4C2D2 /* StickerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB091268746AA00F4C2D2 /* StickerSet.swift */; };
-		582EB09A2687479000F4C2D2 /* StickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0992687479000F4C2D2 /* StickerRow.swift */; };
+		582EB09A2687479000F4C2D2 /* StickerSetRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0992687479000F4C2D2 /* StickerSetRow.swift */; };
 		582EB09C2687491000F4C2D2 /* libStickerImport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 582EB0852687469200F4C2D2 /* libStickerImport.a */; };
 		582EB0A42687765D00F4C2D2 /* StickerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A32687765D00F4C2D2 /* StickerSet.swift */; };
 		582EB0A62687770200F4C2D2 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A52687770200F4C2D2 /* Sticker.swift */; };
@@ -39,6 +39,8 @@
 		58D8A026268A47F100935A31 /* Store+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A025268A47F100935A31 /* Store+Test.swift */; };
 		58D8A029268A602400935A31 /* OriginalImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A028268A602400935A31 /* OriginalImages.swift */; };
 		58D8A02B268B3DCD00935A31 /* Checkerboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A02A268B3DCD00935A31 /* Checkerboard.swift */; };
+		58D8A02D268B5CB500935A31 /* AddText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A02C268B5CB500935A31 /* AddText.swift */; };
+		58D8A02F268BC72600935A31 /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A02E268BC72600935A31 /* Resize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +73,7 @@
 		582EB08F268746AA00F4C2D2 /* Sticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
 		582EB090268746AA00F4C2D2 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		582EB091268746AA00F4C2D2 /* StickerSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerSet.swift; sourceTree = "<group>"; };
-		582EB0992687479000F4C2D2 /* StickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerRow.swift; sourceTree = "<group>"; };
+		582EB0992687479000F4C2D2 /* StickerSetRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetRow.swift; sourceTree = "<group>"; };
 		582EB0A32687765D00F4C2D2 /* StickerSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSet.swift; sourceTree = "<group>"; };
 		582EB0A52687770200F4C2D2 /* Sticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
 		582EB0A8268777CF00F4C2D2 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -98,6 +100,8 @@
 		58D8A025268A47F100935A31 /* Store+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+Test.swift"; sourceTree = "<group>"; };
 		58D8A028268A602400935A31 /* OriginalImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalImages.swift; sourceTree = "<group>"; };
 		58D8A02A268B3DCD00935A31 /* Checkerboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkerboard.swift; sourceTree = "<group>"; };
+		58D8A02C268B5CB500935A31 /* AddText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddText.swift; sourceTree = "<group>"; };
+		58D8A02E268BC72600935A31 /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +142,6 @@
 				58BB966826876CB300B62A74 /* Assets.xcassets */,
 				58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */,
 				58BB966D26876CB300B62A74 /* Info.plist */,
-				58D8A021268A469500935A31 /* Math.swift */,
 				58BB966A26876CB300B62A74 /* Preview Content */,
 				58BB966426876CB200B62A74 /* StickersApp.swift */,
 				58A090DF2687AB5F005785A0 /* Style.swift */,
@@ -158,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				58BB966626876CB200B62A74 /* StickerSetList.swift */,
-				582EB0992687479000F4C2D2 /* StickerRow.swift */,
+				582EB0992687479000F4C2D2 /* StickerSetRow.swift */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -249,6 +252,8 @@
 			children = (
 				58D8A01B268A44EB00935A31 /* Effect.swift */,
 				58D8A013268A2E2400935A31 /* RemoveBackground.swift */,
+				58D8A02C268B5CB500935A31 /* AddText.swift */,
+				58D8A02E268BC72600935A31 /* Resize.swift */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 		58D8A027268A4BAD00935A31 /* Vision */ = {
 			isa = PBXGroup;
 			children = (
+				58D8A021268A469500935A31 /* Math.swift */,
 				58D8A019268A31A600935A31 /* UIImage+CustomExtensions.swift */,
 				58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */,
 				58D8A01F268A465900935A31 /* CGImage+RawBytes.swift */,
@@ -380,15 +386,17 @@
 				582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */,
 				58D8A026268A47F100935A31 /* Store+Test.swift in Sources */,
 				58D8A029268A602400935A31 /* OriginalImages.swift in Sources */,
-				582EB09A2687479000F4C2D2 /* StickerRow.swift in Sources */,
+				582EB09A2687479000F4C2D2 /* StickerSetRow.swift in Sources */,
 				58A090E02687AB5F005785A0 /* Style.swift in Sources */,
 				58D8A018268A317F00935A31 /* MLMultiArray+Image.swift in Sources */,
 				582EB0A62687770200F4C2D2 /* Sticker.swift in Sources */,
 				58D8A02B268B3DCD00935A31 /* Checkerboard.swift in Sources */,
 				58D8A022268A469500935A31 /* Math.swift in Sources */,
 				58D8A020268A465900935A31 /* CGImage+RawBytes.swift in Sources */,
+				58D8A02F268BC72600935A31 /* Resize.swift in Sources */,
 				58D8A014268A2E2400935A31 /* RemoveBackground.swift in Sources */,
 				582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */,
+				58D8A02D268B5CB500935A31 /* AddText.swift in Sources */,
 				58D8A01A268A31A600935A31 /* UIImage+CustomExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

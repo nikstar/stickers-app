@@ -16,7 +16,7 @@ struct StickerEditor: View {
     var body: some View {
 //        ScrollView {
 //            Color.orange
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .center, spacing: 8) {
                 stickerPreview
                 editOptions
             }
@@ -53,27 +53,45 @@ struct StickerEditor: View {
     }
     
     var editOptions: some View {
-        List {
-            Section(header: Text("Emoji"), footer: Text("Sticker can be asociated with an emoji")) {
-                TextField("Emoji", text: $sticker.emoji, onEditingChanged: { isEditing in
-                    print("Editing changed: \(isEditing)")
-                    sticker.emoji = sticker.emoji.filter { $0.isEmoji }
-                }, onCommit: {
-                    sticker.emoji = sticker.emoji.filter { $0.isEmoji }
-                })
+        NavigationView {
+            List {
+                Section(header: Text("Emoji"), footer: Text("Sticker can be asociated with an emoji")) {
+                    TextField("Emoji", text: $sticker.emoji, onEditingChanged: { isEditing in
+                        print("Editing changed: \(isEditing)")
+                        sticker.emoji = sticker.emoji.filter { $0.isEmoji }
+                        sticker.emoji.removeRepeatingCharacters()
+                    }, onCommit: {
+                        sticker.emoji = sticker.emoji.filter { $0.isEmoji }
+                        sticker.emoji.removeRepeatingCharacters()
+                    })
+                }
                 
-            }
-            
-            Section(header: Text("Background")) {
-                Toggle("Remove background", isOn: $sticker.removeBackground.animation())
-                if sticker.removeBackground {
-                    Toggle("Add white border", isOn: $sticker.addBorder)
+                Section(header: Text("Background")) {
+                    Toggle("Remove background", isOn: $sticker.removeBackground.animation())
+                    if sticker.removeBackground {
+                        Toggle("Add white border", isOn: $sticker.addBorder)
+                    }
+                }
+                
+                Section(header: Text("Text"), footer: EmptyView()) {
+                    TextField("Text", text: $sticker.text)
+                    Picker("Position", selection: $sticker.position) {
+                        ForEach(Sticker.TextPosition.allCases, id: \.self) { position in
+                            Text(position.rawValue.capitalized).tag(position)
+                        }
+                    }
+                    Picker("Font", selection: $sticker.font) {
+                        ForEach(Sticker.TextFont.allCases, id: \.self) { font in
+                            Text(font.rawValue).tag(font) // Not localized
+                        }
+                    }
                 }
             }
-            Text("Hello")
+            .listStyle(GroupedListStyle())
+            .navigationBarHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .background(Color.orange)
-        .listStyle(GroupedListStyle())
+        
     }
 }
 
@@ -96,5 +114,16 @@ extension Character {
         guard let first = unicodeScalars.first else { return false }
         print(self, first.properties.isEmoji && ( unicodeScalars.count > 1 || first.properties.isEmojiPresentation))
         return first.properties.isEmoji && ( unicodeScalars.count > 1 || first.properties.isEmojiPresentation)
+    }
+}
+
+
+extension String {
+    mutating func removeRepeatingCharacters() {
+        var seen: Set<Character> = []
+        self = String(self.filter { character in
+            if !seen.contains(character) { seen.insert(character); return true }
+            return false
+        })
     }
 }
