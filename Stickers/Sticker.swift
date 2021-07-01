@@ -9,6 +9,7 @@ struct Sticker: Identifiable, Hashable, Codable {
     var emoji: String = ""
     
     var removeBackground: Bool = false
+    var monochromeBackground: Bool = false
     var addBorder: Bool = false
     
     var text: String = ""
@@ -20,7 +21,7 @@ struct Sticker: Identifiable, Hashable, Codable {
     var effects: [Effect] {
         var effects: [Effect] = []
         if removeBackground {
-            effects.append(.removeBackground(addBorder: addBorder))
+            effects.append(.removeBackground(monochromeBackground: monochromeBackground, addBorder: addBorder))
         }
         effects.append(.resize)
         if !text.isEmpty {

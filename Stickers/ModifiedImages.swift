@@ -35,8 +35,8 @@ final class ModifiedImages {
 
         for effect in sticker.effects {
             switch effect {
-            case .removeBackground(let addBorder):
-                workImage = RemoveBackgroundEffect.apply(to: workImage, addBorder: addBorder)
+            case let .removeBackground(monochromeBackground, addBorder):
+                workImage = RemoveBackgroundEffect.apply(to: workImage, monochromeBackground: monochromeBackground, addBorder: addBorder)
             case .resize:
                 workImage = Resize.apply(to: workImage)
             case let .addText(text: text, position: position, font: font):

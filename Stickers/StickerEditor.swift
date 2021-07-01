@@ -94,6 +94,7 @@ struct StickerEditor: View {
                 Section(header: Text("Background")) {
                     Toggle("Remove background", isOn: $sticker.removeBackground.animation())
                     if sticker.removeBackground {
+                        Toggle("Just remove white background", isOn: $sticker.monochromeBackground)
                         Toggle("Add white border", isOn: $sticker.addBorder)
                     }
                 }
