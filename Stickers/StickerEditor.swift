@@ -57,20 +57,18 @@ struct StickerEditor: View {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .padding(.vertical, 30)
+                        .padding(.top, 44)
+                        .padding(.bottom, 40)
                         .padding(.horizontal, 24)
                     if !sticker.modifiedImageCached {
                         ProgressView()
                     }
                     
                 }
-//                .frame(maxWidth: .infinity, maxHeight: 256)
                 .aspectRatio(1.5, contentMode: .fit)
                 .background(backgroundPattern)
             }
         }
-//        .fixedSize()
-//        .frame(maxHeight: 250)
     }
     
     var backgroundPattern: some View {

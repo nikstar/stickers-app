@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StickerImport
 
 struct StickerSetEditor: View {
     
@@ -22,6 +23,10 @@ struct StickerSetEditor: View {
     @State var presentedStickerID: (UUID, UUID)? = nil
     
     @State var deleteAlertPresented = false
+    
+    @State var importErrorAlertPresented = false
+    @State var errorMessage = "Error"
+    @State var errorDescription = "Unknown error."
     
     @EnvironmentObject var store: Store
     @Environment(\.presentationMode) var presentationMode
@@ -87,7 +92,13 @@ struct StickerSetEditor: View {
                 secondaryButton: .cancel()
             )
         }
-        
+        .alert(isPresented: $importErrorAlertPresented) {
+            Alert(
+                title: Text(errorMessage),
+                message: Text(errorDescription),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         
         
         .environmentObject(store) // crashes without it. bug in Swift UI?
@@ -148,7 +159,33 @@ struct StickerSetEditor: View {
     
     var importToTelegram: some View {
         Button {
-            store.export(stickerSet)
+            do {
+                try store.export(stickerSet)
+            } catch let error as StickerImport.StickersError {
+                switch error {
+                case .fileTooBig:
+                    errorMessage = "File Too Big"
+                    errorDescription = "One of the sticker files is too big" // TODO: not good enough
+                case .invalidDimensions:
+                    errorMessage = "Wrong Dimensions"
+                    errorDescription = "One of the stickers has wrong dimensions"
+                case .countLimitExceeded:
+                    errorMessage = "Too Many Stickers"
+                    errorDescription = "Maximum of 120 stickers is allowed"
+                case .dataTypeMismatch:
+                    errorMessage = "Wrong Type"
+                    errorDescription = "Sticker's type doesn't match set's type" // ???
+                case .setIsEmpty:
+                    errorMessage = "Empty set"
+                    errorDescription = "Looks like this set does not contain any stickers"
+                case .telegramNotInstalled:
+                    errorMessage = "Telegram Not Installed"
+                    errorDescription = "Could not send stickers to Telegram. Telegram app is probably not installed."
+                }
+                importErrorAlertPresented = true
+            } catch {
+                print(error)
+            }
         } label: {
             Text("Import to Telegram")
                 .font(.title.bold())
@@ -160,11 +197,9 @@ struct StickerSetEditor: View {
                 )
         }
         .shadow(radius: 10)
-        .padding(.top, 22)
-        .padding(.bottom, 10)
+        .padding(.top, 24)
+        .padding(.bottom, 16)
     }
-    
-    
 }
 
 

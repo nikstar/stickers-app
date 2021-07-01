@@ -146,6 +146,9 @@ public class StickerSet: Identifiable, Codable  {
         }
         result["stickers"] = stickers
         
+        guard IPC.canSend() else {
+            throw StickersError.telegramNotInstalled
+        }
         let _ = IPC.send(json: result)
     }
 }
