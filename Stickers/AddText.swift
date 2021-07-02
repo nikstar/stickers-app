@@ -45,9 +45,15 @@ final class AddText {
         let font: UIFont
         switch self.font {
         case .arial:
-            font = UIFont(name: "Helvetica-Bold", size: 80)! // lol
+            font = UIFont(name: "Arial-BoldMT", size: 80)!  
+        case .helvetica:
+            font = UIFont(name: "Helvetica-Bold", size: 80)!
         case .impact:
-            font = UIFont(name: "Helvetica-Bold", size: 80)! // exists? no :(
+            font = UIFont(name: "Impact", size: 80)!
+        case .comicSans:
+            font = UIFont(name: "ComicSansMS-Bold", size: 80)!
+        case .snellRoundhand:
+            font = UIFont(name: "SnellRoundhand-Black", size: 96)!
         }
         
         let paragraphStyle = NSMutableParagraphStyle()

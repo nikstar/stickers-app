@@ -31,9 +31,14 @@ struct Sticker: Identifiable, Hashable, Codable {
         return effects
     }
     
-    enum TextFont: String, Codable, CaseIterable, Hashable {
-        case arial = "Arial"
-        case impact = "Impact"
+    enum TextFont: String, Codable, CaseIterable, Hashable, Identifiable {
+        case arial
+        case comicSans
+        case helvetica
+        case impact
+        case snellRoundhand
+        
+        var id: Self { return self }
     }
     
     enum TextPosition: String, Codable, CaseIterable, Hashable {

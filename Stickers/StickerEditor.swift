@@ -106,8 +106,8 @@ struct StickerEditor: View {
                         }
                     }
                     Picker("Font", selection: $sticker.font) {
-                        ForEach(Sticker.TextFont.allCases, id: \.self) { font in
-                            Text(font.rawValue).tag(font) // Not localized
+                        ForEach(Sticker.TextFont.allCases) { font in
+                            Text(font.description).tag(font)
                         }
                     }
                     Picker("Color", selection: $sticker.color) {
@@ -154,6 +154,24 @@ extension String {
             if !seen.contains(character) { seen.insert(character); return true }
             return false
         })
+    }
+}
+
+
+extension Sticker.TextFont {
+    var description: String {
+        switch self {
+        case .arial:
+            return "Arial"
+        case .comicSans:
+            return "Comic Sans"
+        case .helvetica:
+            return "Helvetica"
+        case .impact:
+            return "Impact"
+        case .snellRoundhand:
+            return "Fancy"
+        }
     }
 }
 
