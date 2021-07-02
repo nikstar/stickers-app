@@ -15,7 +15,6 @@ struct StickerSetEditor: View {
     var isNew: Bool
     
     var isEmpty: Bool { stickerSet.stickers.isEmpty }
-    var stickersCount: Int { stickerSet.stickers.count }
     
     enum CellContent: Hashable {
         case sticker(UUID)
@@ -31,9 +30,7 @@ struct StickerSetEditor: View {
         ((containerSize.width - 2 * padding - 2 * spacing) / 3).rounded(.down)
     }
     private var collectionViewHeight: CGFloat {
-        let r = cellSize * CGFloat((cells.count - 1) / 3 + 1) + spacing * CGFloat((cells.count - 1) / 3)
-        print(r)
-        return r
+        cellSize * CGFloat((cells.count - 1) / 3 + 1) + spacing * CGFloat((cells.count - 1) / 3)
     }
     
     @State var imagePickerPresented: Bool = false
@@ -41,7 +38,6 @@ struct StickerSetEditor: View {
     
     @State var stickerEditorPresented: Bool = false
     @State var presentedStickerID: (UUID, UUID)? = nil
-    
     
     enum AlertContent {
         case deleteConfirmation
@@ -60,17 +56,27 @@ struct StickerSetEditor: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 10) {
+                
+                if isNew {
+                    Text("New Set").font(.largeTitle.bold())
+                        .padding(.leading, 20)
+                        .padding(.trailing, 16)
+                }
+                
                 if isEmpty {
                     Text("Start by adding your images").font(.headline)
                         .padding(.leading, 20)
                         .padding(.trailing, 16)
                 }
+                
                 grid
+                    .padding(.top, 8)
+                    .padding(.bottom, 10)
                     .padding(.horizontal, padding)
 
                 if !isEmpty {
-                    Text("Tap images above to edit or remove").font(.headline)
+                    Text("Tap images to edit or remove. Drag to reorder.").font(.headline)
                         .padding(.leading, 20)
                         .padding(.trailing, 16)
                     importToTelegram
@@ -143,7 +149,6 @@ struct StickerSetEditor: View {
                 } label: {
                     stickerView(id)
                         .frame(width: cellSize, height: cellSize)
-                        .background(Color.white)
                 }
             case .newSticker:
                 addImage
@@ -158,7 +163,6 @@ struct StickerSetEditor: View {
         }
         .collectionViewLayout(FlowCollectionViewLayout(minimumLineSpacing: spacing, minimumInteritemSpacing: spacing))
         .height(max(collectionViewHeight, cellSize))
-        
     }
     
     
@@ -265,7 +269,7 @@ extension StickerSetEditor {
 struct StickerSetEditor_Previews: PreviewProvider {
     static var previews: some View {
         //        StickerSetEditor(stickerSet: .constant(Store.testEmpty.stickerSets.first!), isNew: true, isPresented: .constant(true))
-        StickerSetEditor(stickerSet: .constant(Store.default().stickerSets.first!), isNew: false)
+        StickerSetEditor(stickerSet: .constant(Store.default().stickerSets.first!), isNew: true)
             .environmentObject(Store.default())
     }
 }

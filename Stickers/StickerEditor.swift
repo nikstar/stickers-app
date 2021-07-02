@@ -80,7 +80,7 @@ struct StickerEditor: View {
     var editOptions: some View {
         NavigationView {
             List {
-                Section(header: Text("Emoji"), footer: Text("Sticker can be asociated with an emoji")) {
+                Section(header: Text("Emoji"), footer: Text("Sticker will be suggested when user types these emoji")) {
                     TextField("Emoji", text: $sticker.emoji, onEditingChanged: { isEditing in
                         sticker.emoji = sticker.emoji.filter { $0.isEmoji }
                         sticker.emoji.removeRepeatingCharacters()
