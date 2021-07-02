@@ -16,7 +16,7 @@ struct Sticker: Identifiable, Hashable, Codable {
     var position: TextPosition = .bottom
     var font: TextFont = .arial
     
-    var modifiedImageCached: Bool = false { didSet { print("\(id.uuidString.prefix(6)): cached \(modifiedImageCached)") } }
+    var modifiedImageCached: Bool = false
     
     var effects: [Effect] {
         var effects: [Effect] = []

@@ -82,7 +82,6 @@ struct StickerEditor: View {
             List {
                 Section(header: Text("Emoji"), footer: Text("Sticker can be asociated with an emoji")) {
                     TextField("Emoji", text: $sticker.emoji, onEditingChanged: { isEditing in
-                        print("Editing changed: \(isEditing)")
                         sticker.emoji = sticker.emoji.filter { $0.isEmoji }
                         sticker.emoji.removeRepeatingCharacters()
                     }, onCommit: {
@@ -138,7 +137,6 @@ struct StickerEditor_Previews: PreviewProvider {
 extension Character {
     var isEmoji: Bool {
         guard let first = unicodeScalars.first else { return false }
-        print(self, first.properties.isEmoji && ( unicodeScalars.count > 1 || first.properties.isEmojiPresentation))
         return first.properties.isEmoji && ( unicodeScalars.count > 1 || first.properties.isEmojiPresentation)
     }
 }

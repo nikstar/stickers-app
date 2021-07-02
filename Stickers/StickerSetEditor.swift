@@ -6,15 +6,35 @@
 //
 
 import SwiftUI
+import SwiftUIX
 import StickerImport
 
 struct StickerSetEditor: View {
-    
     
     @Binding var stickerSet: StickerSet
     var isNew: Bool
     
     var isEmpty: Bool { stickerSet.stickers.isEmpty }
+    var stickersCount: Int { stickerSet.stickers.count }
+    
+    enum CellContent: Hashable {
+        case sticker(UUID)
+        case newSticker
+    }
+    var cells: [CellContent] {
+        stickerSet.stickers.map(CellContent.sticker) + [CellContent.newSticker]
+    }
+    @State var containerSize: CGSize = .init(width: 200, height: 200)
+    var padding: CGFloat = 8
+    var spacing: CGFloat = 8
+    private var cellSize: CGFloat {
+        ((containerSize.width - 2 * padding - 2 * spacing) / 3).rounded(.down)
+    }
+    private var collectionViewHeight: CGFloat {
+        let r = cellSize * CGFloat((cells.count - 1) / 3 + 1) + spacing * CGFloat((cells.count - 1) / 3)
+        print(r)
+        return r
+    }
     
     @State var imagePickerPresented: Bool = false
     @State private var loadedImagesData: [Data] = []
@@ -39,25 +59,28 @@ struct StickerSetEditor: View {
             VStack(alignment: .leading) {
                 if isEmpty {
                     Text("Start by adding your images").font(.headline)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 16)
                 }
                 grid
+                    .padding(.horizontal, padding)
+
                 if !isEmpty {
                     Text("Tap images above to edit or remove").font(.headline)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 16)
                     importToTelegram
+                        .padding(.leading, 20)
+                        .padding(.trailing, 16)
                 }
             }
             .padding(.top, 60)
-            .padding(.leading, 20)
-            .padding(.trailing, 16)
         }
         .onChange(of: presentedStickerID?.1) { id in
             if stickerEditorPresented == false {
                 stickerEditorPresented = id != nil
             }
         }
-        .onChange(of: imagePickerPresented, perform: { value in
-            print("imagePickerPresented: \(value)")
-        })
         .sheet(isPresented: $imagePickerPresented, onDismiss: loadImage) {
             ImagePicker(loadedImagesData: $loadedImagesData).environmentObject(store)
         }
@@ -99,30 +122,33 @@ struct StickerSetEditor: View {
                 dismissButton: .default(Text("OK"))
             )
         }
-        
-        
+        .captureSize(in: $containerSize)
         .environmentObject(store) // crashes without it. bug in Swift UI?
-        
     }
     
     var grid: some View {
-        LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], alignment: .center, spacing: 4, pinnedViews: [], content: {
-            
-            ForEach(stickerSet.stickers, id: \.self) {  stickerID in
+        CollectionView(cells, id: \.self) { cell  in
+            switch cell {
+            case .sticker(let id):
                 Button {
-                    presentedStickerID = (stickerSet.id, stickerID)
+                    presentedStickerID = (stickerSet.id, id)
                 } label: {
-                    stickerView(stickerID)
+                    stickerView(id)
+                        .frame(width: cellSize, height: cellSize)
+                        .background(Color.white)
                 }
+            case .newSticker:
+                addImage
+                    .frame(width: cellSize, height: cellSize)
             }
-            addImage
             
-        })
+        }
+        .collectionViewLayout(FlowCollectionViewLayout(minimumLineSpacing: spacing, minimumInteritemSpacing: spacing))
+        .height(max(collectionViewHeight, cellSize))
     }
     
     func stickerView(_ sticker: UUID) -> some View {
-        print(sticker)
-        return ZStack {
+        ZStack {
             Color.secondary.opacity(0.08)
                 .cornerRadius(12)
             if let image = store.image(for: sticker) {
@@ -185,6 +211,7 @@ struct StickerSetEditor: View {
                 importErrorAlertPresented = true
             } catch {
                 print(error)
+                importErrorAlertPresented = true // unknown error
             }
         } label: {
             Text("Import to Telegram")
@@ -209,7 +236,6 @@ extension StickerSetEditor {
     
     func loadImage() {
         guard !loadedImagesData.isEmpty else { return }
-        print(loadedImagesData)
         loadedImagesData.forEach { data in
             store.addNewSticker(id: UUID(), setID: stickerSet.id, data: data)
         }

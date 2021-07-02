@@ -20,7 +20,6 @@ extension UIImage {
     
     func resizedImage(for size: CGSize) -> UIImage? {
             let image = self.cgImage
-            print(size)
             let context = CGContext(data: nil,
                                     width: Int(size.width),
                                     height: Int(size.height),
