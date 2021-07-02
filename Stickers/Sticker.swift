@@ -15,6 +15,7 @@ struct Sticker: Identifiable, Hashable, Codable {
     var text: String = ""
     var position: TextPosition = .bottom
     var font: TextFont = .arial
+    var color: TextColor = .whiteWithBorder
     
     var modifiedImageCached: Bool = false
     
@@ -25,7 +26,7 @@ struct Sticker: Identifiable, Hashable, Codable {
         }
         effects.append(.resize)
         if !text.isEmpty {
-            effects.append(.addText(text: text, position: position, font: font))
+            effects.append(.addText(text: text, position: position, font: font, color: color))
         }
         return effects
     }
@@ -39,5 +40,15 @@ struct Sticker: Identifiable, Hashable, Codable {
         case top
         case middle
         case bottom
+    }
+    
+    enum TextColor: String, Codable, CaseIterable, Hashable {
+        case white
+        case whiteWithBorder
+        case black
+        case blackWithBorder
+        case yellow
+        case orange
+        case blue
     }
 }

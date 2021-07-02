@@ -10,5 +10,5 @@ import Foundation
 enum Effect {
     case removeBackground(monochromeBackground: Bool, addBorder: Bool)
     case resize
-    case addText(text: String, position: Sticker.TextPosition, font: Sticker.TextFont)
+    case addText(text: String, position: Sticker.TextPosition, font: Sticker.TextFont, color: Sticker.TextColor)
 }

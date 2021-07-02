@@ -198,7 +198,7 @@
 			name = StickerEditor;
 			sourceTree = "<group>";
 		};
-		582EB0A7268777C500F4C2D2 /* Store */ = {
+		582EB0A7268777C500F4C2D2 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
 				58D8A023268A476200935A31 /* ModifiedImages.swift */,
@@ -208,7 +208,7 @@
 				58D8A025268A47F100935A31 /* Store+Test.swift */,
 				58A090E326889625005785A0 /* Import.swift */,
 			);
-			name = Store;
+			name = Logic;
 			sourceTree = "<group>";
 		};
 		58BB965826876CB200B62A74 = {
@@ -233,7 +233,7 @@
 		58BB966326876CB200B62A74 /* Stickers */ = {
 			isa = PBXGroup;
 			children = (
-				582EB0A7268777C500F4C2D2 /* Store */,
+				582EB0A7268777C500F4C2D2 /* Logic */,
 				582EB0A0268774C000F4C2D2 /* Model */,
 				58D8A016268A2E3000935A31 /* Effects */,
 				582EB09F2687747A00F4C2D2 /* List */,

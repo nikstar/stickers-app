@@ -39,8 +39,8 @@ final class ModifiedImages {
                 workImage = RemoveBackgroundEffect.apply(to: workImage, monochromeBackground: monochromeBackground, addBorder: addBorder)
             case .resize:
                 workImage = Resize.apply(to: workImage)
-            case let .addText(text: text, position: position, font: font):
-                workImage = AddText.apply(to: workImage, text: text, position: position, font: font)
+            case let .addText(text: text, position: position, font: font, color: color):
+                workImage = AddText.apply(to: workImage, text: text, position: position, font: font, color: color)
             }
         }
         stickers[id] = workImage

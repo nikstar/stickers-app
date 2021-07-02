@@ -110,6 +110,11 @@ struct StickerEditor: View {
                             Text(font.rawValue).tag(font) // Not localized
                         }
                     }
+                    Picker("Color", selection: $sticker.color) {
+                        ForEach(Sticker.TextColor.allCases, id: \.self) { color in
+                            Text(color.description).tag(color) // Not localized
+                        }
+                    }
                 }
             }
             .listStyle(GroupedListStyle())
@@ -149,5 +154,27 @@ extension String {
             if !seen.contains(character) { seen.insert(character); return true }
             return false
         })
+    }
+}
+
+
+extension Sticker.TextColor {
+    var description: String {
+        switch self {
+        case .white:
+            return "White"
+        case .whiteWithBorder:
+            return  "White with black border"
+        case .black:
+            return "Black"
+        case .blackWithBorder:
+            return "Black with white border"
+        case .yellow:
+            return "Yellow"
+        case .orange:
+            return "Orange"
+        case .blue:
+            return "Blue"
+        }
     }
 }

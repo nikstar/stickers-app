@@ -14,16 +14,18 @@ final class AddText {
     let text: String
     let position: Sticker.TextPosition
     let font: Sticker.TextFont
+    let color: Sticker.TextColor
     
-    init(image: UIImage, text: String, position: Sticker.TextPosition, font: Sticker.TextFont) {
+    init(image: UIImage, text: String, position: Sticker.TextPosition, font: Sticker.TextFont, color: Sticker.TextColor) {
         self.image = image
         self.text = text
         self.position = position
         self.font = font
+        self.color = color
     }
     
-    static func apply(to image: UIImage, text: String, position: Sticker.TextPosition, font: Sticker.TextFont) -> UIImage {
-        let addText = AddText(image: image, text: text, position: position, font: font)
+    static func apply(to image: UIImage, text: String, position: Sticker.TextPosition, font: Sticker.TextFont, color: Sticker.TextColor) -> UIImage {
+        let addText = AddText(image: image, text: text, position: position, font: font, color: color)
         return addText.addText()
     }
     
@@ -51,13 +53,32 @@ final class AddText {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         
-        let attributes: [NSAttributedString.Key:Any] = [
+        var attributes: [NSAttributedString.Key:Any] = [
             .font: font,
             .paragraphStyle: paragraphStyle,
-            .foregroundColor: UIColor.white,
-            .strokeColor: UIColor.black,
-            .strokeWidth: -8.0,
         ]
+        switch color {
+        case .white:
+            attributes[.foregroundColor] = UIColor.white
+        case .whiteWithBorder:
+            attributes[.foregroundColor] = UIColor.white
+            attributes[.strokeColor] = UIColor.black
+            attributes[.strokeWidth] = -4.0
+        case .black:
+            attributes[.foregroundColor] = UIColor.black
+        case .blackWithBorder:
+            attributes[.foregroundColor] = UIColor.black
+            attributes[.strokeColor] = UIColor.white
+            attributes[.strokeWidth] = -4.0
+        case .yellow:
+            attributes[.foregroundColor] = UIColor.yellow
+        case .orange:
+            attributes[.foregroundColor] = UIColor.orange
+        case .blue:
+            attributes[.foregroundColor] = UIColor.blue
+        }
+        
+        
         let textY = originY + (image.size.height/3 - font.lineHeight) / 2
         text.draw(in: CGRect(x: 0, y: textY, width: image.size.width, height: image.size.height - textY).integral, withAttributes: attributes)
         let result = UIGraphicsGetImageFromCurrentImageContext()!
