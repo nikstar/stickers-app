@@ -33,10 +33,26 @@ final class Store: ObservableObject {
         self.stickers = stickers
     }
     
+    
+    // MARK: - List
+    
+    var listBinding: Binding<[StickerSet]> {
+        Binding {
+            self.stickerSets
+        } set: { newValue in
+            self.stickerSets = newValue
+        }
+    }
+    
+    
     // MARK: - Sticker sets
     
     func addNewStickerSet(id: UUID) {
         stickerSets.append(StickerSet(id: id, stickers: []))
+    }
+    
+    func moveStickerSet(from: IndexSet, to: Int) {
+        stickerSets.move(fromOffsets: from, toOffset: to)
     }
     
     func removeStickerSet(id: UUID) {
@@ -86,8 +102,6 @@ final class Store: ObservableObject {
         // FIXME: check out why this doesn't quite work. Maybe remove on launch or something?
     }
     
-    
-    
     func binding(forSticker id: UUID) -> Binding<Sticker> {
         Binding {
             if let sticker = self.stickers.first(where: { $0.id == id }) {
@@ -105,7 +119,6 @@ final class Store: ObservableObject {
                 self.stickers.insert(newValue, at: 0)
             }
         }
-
     }
     
     

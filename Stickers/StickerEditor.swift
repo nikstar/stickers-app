@@ -9,7 +9,6 @@ import SwiftUI
 
 struct StickerEditor: View {
     
-    
     @Binding var sticker: Sticker
     
     @EnvironmentObject var store: Store
