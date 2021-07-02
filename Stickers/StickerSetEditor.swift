@@ -42,9 +42,13 @@ struct StickerSetEditor: View {
     @State var stickerEditorPresented: Bool = false
     @State var presentedStickerID: (UUID, UUID)? = nil
     
-    @State var deleteAlertPresented = false
     
-    @State var importErrorAlertPresented = false
+    enum AlertContent {
+        case deleteConfirmation
+        case error
+    }
+    @State var alertPresented = false
+    @State var alertContent: AlertContent = .error
     @State var errorMessage = "Error"
     @State var errorDescription = "Unknown error."
     
@@ -76,6 +80,18 @@ struct StickerSetEditor: View {
             }
             .padding(.top, 60)
         }
+        .overlay(HStack {
+            SmallButton(text: "Delete", color: .red) {
+                alertContent = .deleteConfirmation
+                alertPresented = true
+            }
+            Spacer()
+            SmallButton(text: "Done", color: .blue) {
+                presentationMode.wrappedValue.dismiss()
+            }
+            
+        }.padding(2)
+        , alignment: .top)
         .onChange(of: presentedStickerID?.1) { id in
             if stickerEditorPresented == false {
                 stickerEditorPresented = id != nil
@@ -93,38 +109,30 @@ struct StickerSetEditor: View {
                 Color.red
             }
         }
-        .overlay(HStack {
-            SmallButton(text: "Delete", color: .red) {
-               deleteAlertPresented = true
+        .alert(isPresented: $alertPresented) {
+            switch alertContent {
+            case .deleteConfirmation:
+                return Alert(
+                    title: Text("Delete sticker set"),
+                    message: Text("Are you sure you want to delete this sticker set? This action cannot be undone."),
+                    primaryButton: .destructive(Text("Delete")) {
+                        store.removeStickerSet(id: stickerSet.id)
+                        presentationMode.wrappedValue.dismiss()
+                    },
+                    secondaryButton: .cancel()
+                )
+            case .error:
+                return Alert(
+                    title: Text(errorMessage),
+                    message: Text(errorDescription),
+                    dismissButton: .default(Text("OK"))
+                )
             }
-            Spacer()
-            SmallButton(text: "Done", color: .blue) {
-                presentationMode.wrappedValue.dismiss()
-            }
-            
-        }.padding(2)
-        , alignment: .top)
-        .alert(isPresented: $deleteAlertPresented) {
-            Alert(
-                title: Text("Delete sticker set"),
-                message: Text("Are you sure you want to delete this sticker set? This action cannot be undone."),
-                primaryButton: .destructive(Text("Delete")) {
-                    store.removeStickerSet(id: stickerSet.id)
-                    presentationMode.wrappedValue.dismiss()
-                },
-                secondaryButton: .cancel()
-            )
-        }
-        .alert(isPresented: $importErrorAlertPresented) {
-            Alert(
-                title: Text(errorMessage),
-                message: Text(errorDescription),
-                dismissButton: .default(Text("OK"))
-            )
         }
         .captureSize(in: $containerSize)
         .environmentObject(store) // crashes without it. bug in Swift UI?
     }
+    
     
     var grid: some View {
         CollectionView(cells, id: \.self) { cell  in
@@ -140,12 +148,19 @@ struct StickerSetEditor: View {
             case .newSticker:
                 addImage
                     .frame(width: cellSize, height: cellSize)
+                    .dragItems([])
             }
             
         }
+        .onMove { from, to in
+            guard from.allSatisfy({ $0 < stickerSet.stickers.endIndex }) else { return }
+            stickerSet.stickers.move(fromOffsets: from, toOffset: min(to, stickerSet.stickers.endIndex))
+        }
         .collectionViewLayout(FlowCollectionViewLayout(minimumLineSpacing: spacing, minimumInteritemSpacing: spacing))
         .height(max(collectionViewHeight, cellSize))
+        
     }
+    
     
     func stickerView(_ sticker: UUID) -> some View {
         ZStack {
@@ -166,8 +181,7 @@ struct StickerSetEditor: View {
         }, alignment: .bottomTrailing)
         .aspectRatio(1, contentMode: .fit)
     }
-    
-    
+
     
     var addImage: some View {
         Button {
@@ -182,6 +196,7 @@ struct StickerSetEditor: View {
             .padding(4)
         }
     }
+    
     
     var importToTelegram: some View {
         Button {
@@ -208,10 +223,11 @@ struct StickerSetEditor: View {
                     errorMessage = "Telegram Not Installed"
                     errorDescription = "Could not send stickers to Telegram. Telegram app is probably not installed."
                 }
-                importErrorAlertPresented = true
+                alertContent = .error
+                alertPresented = true
             } catch {
-                print(error)
-                importErrorAlertPresented = true // unknown error
+                alertContent = .error
+                alertPresented = true // unknown error
             }
         } label: {
             Text("Import to Telegram")

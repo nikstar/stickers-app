@@ -142,8 +142,8 @@
             filePath = "Stickers/StickerSetEditor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "loadImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -758,16 +758,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "39ACF678-1CDB-47FD-931F-766E6F0E47DB"
-            shouldBeEnabled = "Yes"
+            uuid = "EE4EFE0F-49F1-41A4-8D2A-308C7DDFA83E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stickers/StickerSetEditor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "body"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "grid"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DE7924DE-5377-403A-B397-F4FC7890011D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stickers/StickerSetEditor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "grid"
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
