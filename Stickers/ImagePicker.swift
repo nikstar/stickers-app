@@ -7,7 +7,7 @@
 
 import SwiftUI
 import PhotosUI
-import StickerImport
+import TelegramStickersImport
 
 struct ImagePicker: UIViewControllerRepresentable {
     
@@ -18,7 +18,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
         configuration.filter = .images
         configuration.preferredAssetRepresentationMode = .compatible
-        configuration.selectionLimit = StickerImport.Limits.stickerSetStickerMaxCount
+        configuration.selectionLimit = 120 // TODO: make this accurate
         
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = context.coordinator

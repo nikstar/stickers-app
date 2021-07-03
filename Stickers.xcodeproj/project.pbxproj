@@ -7,14 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		582EB092268746AB00F4C2D2 /* IPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08C268746AA00F4C2D2 /* IPC.swift */; };
-		582EB093268746AB00F4C2D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08D268746AA00F4C2D2 /* Helpers.swift */; };
-		582EB094268746AB00F4C2D2 /* Limits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08E268746AA00F4C2D2 /* Limits.swift */; };
-		582EB095268746AB00F4C2D2 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB08F268746AA00F4C2D2 /* Sticker.swift */; };
-		582EB096268746AB00F4C2D2 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB090268746AA00F4C2D2 /* Errors.swift */; };
-		582EB097268746AB00F4C2D2 /* StickerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB091268746AA00F4C2D2 /* StickerSet.swift */; };
 		582EB09A2687479000F4C2D2 /* StickerSetRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0992687479000F4C2D2 /* StickerSetRow.swift */; };
-		582EB09C2687491000F4C2D2 /* libStickerImport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 582EB0852687469200F4C2D2 /* libStickerImport.a */; };
 		582EB0A42687765D00F4C2D2 /* StickerSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A32687765D00F4C2D2 /* StickerSet.swift */; };
 		582EB0A62687770200F4C2D2 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A52687770200F4C2D2 /* Sticker.swift */; };
 		582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A8268777CF00F4C2D2 /* Store.swift */; };
@@ -38,6 +31,7 @@
 		58BBF0A92690EFB000C8A3A0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0A82690EFB000C8A3A0 /* Lottie */; };
 		58BBF0AC2690F1FE00C8A3A0 /* LottieViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */; };
 		58BBF0AF2690F3A400C8A3A0 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0AE2690F3A400C8A3A0 /* Gzip */; };
+		58BBF0B42691105900C8A3A0 /* TelegramStickersImport in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0B32691105900C8A3A0 /* TelegramStickersImport */; };
 		58D8A012268A29D000935A31 /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */; };
 		58D8A014268A2E2400935A31 /* BackgroundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A013268A2E2400935A31 /* BackgroundEffect.swift */; };
 		58D8A018268A317F00935A31 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */; };
@@ -53,30 +47,7 @@
 		58D8A031268D226E00935A31 /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A030268D226E00935A31 /* SmallButton.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		582EB09D2687491000F4C2D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 58BB965926876CB200B62A74 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 582EB0842687469200F4C2D2;
-			remoteInfo = StickerImport;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		582EB0832687469200F4C2D2 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		582EB0852687469200F4C2D2 /* libStickerImport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStickerImport.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		582EB08C268746AA00F4C2D2 /* IPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPC.swift; sourceTree = "<group>"; };
 		582EB08D268746AA00F4C2D2 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		582EB08E268746AA00F4C2D2 /* Limits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Limits.swift; sourceTree = "<group>"; };
@@ -122,20 +93,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		582EB0822687469200F4C2D2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		58BB965E26876CB200B62A74 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				582EB09C2687491000F4C2D2 /* libStickerImport.a in Frameworks */,
 				58848C3B268E1EA2003A743D /* SwiftUIX in Frameworks */,
 				58BBF0AF2690F3A400C8A3A0 /* Gzip in Frameworks */,
+				58BBF0B42691105900C8A3A0 /* TelegramStickersImport in Frameworks */,
 				58BBF0A92690EFB000C8A3A0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				58BB966126876CB200B62A74 /* Stickers.app */,
-				582EB0852687469200F4C2D2 /* libStickerImport.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -331,23 +294,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		582EB0842687469200F4C2D2 /* StickerImport */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 582EB08B2687469200F4C2D2 /* Build configuration list for PBXNativeTarget "StickerImport" */;
-			buildPhases = (
-				582EB0812687469200F4C2D2 /* Sources */,
-				582EB0822687469200F4C2D2 /* Frameworks */,
-				582EB0832687469200F4C2D2 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = StickerImport;
-			productName = StickerImport;
-			productReference = 582EB0852687469200F4C2D2 /* libStickerImport.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		58BB966026876CB200B62A74 /* Stickers */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58BB967026876CB300B62A74 /* Build configuration list for PBXNativeTarget "Stickers" */;
@@ -359,13 +305,13 @@
 			buildRules = (
 			);
 			dependencies = (
-				582EB09E2687491000F4C2D2 /* PBXTargetDependency */,
 			);
 			name = Stickers;
 			packageProductDependencies = (
 				58848C3A268E1EA2003A743D /* SwiftUIX */,
 				58BBF0A82690EFB000C8A3A0 /* Lottie */,
 				58BBF0AE2690F3A400C8A3A0 /* Gzip */,
+				58BBF0B32691105900C8A3A0 /* TelegramStickersImport */,
 			);
 			productName = Stickers;
 			productReference = 58BB966126876CB200B62A74 /* Stickers.app */;
@@ -380,9 +326,6 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
-					582EB0842687469200F4C2D2 = {
-						CreatedOnToolsVersion = 12.5;
-					};
 					58BB966026876CB200B62A74 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -401,13 +344,13 @@
 				58848C39268E1EA2003A743D /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				58BBF0A72690EFB000C8A3A0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				58BBF0AD2690F3A400C8A3A0 /* XCRemoteSwiftPackageReference "GzipSwift" */,
+				58BBF0B22691105900C8A3A0 /* XCRemoteSwiftPackageReference "TelegramStickersImport" */,
 			);
 			productRefGroup = 58BB966226876CB200B62A74 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				58BB966026876CB200B62A74 /* Stickers */,
-				582EB0842687469200F4C2D2 /* StickerImport */,
 			);
 		};
 /* End PBXProject section */
@@ -427,19 +370,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		582EB0812687469200F4C2D2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				582EB092268746AB00F4C2D2 /* IPC.swift in Sources */,
-				582EB094268746AB00F4C2D2 /* Limits.swift in Sources */,
-				582EB097268746AB00F4C2D2 /* StickerSet.swift in Sources */,
-				582EB093268746AB00F4C2D2 /* Helpers.swift in Sources */,
-				582EB096268746AB00F4C2D2 /* Errors.swift in Sources */,
-				582EB095268746AB00F4C2D2 /* Sticker.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		58BB965D26876CB200B62A74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,43 +409,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		582EB09E2687491000F4C2D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 582EB0842687469200F4C2D2 /* StickerImport */;
-			targetProxy = 582EB09D2687491000F4C2D2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		582EB0892687469200F4C2D2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6RX8GEVB43;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		582EB08A2687469200F4C2D2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6RX8GEVB43;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		58BB966E26876CB300B62A74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -683,15 +577,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		582EB08B2687469200F4C2D2 /* Build configuration list for PBXNativeTarget "StickerImport" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				582EB0892687469200F4C2D2 /* Debug */,
-				582EB08A2687469200F4C2D2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		58BB965C26876CB200B62A74 /* Build configuration list for PBXProject "Stickers" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -737,6 +622,14 @@
 				minimumVersion = 5.1.1;
 			};
 		};
+		58BBF0B22691105900C8A3A0 /* XCRemoteSwiftPackageReference "TelegramStickersImport" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TelegramMessenger/TelegramStickersImport";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -754,6 +647,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 58BBF0AD2690F3A400C8A3A0 /* XCRemoteSwiftPackageReference "GzipSwift" */;
 			productName = Gzip;
+		};
+		58BBF0B32691105900C8A3A0 /* TelegramStickersImport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58BBF0B22691105900C8A3A0 /* XCRemoteSwiftPackageReference "TelegramStickersImport" */;
+			productName = TelegramStickersImport;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftUIX
-import StickerImport
+import TelegramStickersImport
 import UniformTypeIdentifiers
 
 struct StickerSetEditor: View {
@@ -241,9 +241,16 @@ struct StickerSetEditor: View {
     
     var importToTelegram: some View {
         Button {
-            do {
+            do { // refactor this
+                guard UIApplication.shared.canOpenURL(URL(string: "tg://")!) else {
+                    errorMessage = "Telegram Not Installed"
+                    errorDescription = "Could not send stickers to Telegram. Telegram app is probably not installed."
+                    alertContent = .error
+                    alertPresented = true
+                    return
+                }
                 try store.export(stickerSet)
-            } catch let error as StickerImport.StickersError {
+            } catch let error as TelegramStickersImport.StickersError {
                 switch error {
                 case .fileTooBig:
                     errorMessage = "File Too Big"
@@ -260,9 +267,6 @@ struct StickerSetEditor: View {
                 case .setIsEmpty:
                     errorMessage = "Empty set"
                     errorDescription = "Looks like this set does not contain any stickers"
-                case .telegramNotInstalled:
-                    errorMessage = "Telegram Not Installed"
-                    errorDescription = "Could not send stickers to Telegram. Telegram app is probably not installed."
                 }
                 alertContent = .error
                 alertPresented = true
@@ -271,7 +275,7 @@ struct StickerSetEditor: View {
                 alertPresented = true // unknown error
             }
         } label: {
-            Text("Import to Telegram")
+            Text("Add to Telegram")
                 .font(.title.bold())
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, minHeight: 66, maxHeight: 66, alignment: .center)
