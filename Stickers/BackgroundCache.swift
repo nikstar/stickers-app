@@ -49,9 +49,10 @@ final class BackgroundCache {
         return nil
     }
     
-    func writeImageToDisk(id: UUID, image: UIImage) {
+    private func writeImageToDisk(id: UUID, image: UIImage) {
         DispatchQueue.global(qos: .background).async {
             if let data = image.pngData() {
+                print("write", image.size, image.scale)
                 try? data.write(to: cacheDir.appendingPathComponent(id.uuidString))
             }
         }
@@ -68,15 +69,15 @@ final class BackgroundCache {
             }
         }
         let data = store.originalImages.get(id: id)
-        guard let sticker = store.getSticker(id: id), let image = UIImage(data: data) else {
+        guard let sticker = store.getSticker(id: id), var image = UIImage(data: data) else {
             // error
             return UIImage()
         }
-        let newImage = BackgroundEffect.apply(to: image, config: sticker.background)
-        let resized = Resize.apply(to: newImage)
-        inMemory[id] = resized
+        image = BackgroundEffect.apply(to: image, config: sticker.background)
+        image = ResizeEffect.apply(to: image)
+        inMemory[id] = image
         cache[id] = sticker.background
-        writeImageToDisk(id: id, image: resized)
-        return resized
+        writeImageToDisk(id: id, image: image)
+        return image
     }
 }

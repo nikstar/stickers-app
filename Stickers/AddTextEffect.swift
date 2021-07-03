@@ -10,14 +10,14 @@ import UIKit
 
 final class AddTextEffect {
     
-    var image: UIImage
+    var inputImage: UIImage
     let text: String
     let position: Sticker.TextPosition
     let font: Sticker.TextFont
     let color: Sticker.TextColor
     
     init(image: UIImage, text: String, position: Sticker.TextPosition, font: Sticker.TextFont, color: Sticker.TextColor) {
-        self.image = image
+        self.inputImage = image
         self.text = text
         self.position = position
         self.font = font
@@ -30,17 +30,18 @@ final class AddTextEffect {
     }
     
     func addText() -> UIImage {
-        UIGraphicsBeginImageContext(image.size)
+        print(inputImage.size)
+        UIGraphicsBeginImageContext(inputImage.size)
         let originY: CGFloat
         switch position {
         case .top:
             originY = 0
         case .middle:
-            originY = 0.33 * image.size.height
+            originY = 0.33 * inputImage.size.height
         case .bottom:
-            originY = 0.67 * image.size.height
+            originY = 0.67 * inputImage.size.height
         }
-        image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        inputImage.draw(in: CGRect(x: 0, y: 0, width: inputImage.size.width, height: inputImage.size.height))
         
         let font: UIFont
         switch self.font {
@@ -85,8 +86,8 @@ final class AddTextEffect {
         }
         
         
-        let textY = originY + (image.size.height/3 - font.lineHeight) / 2
-        text.draw(in: CGRect(x: 0, y: textY, width: image.size.width, height: image.size.height - textY).integral, withAttributes: attributes)
+        let textY = originY + (inputImage.size.height/3 - font.lineHeight) / 2
+        text.draw(in: CGRect(x: 0, y: textY, width: inputImage.size.width, height: inputImage.size.height - textY).integral, withAttributes: attributes)
         let result = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return result

@@ -84,7 +84,7 @@ public final class BackgroundEffect {
         if let compositeImage = filter?.outputImage {
             let context = CIContext(options: nil)
             let filteredImageRef = context.createCGImage(compositeImage, from: compositeImage.extent)!
-            return UIImage(cgImage: filteredImageRef)
+            return UIImage(cgImage: filteredImageRef, scale: 1.0, orientation: .up)
             
         }
         return inputImage
@@ -110,7 +110,7 @@ public final class BackgroundEffect {
         
         let context = CIContext(options: nil)
         let cgImageRef = context.createCGImage(composited, from: composited.extent)!
-        return UIImage(cgImage: cgImageRef)
+        return UIImage(cgImage: cgImageRef, scale: 1.0, orientation: .up)
     }
 }
 

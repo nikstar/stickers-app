@@ -17,11 +17,11 @@ struct StickerSetEditor: View {
     var isEmpty: Bool { stickerSet.stickers.isEmpty }
     
     enum CellContent: Hashable {
-        case sticker(UUID)
+        case sticker(Sticker)
         case newSticker
     }
     var cells: [CellContent] {
-        stickerSet.stickers.map(CellContent.sticker) + [CellContent.newSticker]
+        stickerSet.stickers.compactMap(store.getSticker).map(CellContent.sticker) + [CellContent.newSticker]
     }
     @State var containerSize: CGSize = .init(width: 200, height: 200)
     var padding: CGFloat = 8
@@ -107,7 +107,12 @@ struct StickerSetEditor: View {
             ImagePicker(loadedImagesData: $loadedImagesData).environmentObject(store)
         }
         .sheet(isPresented: $stickerEditorPresented, onDismiss: {
-            presentedStickerID = nil
+            if let id = presentedStickerID?.1 {
+                presentedStickerID = nil
+                let temp = UUID()
+                stickerSet.stickers.append(temp)
+                stickerSet.stickers.removeLast()
+            }
         }) {
             if let id = presentedStickerID {
                 StickerEditor(sticker: store.binding(forSticker: id.1)).environmentObject(store)
@@ -143,11 +148,11 @@ struct StickerSetEditor: View {
     var grid: some View {
         CollectionView(cells, id: \.self) { cell  in
             switch cell {
-            case .sticker(let id):
+            case .sticker(let sticker):
                 Button {
-                    presentedStickerID = (stickerSet.id, id)
+                    presentedStickerID = (stickerSet.id, sticker.id)
                 } label: {
-                    stickerView(id)
+                    StickerView(sticker: sticker)
                         .frame(width: cellSize, height: cellSize)
                 }
             case .newSticker:
@@ -164,28 +169,6 @@ struct StickerSetEditor: View {
         .collectionViewLayout(FlowCollectionViewLayout(minimumLineSpacing: spacing, minimumInteritemSpacing: spacing))
         .height(max(collectionViewHeight, cellSize))
     }
-    
-    
-    func stickerView(_ sticker: UUID) -> some View {
-        ZStack {
-            Color.secondary.opacity(0.08)
-                .cornerRadius(12)
-            if let image = store.image(for: sticker) {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(6)
-            }
-        }
-        .overlay(Group {
-            if let emoji = store.getSticker(id: sticker)?.emoji, emoji.count > 0 {
-                Text(emoji.prefix(3)) // improve?
-                    .padding(8)
-            }
-        }, alignment: .bottomTrailing)
-        .aspectRatio(1, contentMode: .fit)
-    }
-
     
     var addImage: some View {
         Button {
@@ -246,6 +229,35 @@ struct StickerSetEditor: View {
         .shadow(radius: 10)
         .padding(.top, 24)
         .padding(.bottom, 16)
+    }
+}
+
+
+struct StickerView: View {
+    
+    var sticker: Sticker
+    
+    @EnvironmentObject var store: Store
+    
+    
+    var body: some View {
+        ZStack {
+            Color.secondary.opacity(0.08)
+                .cornerRadius(12)
+            if let image = store.image(for: sticker.id) {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(6)
+            }
+        }
+        .overlay(Group {
+            if let emoji = store.getSticker(id: sticker.id)?.emoji, emoji.count > 0 {
+                Text(emoji.prefix(3)) // improve?
+                    .padding(8)
+            }
+        }, alignment: .bottomTrailing)
+        .aspectRatio(1, contentMode: .fit)
     }
 }
 

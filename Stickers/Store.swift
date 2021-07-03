@@ -61,6 +61,10 @@ final class Store: ObservableObject {
         stickerSets.removeAll(where: { $0.id == id })
     }
     
+    func removeEmptyStickerSets() {
+        stickerSets.removeAll(where: \.stickers.isEmpty)
+    }
+    
     func binding(forStickerSet id: UUID) -> Binding<StickerSet> {
         Binding {
             if let stickerSet = self.stickerSets.first(where: { $0.id == id }) {
@@ -131,7 +135,7 @@ final class Store: ObservableObject {
     func invalidateStickerCache(id: UUID) {
         if let idx = stickers.firstIndex(where: { $0.id == id }) {
             DispatchQueue.main.async {
-                self.stickers[idx].modifiedImageCached = false
+//                self.stickers[idx].modifiedImageCached = false
             }
         }
 //        modifiedImages.invalidate(id)
@@ -140,7 +144,8 @@ final class Store: ObservableObject {
     func modifiedImageCached(id: UUID) {
         if let idx = stickers.firstIndex(where: { $0.id == id }) {
             DispatchQueue.main.async {
-                self.stickers[idx].modifiedImageCached = true
+                print(id, Date())
+                self.stickers[idx].lastUpdated = Date()
             }
         }
     }

@@ -39,6 +39,7 @@ struct StickerSetList: View {
                     }
                     .maxWidth(.infinity)
                     .height(96 + 2 * 12)
+                    .border(Color.pink)
                 }
             }
             .onMove { from, to in
@@ -46,6 +47,7 @@ struct StickerSetList: View {
             }
             .collectionViewLayout(FlowCollectionViewLayout(minimumLineSpacing: 16, minimumInteritemSpacing: 0))
             .height(max(rowHeight, rowHeight * CGFloat(store.stickerSets.count)))
+            .border(Color.orange)
         }
         .onChange(of: presentedStickerSetID?.0) { id in
             if !isPresented && id != nil {
@@ -53,14 +55,8 @@ struct StickerSetList: View {
             }
         }
         .sheet(isPresented: $isPresented, onDismiss: {
-            let id = presentedStickerSetID?.0
             presentedStickerSetID = nil
-            if let id = id {
-                let shouldDelete = store.stickerSets.first(where: { $0.id == id })?.stickers.isEmpty ?? false
-                if shouldDelete {
-                    store.removeStickerSet(id: id)
-                }
-            }
+            store.removeEmptyStickerSets()
         }) {
             if let id = presentedStickerSetID {
                 StickerSetEditor(stickerSet: store.binding(forStickerSet: id.0), isNew: id.1).environmentObject(store)

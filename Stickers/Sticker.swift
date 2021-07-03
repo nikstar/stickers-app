@@ -11,7 +11,7 @@ struct Sticker: Hashable, Codable {
     var background: BackgroundConfig = .init()
     var foreground: ForegroundConfig = .init()
     
-    var modifiedImageCached: Bool = false
+    var lastUpdated: Date = Date()
     
     enum TextFont: String, Codable, CaseIterable, Hashable {
         case arial
