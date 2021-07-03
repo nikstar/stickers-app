@@ -34,6 +34,10 @@
 		58BBF09D269075BF00C8A3A0 /* BackgroundConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF09C269075BF00C8A3A0 /* BackgroundConfig.swift */; };
 		58BBF0A12690766A00C8A3A0 /* ForegroundConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0A02690766A00C8A3A0 /* ForegroundConfig.swift */; };
 		58BBF0A32690773900C8A3A0 /* ForegroundCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0A22690773900C8A3A0 /* ForegroundCache.swift */; };
+		58BBF0A62690EADA00C8A3A0 /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0A52690EAD900C8A3A0 /* StickerView.swift */; };
+		58BBF0A92690EFB000C8A3A0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0A82690EFB000C8A3A0 /* Lottie */; };
+		58BBF0AC2690F1FE00C8A3A0 /* LottieViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */; };
+		58BBF0AF2690F3A400C8A3A0 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0AE2690F3A400C8A3A0 /* Gzip */; };
 		58D8A012268A29D000935A31 /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */; };
 		58D8A014268A2E2400935A31 /* BackgroundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A013268A2E2400935A31 /* BackgroundEffect.swift */; };
 		58D8A018268A317F00935A31 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */; };
@@ -100,6 +104,8 @@
 		58BBF09C269075BF00C8A3A0 /* BackgroundConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundConfig.swift; sourceTree = "<group>"; };
 		58BBF0A02690766A00C8A3A0 /* ForegroundConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundConfig.swift; sourceTree = "<group>"; };
 		58BBF0A22690773900C8A3A0 /* ForegroundCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundCache.swift; sourceTree = "<group>"; };
+		58BBF0A52690EAD900C8A3A0 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
+		58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieViewUI.swift; sourceTree = "<group>"; };
 		58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeepLabV3.mlmodel; sourceTree = "<group>"; };
 		58D8A013268A2E2400935A31 /* BackgroundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundEffect.swift; sourceTree = "<group>"; };
 		58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
@@ -129,6 +135,8 @@
 			files = (
 				582EB09C2687491000F4C2D2 /* libStickerImport.a in Frameworks */,
 				58848C3B268E1EA2003A743D /* SwiftUIX in Frameworks */,
+				58BBF0AF2690F3A400C8A3A0 /* Gzip in Frameworks */,
+				58BBF0A92690EFB000C8A3A0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,13 +189,13 @@
 			name = List;
 			sourceTree = "<group>";
 		};
-		582EB0A0268774C000F4C2D2 /* Model */ = {
+		582EB0A0268774C000F4C2D2 /* Model types */ = {
 			isa = PBXGroup;
 			children = (
 				582EB0A52687770200F4C2D2 /* Sticker.swift */,
 				582EB0A32687765D00F4C2D2 /* StickerSet.swift */,
 			);
-			name = Model;
+			name = "Model types";
 			sourceTree = "<group>";
 		};
 		582EB0A12687750400F4C2D2 /* StickerSetEditor */ = {
@@ -208,15 +216,16 @@
 			name = StickerEditor;
 			sourceTree = "<group>";
 		};
-		582EB0A7268777C500F4C2D2 /* Logic */ = {
+		582EB0A7268777C500F4C2D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				582EB0A0268774C000F4C2D2 /* Model types */,
 				58BBF0A426908E0100C8A3A0 /* Store */,
 				58BBF09E2690762C00C8A3A0 /* Background */,
 				58BBF09F2690764900C8A3A0 /* Foreground */,
 				58A090E326889625005785A0 /* Import.swift */,
 			);
-			name = Logic;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		58BB965826876CB200B62A74 = {
@@ -241,11 +250,8 @@
 		58BB966326876CB200B62A74 /* Stickers */ = {
 			isa = PBXGroup;
 			children = (
-				582EB0A7268777C500F4C2D2 /* Logic */,
-				582EB0A0268774C000F4C2D2 /* Model */,
-				582EB09F2687747A00F4C2D2 /* List */,
-				582EB0A12687750400F4C2D2 /* StickerSetEditor */,
-				582EB0A22687758200F4C2D2 /* StickerEditor */,
+				582EB0A7268777C500F4C2D2 /* Model */,
+				58BBF0AA2690EFE700C8A3A0 /* Views */,
 				582EB0982687472600F4C2D2 /* Support FIles */,
 			);
 			path = Stickers;
@@ -289,6 +295,26 @@
 				58D8A025268A47F100935A31 /* Store+Test.swift */,
 			);
 			name = Store;
+			sourceTree = "<group>";
+		};
+		58BBF0AA2690EFE700C8A3A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				58BBF0B02690FEC000C8A3A0 /* Shared */,
+				582EB09F2687747A00F4C2D2 /* List */,
+				582EB0A12687750400F4C2D2 /* StickerSetEditor */,
+				582EB0A22687758200F4C2D2 /* StickerEditor */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		58BBF0B02690FEC000C8A3A0 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				58BBF0A52690EAD900C8A3A0 /* StickerView.swift */,
+				58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */,
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 		58D8A027268A4BAD00935A31 /* Vision */ = {
@@ -338,6 +364,8 @@
 			name = Stickers;
 			packageProductDependencies = (
 				58848C3A268E1EA2003A743D /* SwiftUIX */,
+				58BBF0A82690EFB000C8A3A0 /* Lottie */,
+				58BBF0AE2690F3A400C8A3A0 /* Gzip */,
 			);
 			productName = Stickers;
 			productReference = 58BB966126876CB200B62A74 /* Stickers.app */;
@@ -371,6 +399,8 @@
 			mainGroup = 58BB965826876CB200B62A74;
 			packageReferences = (
 				58848C39268E1EA2003A743D /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				58BBF0A72690EFB000C8A3A0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				58BBF0AD2690F3A400C8A3A0 /* XCRemoteSwiftPackageReference "GzipSwift" */,
 			);
 			productRefGroup = 58BB966226876CB200B62A74 /* Products */;
 			projectDirPath = "";
@@ -423,6 +453,7 @@
 				58D8A012268A29D000935A31 /* DeepLabV3.mlmodel in Sources */,
 				58BBF09D269075BF00C8A3A0 /* BackgroundConfig.swift in Sources */,
 				58A1E94D268A1224001A93FE /* StickerEditor.swift in Sources */,
+				58BBF0A62690EADA00C8A3A0 /* StickerView.swift in Sources */,
 				58BBF09B26906ABA00C8A3A0 /* BackgroundCache.swift in Sources */,
 				58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */,
 				58A090E426889625005785A0 /* Import.swift in Sources */,
@@ -442,6 +473,7 @@
 				582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */,
 				58D8A02D268B5CB500935A31 /* AddTextEffect.swift in Sources */,
 				58D8A01A268A31A600935A31 /* UIImage+CustomExtensions.swift in Sources */,
+				58BBF0AC2690F1FE00C8A3A0 /* LottieViewUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +721,22 @@
 				kind = branch;
 			};
 		};
+		58BBF0A72690EFB000C8A3A0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.3;
+			};
+		};
+		58BBF0AD2690F3A400C8A3A0 /* XCRemoteSwiftPackageReference "GzipSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/1024jp/GzipSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -696,6 +744,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 58848C39268E1EA2003A743D /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
+		};
+		58BBF0A82690EFB000C8A3A0 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58BBF0A72690EFB000C8A3A0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		58BBF0AE2690F3A400C8A3A0 /* Gzip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58BBF0AD2690F3A400C8A3A0 /* XCRemoteSwiftPackageReference "GzipSwift" */;
+			productName = Gzip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

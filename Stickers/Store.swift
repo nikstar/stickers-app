@@ -7,7 +7,8 @@
 
 import SwiftUI
 import Combine
-
+import Lottie
+import Gzip
 
 final class Store: ObservableObject {
     
@@ -150,5 +151,32 @@ final class Store: ObservableObject {
         }
     }
     
+    
+    // MARK: - Animated stickers
+    
+    func addNewAnimatedSticker(id: UUID = UUID(), setID: UUID, url: URL) {
+        guard url.startAccessingSecurityScopedResource() else {
+            return
+        }
+        defer { url.stopAccessingSecurityScopedResource() }
+        let data = try! Data(contentsOf: url)
+        originalImages.add(id: id, data: data)
+        stickers.append(Sticker(id: id, type: .animated))
+        if let setIndex = stickerSets.firstIndex(where: { $0.id == setID}) {
+            stickerSets[setIndex].stickers.append(id)
+        }
+    }
+    
+    func getAnimated(id: UUID) -> Lottie.Animation? {
+        do {
+            let url = originalImages.getURL(id: id)
+            let data = try Data(contentsOf: url)
+            let unzipped = try data.gunzipped()
+            let animation = try JSONDecoder().decode(Lottie.Animation.self, from: unzipped)
+            return animation
+        } catch {
+            return nil
+        }
+    }
 }
 

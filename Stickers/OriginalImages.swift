@@ -32,4 +32,8 @@ final class OriginalImages {
         }
     }
     
+    
+    func getURL(id: UUID) -> URL {
+        return imagesDir.appendingPathComponent(id.uuidString)
+    }
 }

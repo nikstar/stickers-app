@@ -11,6 +11,11 @@ struct StickerSet: Hashable, Codable {
     
     let id: UUID
     
+    var type: SetType = .images
     var stickers: [UUID]
     
+    enum SetType: String, Codable, Equatable {
+        case images
+        case animated
+    }
 }

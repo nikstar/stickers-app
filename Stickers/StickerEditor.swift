@@ -11,10 +11,11 @@ struct StickerEditor: View {
     
     @Binding var sticker: Sticker
     
+    @State var previewSize: CGSize = CGSize(width: 100, height: 100)
+    @State var deleteAlertPresented = false
+
     @EnvironmentObject var store: Store
     @Environment(\.presentationMode) var presentationMode
-
-    @State var deleteAlertPresented = false
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -49,25 +50,18 @@ struct StickerEditor: View {
     }
     
     var stickerPreview: some View {
-        Group {
-            if let image = store.image(for: sticker.id) {
-                ZStack {
-                    Color.clear
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .padding(.top, 44)
-                        .padding(.bottom, 40)
-                        .padding(.horizontal, 24)
-//                    if !sticker.modifiedImageCached {
-//                        ProgressView()
-//                    }
-                    
-                }
-                .aspectRatio(1.5, contentMode: .fit)
-                .background(backgroundPattern)
-            }
+        ZStack {
+            Color.clear
+            StickerView(sticker: sticker, size: previewSize.height - 44 - 40, showEmoji: false)
+                .padding(.top, 44)
+                .padding(.bottom, 40)
+                .padding(.horizontal, 24)
+                .border(Color.red)
         }
+        .aspectRatio(1.5, contentMode: .fit)
+        .background(backgroundPattern)
+        .captureSize(in: $previewSize)
+        .border(Color.red)
     }
     
     var backgroundPattern: some View {
@@ -89,29 +83,31 @@ struct StickerEditor: View {
                     })
                 }
                 
-                Section(header: Text("Background")) {
-                    Toggle("Remove background", isOn: $sticker.background.removeBackground.animation())
-                    if sticker.background.removeBackground {
-                        Toggle("Just remove white background", isOn: $sticker.background.monochromeBackground)
-                        Toggle("Add white border", isOn: $sticker.background.addBorder)
-                    }
-                }
-                
-                Section(header: Text("Text"), footer: EmptyView()) {
-                    TextField("Text", text: $sticker.foreground.text)
-                    Picker("Position", selection: $sticker.foreground.position) {
-                        ForEach(Sticker.TextPosition.allCases, id: \.self) { position in
-                            Text(position.rawValue.capitalized).tag(position)
+                if sticker.type != .animated {
+                    Section(header: Text("Background")) {
+                        Toggle("Remove background", isOn: $sticker.background.removeBackground.animation())
+                        if sticker.background.removeBackground {
+                            Toggle("Just remove white background", isOn: $sticker.background.monochromeBackground)
+                            Toggle("Add white border", isOn: $sticker.background.addBorder)
                         }
                     }
-                    Picker("Font", selection: $sticker.foreground.font) {
-                        ForEach(Sticker.TextFont.allCases, id: \.self) { font in
-                            Text(font.description).tag(font)
+                    
+                    Section(header: Text("Text"), footer: EmptyView()) {
+                        TextField("Text", text: $sticker.foreground.text)
+                        Picker("Position", selection: $sticker.foreground.position) {
+                            ForEach(Sticker.TextPosition.allCases, id: \.self) { position in
+                                Text(position.rawValue.capitalized).tag(position)
+                            }
                         }
-                    }
-                    Picker("Color", selection: $sticker.foreground.color) {
-                        ForEach(Sticker.TextColor.allCases, id: \.self) { color in
-                            Text(color.description).tag(color) // Not localized
+                        Picker("Font", selection: $sticker.foreground.font) {
+                            ForEach(Sticker.TextFont.allCases, id: \.self) { font in
+                                Text(font.description).tag(font)
+                            }
+                        }
+                        Picker("Color", selection: $sticker.foreground.color) {
+                            ForEach(Sticker.TextColor.allCases, id: \.self) { color in
+                                Text(color.description).tag(color) // Not localized
+                            }
                         }
                     }
                 }

@@ -24,9 +24,12 @@ struct StickerSetRow: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .center, spacing: 12) {
                     
-                    ForEach(stickerSet.stickers, id: \.self) { stickerID in
+                    ForEach(stickerSet.stickers, id: \.self) { id in
                         Group {
-                            stickerView(stickerID)
+                            if let sticker = store.getSticker(id: id) {
+                                StickerView(sticker: sticker, size: 96, showEmoji: false)
+                            }
+                            
                         }
                     }
                 }
@@ -40,10 +43,15 @@ struct StickerSetRow: View {
     func stickerView(_ stickerID: UUID) -> some View {
         ZStack {
             Color.clear
-            if let image = store.image(for: stickerID) {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+            switch stickerSet.type {
+            case .images:
+                if let image = store.image(for: stickerID) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+            case .animated:
+                Text("ANIMATED")
             }
         }
         .aspectRatio(1, contentMode: .fit)

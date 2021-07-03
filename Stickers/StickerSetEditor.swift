@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftUIX
 import StickerImport
+import UniformTypeIdentifiers
 
 struct StickerSetEditor: View {
     
@@ -38,6 +39,8 @@ struct StickerSetEditor: View {
     
     @State var stickerEditorPresented: Bool = false
     @State var presentedStickerID: (UUID, UUID)? = nil
+    
+    @State var animatedPickerPresented: Bool = false
     
     enum AlertContent {
         case deleteConfirmation
@@ -70,7 +73,7 @@ struct StickerSetEditor: View {
                         .padding(.trailing, 16)
                 }
                 
-                grid
+                collectionView
                     .padding(.top, 8)
                     .padding(.bottom, 10)
                     .padding(.horizontal, padding)
@@ -82,6 +85,14 @@ struct StickerSetEditor: View {
                     importToTelegram
                         .padding(.leading, 20)
                         .padding(.trailing, 16)
+                }
+                
+                if isNew && isEmpty {
+                    Text("or").font(.headline)
+                        .padding(.top, 36)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 16)
+                    importAnimatedStickers
                 }
             }
             .padding(.top, 60)
@@ -98,6 +109,17 @@ struct StickerSetEditor: View {
             
         }.padding(2)
         , alignment: .top)
+        .fileImporter(isPresented: $animatedPickerPresented, allowedContentTypes: [UTType("me.nikstar.tgs")!], allowsMultipleSelection: true) { [self] result in
+            switch result {
+            case .success(let urls):
+                stickerSet.type = .animated
+                for url in urls {
+                    store.addNewAnimatedSticker(setID: stickerSet.id, url: url)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
         .onChange(of: presentedStickerID?.1) { id in
             if stickerEditorPresented == false {
                 stickerEditorPresented = id != nil
@@ -145,15 +167,19 @@ struct StickerSetEditor: View {
     }
     
     
-    var grid: some View {
+    var collectionView: some View {
         CollectionView(cells, id: \.self) { cell  in
             switch cell {
             case .sticker(let sticker):
                 Button {
                     presentedStickerID = (stickerSet.id, sticker.id)
                 } label: {
-                    StickerView(sticker: sticker)
-                        .frame(width: cellSize, height: cellSize)
+                    ZStack {
+                        Color.secondary.opacity(0.08)
+                            .cornerRadius(12)
+                        StickerView(sticker: sticker, size: cellSize - 12, showEmoji: true)    
+                    }
+                    .frame(width: cellSize, height: cellSize)
                 }
             case .newSticker:
                 addImage
@@ -170,9 +196,16 @@ struct StickerSetEditor: View {
         .height(max(collectionViewHeight, cellSize))
     }
     
+    
     var addImage: some View {
         Button {
-            imagePickerPresented = true
+            switch stickerSet.type {
+            case .images:
+                imagePickerPresented = true
+            case .animated:
+                animatedPickerPresented = true
+            }
+             
         } label: {
             gradient1.mask(
                 Image(systemName: "plus.square")
@@ -182,6 +215,27 @@ struct StickerSetEditor: View {
             .aspectRatio(1, contentMode: .fit)
             .padding(4)
         }
+    }
+    
+    
+    var importAnimatedStickers: some View {
+        Button {
+            animatedPickerPresented = true
+        } label: {
+            VStack(spacing: 4) {
+                Text("Import animated stickers")
+                    .font(.headline)
+                Text("Import TGS files created in AfterEffects")
+                    .font(.subheadline)
+            }
+            .padding(.vertical, 16)
+            .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .background(RoundedRectangle(cornerRadius: 24).stroke(gradient1, style: StrokeStyle()))
+        }
+        .padding(.top, 4)
+        .padding(.leading, 20)
+        .padding(.trailing, 16)
     }
     
     
@@ -233,33 +287,7 @@ struct StickerSetEditor: View {
 }
 
 
-struct StickerView: View {
-    
-    var sticker: Sticker
-    
-    @EnvironmentObject var store: Store
-    
-    
-    var body: some View {
-        ZStack {
-            Color.secondary.opacity(0.08)
-                .cornerRadius(12)
-            if let image = store.image(for: sticker.id) {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(6)
-            }
-        }
-        .overlay(Group {
-            if let emoji = store.getSticker(id: sticker.id)?.emoji, emoji.count > 0 {
-                Text(emoji.prefix(3)) // improve?
-                    .padding(8)
-            }
-        }, alignment: .bottomTrailing)
-        .aspectRatio(1, contentMode: .fit)
-    }
-}
+
 
 
 // MARK: - Actions
@@ -281,7 +309,7 @@ extension StickerSetEditor {
 struct StickerSetEditor_Previews: PreviewProvider {
     static var previews: some View {
         //        StickerSetEditor(stickerSet: .constant(Store.testEmpty.stickerSets.first!), isNew: true, isPresented: .constant(true))
-        StickerSetEditor(stickerSet: .constant(Store.default().stickerSets.first!), isNew: true)
+        StickerSetEditor(stickerSet: .constant(StickerSet(id: UUID(), stickers: [])), isNew: true)
             .environmentObject(Store.default())
     }
 }
