@@ -2,43 +2,23 @@
 import UIKit
 import Vision
 
-struct Sticker: Identifiable, Hashable, Codable {
+struct Sticker: Hashable, Codable {
     
     var id: UUID
     
     var emoji: String = ""
     
-    var removeBackground: Bool = false
-    var monochromeBackground: Bool = false
-    var addBorder: Bool = false
-    
-    var text: String = ""
-    var position: TextPosition = .bottom
-    var font: TextFont = .arial
-    var color: TextColor = .whiteWithBorder
+    var background: BackgroundConfig = .init()
+    var foreground: ForegroundConfig = .init()
     
     var modifiedImageCached: Bool = false
     
-    var effects: [Effect] {
-        var effects: [Effect] = []
-        if removeBackground {
-            effects.append(.removeBackground(monochromeBackground: monochromeBackground, addBorder: addBorder))
-        }
-        effects.append(.resize)
-        if !text.isEmpty {
-            effects.append(.addText(text: text, position: position, font: font, color: color))
-        }
-        return effects
-    }
-    
-    enum TextFont: String, Codable, CaseIterable, Hashable, Identifiable {
+    enum TextFont: String, Codable, CaseIterable, Hashable {
         case arial
         case comicSans
         case helvetica
         case impact
         case snellRoundhand
-        
-        var id: Self { return self }
     }
     
     enum TextPosition: String, Codable, CaseIterable, Hashable {
@@ -57,3 +37,5 @@ struct Sticker: Identifiable, Hashable, Codable {
         case blue
     }
 }
+
+

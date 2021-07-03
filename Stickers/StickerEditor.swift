@@ -59,9 +59,9 @@ struct StickerEditor: View {
                         .padding(.top, 44)
                         .padding(.bottom, 40)
                         .padding(.horizontal, 24)
-                    if !sticker.modifiedImageCached {
-                        ProgressView()
-                    }
+//                    if !sticker.modifiedImageCached {
+//                        ProgressView()
+//                    }
                     
                 }
                 .aspectRatio(1.5, contentMode: .fit)
@@ -90,26 +90,26 @@ struct StickerEditor: View {
                 }
                 
                 Section(header: Text("Background")) {
-                    Toggle("Remove background", isOn: $sticker.removeBackground.animation())
-                    if sticker.removeBackground {
-                        Toggle("Just remove white background", isOn: $sticker.monochromeBackground)
-                        Toggle("Add white border", isOn: $sticker.addBorder)
+                    Toggle("Remove background", isOn: $sticker.background.removeBackground.animation())
+                    if sticker.background.removeBackground {
+                        Toggle("Just remove white background", isOn: $sticker.background.monochromeBackground)
+                        Toggle("Add white border", isOn: $sticker.background.addBorder)
                     }
                 }
                 
                 Section(header: Text("Text"), footer: EmptyView()) {
-                    TextField("Text", text: $sticker.text)
-                    Picker("Position", selection: $sticker.position) {
+                    TextField("Text", text: $sticker.foreground.text)
+                    Picker("Position", selection: $sticker.foreground.position) {
                         ForEach(Sticker.TextPosition.allCases, id: \.self) { position in
                             Text(position.rawValue.capitalized).tag(position)
                         }
                     }
-                    Picker("Font", selection: $sticker.font) {
-                        ForEach(Sticker.TextFont.allCases) { font in
+                    Picker("Font", selection: $sticker.foreground.font) {
+                        ForEach(Sticker.TextFont.allCases, id: \.self) { font in
                             Text(font.description).tag(font)
                         }
                     }
-                    Picker("Color", selection: $sticker.color) {
+                    Picker("Color", selection: $sticker.foreground.color) {
                         ForEach(Sticker.TextColor.allCases, id: \.self) { color in
                             Text(color.description).tag(color) // Not localized
                         }

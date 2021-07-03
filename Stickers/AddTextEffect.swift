@@ -8,7 +8,7 @@
 import UIKit
 
 
-final class AddText {
+final class AddTextEffect {
     
     var image: UIImage
     let text: String
@@ -25,7 +25,7 @@ final class AddText {
     }
     
     static func apply(to image: UIImage, text: String, position: Sticker.TextPosition, font: Sticker.TextFont, color: Sticker.TextColor) -> UIImage {
-        let addText = AddText(image: image, text: text, position: position, font: font, color: color)
+        let addText = AddTextEffect(image: image, text: text, position: position, font: font, color: color)
         return addText.addText()
     }
     

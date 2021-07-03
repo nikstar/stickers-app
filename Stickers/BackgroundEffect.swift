@@ -2,29 +2,27 @@
 import UIKit
 import Vision
 
-public final class RemoveBackgroundEffect {
+public final class BackgroundEffect {
     
     private var inputImage: UIImage
     private var outputImage: UIImage?
-    private var monochromeBackground: Bool
-    private var addBorder: Bool
+    private var config: BackgroundConfig
     
-    private init(inputImage: UIImage, monochromeBackground: Bool, addBorder: Bool) {
+    private init(inputImage: UIImage, config: BackgroundConfig) {
         self.inputImage = inputImage
-        self.monochromeBackground = monochromeBackground
-        self.addBorder = addBorder
+        self.config = config
     }
     
-    public static func apply(to image: UIImage, monochromeBackground: Bool, addBorder: Bool) -> UIImage {
-        let effect = RemoveBackgroundEffect(inputImage: image, monochromeBackground: monochromeBackground, addBorder: addBorder)
+    static func apply(to image: UIImage, config: BackgroundConfig) -> UIImage {
+        let effect = BackgroundEffect(inputImage: image, config: config)
         return effect.removeBackground()
     }
     
     private func removeBackground() -> UIImage {
+        guard config.removeBackground else { return inputImage }
         let mask = getMask()
-//        return mask
         var result = applyMask(mask)
-        if addBorder {
+        if config.addBorder {
            result = _addBorder(baseImage: result, maskImage: mask)
         }
         return result
@@ -33,9 +31,7 @@ public final class RemoveBackgroundEffect {
     
     func getMask() -> UIImage {
         do {
-            if monochromeBackground {
-//                let backgroundColor = UIColor.white
-                
+            if config.monochromeBackground {
                 let original = CIImage(cgImage: inputImage.cgImage!)
                 
                 let filter = ColorFilter()

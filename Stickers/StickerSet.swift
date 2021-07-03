@@ -9,7 +9,7 @@ import Foundation
 
 struct StickerSet: Hashable, Codable {
     
-    let id: UUID // not identifiable
+    let id: UUID
     
     var stickers: [UUID]
     

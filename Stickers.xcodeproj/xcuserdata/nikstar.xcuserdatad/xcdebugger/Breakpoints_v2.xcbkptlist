@@ -78,8 +78,8 @@
             filePath = "Stickers/Store.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "binding(forSticker:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "Stickers/Store.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "binding(forSticker:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,8 +314,8 @@
             filePath = "Stickers/RemoveBackground.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "applyMask(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,8 +410,8 @@
             filePath = "Stickers/RemoveBackground.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "applyMask(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -458,8 +458,8 @@
             filePath = "Stickers/Store.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "binding(forSticker:)"
             landmarkType = "7">
             <Locations>
@@ -506,8 +506,8 @@
             filePath = "Stickers/Store.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "invalidateStickerCache(id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -522,8 +522,8 @@
             filePath = "Stickers/Store.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "modifiedImageCached(id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -701,8 +701,8 @@
             filePath = "Stickers/Store.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "removeSticker(id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -717,8 +717,8 @@
             filePath = "Stickers/RemoveBackground.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "getMask()"
             landmarkType = "7">
          </BreakpointContent>

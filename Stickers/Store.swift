@@ -25,7 +25,9 @@ final class Store: ObservableObject {
     }
     
     var originalImages: OriginalImages = OriginalImages()
-    lazy var modifiedImages: ModifiedImages = ModifiedImages(store: self)
+    lazy var backgroundCache: BackgroundCache = BackgroundCache(store: self)
+    lazy var foregroundCache: ForegroundCache = ForegroundCache(store: self)
+    
     private var cancellables: Set<AnyCancellable> = []
     
     init(stickerSets: [StickerSet], stickers: [Sticker]) {
@@ -86,7 +88,7 @@ final class Store: ObservableObject {
     
     func addNewSticker(id: UUID, setID: UUID, data: Data) {
         originalImages.add(id: id, data: data)
-        stickers.append(Sticker(id: id, removeBackground: false))
+        stickers.append(Sticker(id: id))
         if let setIndex = stickerSets.firstIndex(where: { $0.id == setID}) {
             stickerSets[setIndex].stickers.append(id)
         }
@@ -123,7 +125,7 @@ final class Store: ObservableObject {
     
     
     func image(for stickerID: UUID) -> UIImage? {
-        modifiedImages.get(id: stickerID)
+        foregroundCache.get(id: stickerID)
     }
     
     func invalidateStickerCache(id: UUID) {
@@ -132,7 +134,7 @@ final class Store: ObservableObject {
                 self.stickers[idx].modifiedImageCached = false
             }
         }
-        modifiedImages.invalidate(id)
+//        modifiedImages.invalidate(id)
     }
     
     func modifiedImageCached(id: UUID) {
