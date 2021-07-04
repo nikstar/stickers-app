@@ -52,7 +52,6 @@ final class BackgroundCache {
     private func writeImageToDisk(id: UUID, image: UIImage) {
         DispatchQueue.global(qos: .background).async {
             if let data = image.pngData() {
-                print("write", image.size, image.scale)
                 try? data.write(to: cacheDir.appendingPathComponent(id.uuidString))
             }
         }

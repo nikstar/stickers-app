@@ -27,8 +27,6 @@ struct StickerViewLarge: View {
                 animatedView
             }
         }
-//        .aspectRatio(1, contentMode: .fit)
-//        .frame(width: size, height: size, alignment: .center)
         .overlay(Group {
             if showEmoji, let emoji = store.getSticker(id: sticker.id)?.emoji, emoji.count > 0 {
                 Text(emoji.prefix(3)) // improve?

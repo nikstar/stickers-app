@@ -30,7 +30,6 @@ final class AddTextEffect {
     }
     
     func addText() -> UIImage {
-        print(inputImage.size)
         UIGraphicsBeginImageContext(inputImage.size)
         let originY: CGFloat
         switch position {

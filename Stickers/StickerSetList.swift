@@ -39,7 +39,7 @@ struct StickerSetList: View {
                     }
                     .maxWidth(.infinity)
                     .height(96 + 2 * 12)
-                    .border(Color.pink)
+                    // .border(Color.pink)
                 }
             }
             .onMove { from, to in
@@ -47,7 +47,7 @@ struct StickerSetList: View {
             }
             .collectionViewLayout(FlowCollectionViewLayout(minimumLineSpacing: 16, minimumInteritemSpacing: 0))
             .height(max(rowHeight, rowHeight * CGFloat(store.stickerSets.count)))
-            .border(Color.orange)
+            // .border(Color.orange)
         }
         .onChange(of: presentedStickerSetID?.0) { id in
             if !isPresented && id != nil {

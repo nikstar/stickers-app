@@ -53,16 +53,16 @@ struct StickerEditor: View {
         ZStack {
             Color.clear
             StickerViewLarge(sticker: sticker, size: previewSize.height - 36 - 26, showEmoji: false)
-                .border(Color.blue)
+                // .border(Color.blue)
                 .padding(.top, 36)
                 .padding(.bottom, 26)
                 .padding(.horizontal, 24)
-                .border(Color.red)
+                // .border(Color.red)
         }
         .aspectRatio(1.5, contentMode: .fit)
         .background(backgroundPattern)
         .captureSize(in: $previewSize)
-        .border(Color.red)
+        // .border(Color.red)
     }
     
     var backgroundPattern: some View {
@@ -82,6 +82,7 @@ struct StickerEditor: View {
                         sticker.emoji = sticker.emoji.filter { $0.isEmoji }
                         sticker.emoji.removeRepeatingCharacters()
                     })
+                    .keyboardDismissMode(.interactive)                    
                 }
                 
                 if sticker.type != .animated {
@@ -95,6 +96,7 @@ struct StickerEditor: View {
                     
                     Section(header: Text("Text"), footer: EmptyView()) {
                         TextField("Text", text: $sticker.foreground.text)
+                            .keyboardDismissMode(.interactive)
                         Picker("Position", selection: $sticker.foreground.position) {
                             ForEach(Sticker.TextPosition.allCases, id: \.self) { position in
                                 Text(position.rawValue.capitalized).tag(position)
