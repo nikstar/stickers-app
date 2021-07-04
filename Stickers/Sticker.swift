@@ -13,8 +13,6 @@ struct Sticker: Hashable, Codable {
     var background: BackgroundConfig = .init()
     var foreground: ForegroundConfig = .init()
     
-    var lastUpdated: Date = Date()
-    
     enum StickerType: String, Codable, Equatable {
         case image
         case animated

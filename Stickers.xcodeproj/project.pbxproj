@@ -32,6 +32,7 @@
 		58BBF0AC2690F1FE00C8A3A0 /* LottieViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */; };
 		58BBF0AF2690F3A400C8A3A0 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0AE2690F3A400C8A3A0 /* Gzip */; };
 		58BBF0B42691105900C8A3A0 /* TelegramStickersImport in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0B32691105900C8A3A0 /* TelegramStickersImport */; };
+		58BBF0B62691C0D800C8A3A0 /* StickerViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */; };
 		58D8A012268A29D000935A31 /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */; };
 		58D8A014268A2E2400935A31 /* BackgroundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A013268A2E2400935A31 /* BackgroundEffect.swift */; };
 		58D8A018268A317F00935A31 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */; };
@@ -77,6 +78,7 @@
 		58BBF0A22690773900C8A3A0 /* ForegroundCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundCache.swift; sourceTree = "<group>"; };
 		58BBF0A52690EAD900C8A3A0 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieViewUI.swift; sourceTree = "<group>"; };
+		58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerViewLarge.swift; sourceTree = "<group>"; };
 		58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeepLabV3.mlmodel; sourceTree = "<group>"; };
 		58D8A013268A2E2400935A31 /* BackgroundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundEffect.swift; sourceTree = "<group>"; };
 		58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				58A1E94C268A1224001A93FE /* StickerEditor.swift */,
+				58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */,
 				58D8A02A268B3DCD00935A31 /* Checkerboard.swift */,
 			);
 			name = StickerEditor;
@@ -389,6 +392,7 @@
 				58A090E426889625005785A0 /* Import.swift in Sources */,
 				582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */,
 				58D8A026268A47F100935A31 /* Store+Test.swift in Sources */,
+				58BBF0B62691C0D800C8A3A0 /* StickerViewLarge.swift in Sources */,
 				58D8A029268A602400935A31 /* OriginalImages.swift in Sources */,
 				582EB09A2687479000F4C2D2 /* StickerSetRow.swift in Sources */,
 				58A090E02687AB5F005785A0 /* Style.swift in Sources */,

@@ -81,7 +81,6 @@ final class ForegroundCache {
         inMemory[id] = image
         cache[id] = _Config(background: sticker.background, foreground: sticker.foreground)
         writeImageToDisk(id: id, image: image)
-        store.modifiedImageCached(id: id)
         return image
     }
 }

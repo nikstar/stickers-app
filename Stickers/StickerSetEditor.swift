@@ -38,7 +38,7 @@ struct StickerSetEditor: View {
     @State private var loadedImagesData: [Data] = []
     
     @State var stickerEditorPresented: Bool = false
-    @State var presentedStickerID: (UUID, UUID)? = nil
+    @State var presentedStickerID: UUID? = nil
     
     @State var animatedPickerPresented: Bool = false
     
@@ -120,7 +120,7 @@ struct StickerSetEditor: View {
                 print(error)
             }
         }
-        .onChange(of: presentedStickerID?.1) { id in
+        .onChange(of: presentedStickerID) { id in
             if stickerEditorPresented == false {
                 stickerEditorPresented = id != nil
             }
@@ -128,16 +128,9 @@ struct StickerSetEditor: View {
         .sheet(isPresented: $imagePickerPresented, onDismiss: loadImage) {
             ImagePicker(loadedImagesData: $loadedImagesData).environmentObject(store)
         }
-        .sheet(isPresented: $stickerEditorPresented, onDismiss: {
-            if let id = presentedStickerID?.1 {
-                presentedStickerID = nil
-                let temp = UUID()
-                stickerSet.stickers.append(temp)
-                stickerSet.stickers.removeLast()
-            }
-        }) {
+        .sheet(isPresented: $stickerEditorPresented, onDismiss: { presentedStickerID = nil }) {
             if let id = presentedStickerID {
-                StickerEditor(sticker: store.binding(forSticker: id.1)).environmentObject(store)
+                StickerEditor(sticker: store.binding(forSticker: id)).environmentObject(store)
             } else {
                 Color.red
             }
@@ -172,7 +165,7 @@ struct StickerSetEditor: View {
             switch cell {
             case .sticker(let sticker):
                 Button {
-                    presentedStickerID = (stickerSet.id, sticker.id)
+                    presentedStickerID = sticker.id
                 } label: {
                     ZStack {
                         Color.secondary.opacity(0.08)

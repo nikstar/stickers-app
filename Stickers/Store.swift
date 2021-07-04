@@ -120,7 +120,6 @@ final class Store: ObservableObject {
         } set: { newValue in
             if let idx = self.stickers.firstIndex(where: { $0.id == id }) {
                 self.stickers[idx] = newValue
-                self.invalidateStickerCache(id: id)
             } else {
                 // error
                 self.stickers.insert(newValue, at: 0)
@@ -132,25 +131,7 @@ final class Store: ObservableObject {
     func image(for stickerID: UUID) -> UIImage? {
         foregroundCache.get(id: stickerID)
     }
-    
-    func invalidateStickerCache(id: UUID) {
-        if let idx = stickers.firstIndex(where: { $0.id == id }) {
-            DispatchQueue.main.async {
-//                self.stickers[idx].modifiedImageCached = false
-            }
-        }
-//        modifiedImages.invalidate(id)
-    }
-    
-    func modifiedImageCached(id: UUID) {
-        if let idx = stickers.firstIndex(where: { $0.id == id }) {
-            DispatchQueue.main.async {
-                print(id, Date())
-                self.stickers[idx].lastUpdated = Date()
-            }
-        }
-    }
-    
+        
     
     // MARK: - Animated stickers
     

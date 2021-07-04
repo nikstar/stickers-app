@@ -52,9 +52,10 @@ struct StickerEditor: View {
     var stickerPreview: some View {
         ZStack {
             Color.clear
-            StickerView(sticker: sticker, size: previewSize.height - 44 - 40, showEmoji: false)
-                .padding(.top, 44)
-                .padding(.bottom, 40)
+            StickerViewLarge(sticker: sticker, size: previewSize.height - 36 - 26, showEmoji: false)
+                .border(Color.blue)
+                .padding(.top, 36)
+                .padding(.bottom, 26)
                 .padding(.horizontal, 24)
                 .border(Color.red)
         }

@@ -10,7 +10,7 @@ import SwiftUIX
 import Lottie
 
 
-struct StickerView: View {
+struct StickerViewLarge: View {
     
     var sticker: Sticker
     var size: CGFloat
@@ -27,8 +27,8 @@ struct StickerView: View {
                 animatedView
             }
         }
-        .aspectRatio(1, contentMode: .fit)
-        .frame(width: size, height: size, alignment: .center)
+//        .aspectRatio(1, contentMode: .fit)
+//        .frame(width: size, height: size, alignment: .center)
         .overlay(Group {
             if showEmoji, let emoji = store.getSticker(id: sticker.id)?.emoji, emoji.count > 0 {
                 Text(emoji.prefix(3)) // improve?
