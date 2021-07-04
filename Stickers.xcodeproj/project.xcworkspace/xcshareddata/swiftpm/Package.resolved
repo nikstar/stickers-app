@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Gzip",
+        "repositoryURL": "https://github.com/1024jp/GzipSwift",
+        "state": {
+          "branch": null,
+          "revision": "ba0b6cb51cc6202f896e469b87d2889a46b10d1b",
+          "version": "5.1.1"
+        }
+      },
+      {
+        "package": "Lottie",
+        "repositoryURL": "https://github.com/airbnb/lottie-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "79a0b70547f7c40ea54c67487f935fa2f2eaaadc",
+          "version": "3.2.3"
+        }
+      },
+      {
+        "package": "SwiftUIX",
+        "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
+        "state": {
+          "branch": "master",
+          "revision": "e0587457231d485e8a1f625d5d1635422d0d5045",
+          "version": null
+        }
+      },
+      {
+        "package": "TelegramStickersImport",
+        "repositoryURL": "https://github.com/TelegramMessenger/TelegramStickersImport",
+        "state": {
+          "branch": "master",
+          "revision": "a0ec85bbb5fb88e393c38967110e566355bbf463",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
