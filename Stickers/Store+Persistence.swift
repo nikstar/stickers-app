@@ -49,11 +49,23 @@ extension Store {
     
     static var examples: Store {
         let store = Store(stickerSets: [], stickers: [])
-        let set = UUID()
-        store.addNewStickerSet(id: set)
-        store.addNewSticker(id: UUID(), setID: set, data: UIImage(named: "s-1")!.pngData()!)
-        store.addNewSticker(id: UUID(), setID: set, data: UIImage(named: "s-2")!.pngData()!)
-        store.addNewSticker(id: UUID(), setID: set, data: UIImage(named: "s-3")!.pngData()!)
+        
+        let chibi = UUID()
+        store.addNewStickerSet(id: chibi)
+        for i in 1...5 {
+            let sticker = Sticker(id: UUID(), type: .image, emoji: "", background: .init(removeBackground: true, monochromeBackground: true, addBorder: true), foreground: .init())
+            store.addNewSticker(sticker: sticker, set: chibi, data: UIImage(named: "chibi-\(i)")!.pngData()!)
+        }
+        
+        let freddie = UUID()
+        store.addNewStickerSet(id: freddie)
+        for i in 1...3 {
+            let bg: BackgroundConfig = i == 2 ? .init(removeBackground: true, monochromeBackground: false, addBorder: true) : .init()
+            let fg: ForegroundConfig = i == 3 ? .init(text: "Champions", position: .bottom, font: .snellRoundhand, color: .yellow) : .init()
+            let sticker = Sticker(id: UUID(), type: .image, emoji: "🙌", background: bg, foreground: fg)
+            store.addNewSticker(sticker: sticker, set: freddie, data: UIImage(named: "freddie-\(i)")!.pngData()!)
+        }
+        
         return store
     }
     

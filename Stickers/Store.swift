@@ -97,8 +97,16 @@ final class Store: ObservableObject {
         if let setIndex = stickerSets.firstIndex(where: { $0.id == setID}) {
             stickerSets[setIndex].stickers.append(id)
         }
-        
     }
+    
+    func addNewSticker(sticker: Sticker, set: UUID, data: Data) {
+        originalImages.add(id: sticker.id, data: data)
+        stickers.append(sticker)
+        if let setIndex = stickerSets.firstIndex(where: { $0.id == set}) {
+            stickerSets[setIndex].stickers.append(sticker.id)
+        }
+    }
+    
     
     func removeSticker(id: UUID) {
         // TODO: remove files

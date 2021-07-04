@@ -49,12 +49,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		582EB08C268746AA00F4C2D2 /* IPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPC.swift; sourceTree = "<group>"; };
-		582EB08D268746AA00F4C2D2 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		582EB08E268746AA00F4C2D2 /* Limits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Limits.swift; sourceTree = "<group>"; };
-		582EB08F268746AA00F4C2D2 /* Sticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
-		582EB090268746AA00F4C2D2 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		582EB091268746AA00F4C2D2 /* StickerSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerSet.swift; sourceTree = "<group>"; };
 		582EB0992687479000F4C2D2 /* StickerSetRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetRow.swift; sourceTree = "<group>"; };
 		582EB0A32687765D00F4C2D2 /* StickerSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSet.swift; sourceTree = "<group>"; };
 		582EB0A52687770200F4C2D2 /* Sticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
@@ -109,19 +103,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		582EB0862687469200F4C2D2 /* StickerImport */ = {
-			isa = PBXGroup;
-			children = (
-				582EB090268746AA00F4C2D2 /* Errors.swift */,
-				582EB08D268746AA00F4C2D2 /* Helpers.swift */,
-				582EB08C268746AA00F4C2D2 /* IPC.swift */,
-				582EB08E268746AA00F4C2D2 /* Limits.swift */,
-				582EB08F268746AA00F4C2D2 /* Sticker.swift */,
-				582EB091268746AA00F4C2D2 /* StickerSet.swift */,
-			);
-			path = StickerImport;
-			sourceTree = "<group>";
-		};
 		582EB0982687472600F4C2D2 /* Support FIles */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				58BB966326876CB200B62A74 /* Stickers */,
-				582EB0862687469200F4C2D2 /* StickerImport */,
 				58BB966226876CB200B62A74 /* Products */,
 				582EB09B2687491000F4C2D2 /* Frameworks */,
 			);
