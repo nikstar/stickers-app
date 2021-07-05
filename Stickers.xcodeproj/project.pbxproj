@@ -40,7 +40,6 @@
 		58D8A01E268A451D00935A31 /* Store+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A01D268A451D00935A31 /* Store+Persistence.swift */; };
 		58D8A020268A465900935A31 /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A01F268A465900935A31 /* CGImage+RawBytes.swift */; };
 		58D8A022268A469500935A31 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A021268A469500935A31 /* Math.swift */; };
-		58D8A026268A47F100935A31 /* Store+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A025268A47F100935A31 /* Store+Test.swift */; };
 		58D8A029268A602400935A31 /* OriginalImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A028268A602400935A31 /* OriginalImages.swift */; };
 		58D8A02B268B3DCD00935A31 /* Checkerboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A02A268B3DCD00935A31 /* Checkerboard.swift */; };
 		58D8A02D268B5CB500935A31 /* AddTextEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A02C268B5CB500935A31 /* AddTextEffect.swift */; };
@@ -80,7 +79,6 @@
 		58D8A01D268A451D00935A31 /* Store+Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+Persistence.swift"; sourceTree = "<group>"; };
 		58D8A01F268A465900935A31 /* CGImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+RawBytes.swift"; sourceTree = "<group>"; };
 		58D8A021268A469500935A31 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
-		58D8A025268A47F100935A31 /* Store+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+Test.swift"; sourceTree = "<group>"; };
 		58D8A028268A602400935A31 /* OriginalImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalImages.swift; sourceTree = "<group>"; };
 		58D8A02A268B3DCD00935A31 /* Checkerboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkerboard.swift; sourceTree = "<group>"; };
 		58D8A02C268B5CB500935A31 /* AddTextEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTextEffect.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 				58D8A028268A602400935A31 /* OriginalImages.swift */,
 				582EB0A8268777CF00F4C2D2 /* Store.swift */,
 				58D8A01D268A451D00935A31 /* Store+Persistence.swift */,
-				58D8A025268A47F100935A31 /* Store+Test.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -284,6 +281,7 @@
 				58BB965D26876CB200B62A74 /* Sources */,
 				58BB965E26876CB200B62A74 /* Frameworks */,
 				58BB965F26876CB200B62A74 /* Resources */,
+				58B1EB0626934458005D8284 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -352,6 +350,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		58B1EB0626934458005D8284 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		58BB965D26876CB200B62A74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -371,7 +389,6 @@
 				58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */,
 				58A090E426889625005785A0 /* Import.swift in Sources */,
 				582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */,
-				58D8A026268A47F100935A31 /* Store+Test.swift in Sources */,
 				58BBF0B62691C0D800C8A3A0 /* StickerViewLarge.swift in Sources */,
 				58D8A029268A602400935A31 /* OriginalImages.swift in Sources */,
 				582EB09A2687479000F4C2D2 /* StickerSetRow.swift in Sources */,
