@@ -39,24 +39,6 @@ struct StickerSetRow: View {
         }
         .padding(.horizontal, 8)
     }
-    
-    func stickerView(_ stickerID: UUID) -> some View {
-        ZStack {
-            Color.clear
-            switch stickerSet.type {
-            case .images:
-                if let image = store.image(for: stickerID) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
-            case .animated:
-                Text("ANIMATED")
-            }
-        }
-        .aspectRatio(1, contentMode: .fit)
-        .frame(maxWidth: 96, maxHeight: 96, alignment: .center)
-    }
 }
 
 struct StickerRow_Previews: PreviewProvider {

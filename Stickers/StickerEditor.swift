@@ -77,33 +77,9 @@ struct StickerEditor: View {
                 emojiOptions
                 
                 if sticker.type != .animated {
-                    Section(header: Text("Background")) {
-                        Toggle("Remove background", isOn: $sticker.background.removeBackground.animation())
-                        if sticker.background.removeBackground {
-                            Toggle("Just remove white background", isOn: $sticker.background.monochromeBackground)
-                            Toggle("Add white border", isOn: $sticker.background.addBorder)
-                        }
-                    }
                     
-                    Section(header: Text("Text"), footer: EmptyView()) {
-                        TextField("Text", text: $sticker.foreground.text)
-                            .keyboardDismissMode(.interactive)
-                        Picker("Position", selection: $sticker.foreground.position) {
-                            ForEach(Sticker.TextPosition.allCases, id: \.self) { position in
-                                Text(position.rawValue.capitalized).tag(position)
-                            }
-                        }
-                        Picker("Font", selection: $sticker.foreground.font) {
-                            ForEach(Sticker.TextFont.allCases, id: \.self) { font in
-                                Text(font.description).tag(font)
-                            }
-                        }
-                        Picker("Color", selection: $sticker.foreground.color) {
-                            ForEach(Sticker.TextColor.allCases, id: \.self) { color in
-                                Text(color.description).tag(color) // Not localized
-                            }
-                        }
-                    }
+                    backgroundOptions
+                    textOptions
                 }
             }
             .listStyle(GroupedListStyle())
@@ -129,6 +105,40 @@ struct StickerEditor: View {
                 })
                 .padding(.trailing, -10)
                 , alignment: .trailing)
+        }
+    }
+    
+    var backgroundOptions: some View {
+        Section(header: Text("Background")) {
+            Toggle("Remove background", isOn: $sticker.background.removeBackground.animation())
+            if sticker.background.removeBackground {
+                Toggle("Just remove white background", isOn: $sticker.background.monochromeBackground)
+                Toggle("Add white border", isOn: $sticker.background.addBorder)
+            }
+        }
+    }
+    
+    var textOptions: some View {
+        Section(header: Text("Text"), footer: EmptyView()) {
+            
+            TextField("Text", text: $sticker.foreground.text)
+                .keyboardDismissMode(.interactive)
+            
+            Picker(LocalizedStringKey("Position"), selection: $sticker.foreground.position) {
+                ForEach(Sticker.TextPosition.allCases, id: \.self) { position in
+                    Text(position.localizedDescription).tag(position)
+                }
+            }
+            Picker(LocalizedStringKey("Font"), selection: $sticker.foreground.font) {
+                ForEach(Sticker.TextFont.allCases, id: \.self) { font in
+                    Text(font.localizedDescription).tag(font)
+                }
+            }
+            Picker(LocalizedStringKey("Color"), selection: $sticker.foreground.color) {
+                ForEach(Sticker.TextColor.allCases, id: \.self) { color in
+                    Text(color.localizedDescription).tag(color) // Not localized
+                }
+            }
         }
     }
 }
@@ -172,8 +182,15 @@ extension String {
 }
 
 
+extension Sticker.TextPosition {
+    var localizedDescription: LocalizedStringKey {
+        return LocalizedStringKey(rawValue.capitalized)
+    }
+}
+
+
 extension Sticker.TextFont {
-    var description: String {
+    var localizedDescription: LocalizedStringKey {
         switch self {
         case .arial:
             return "Arial"
@@ -191,7 +208,7 @@ extension Sticker.TextFont {
 
 
 extension Sticker.TextColor {
-    var description: String {
+    var localizedDescription: LocalizedStringKey {
         switch self {
         case .white:
             return "White"

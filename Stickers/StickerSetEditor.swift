@@ -48,8 +48,8 @@ struct StickerSetEditor: View {
     }
     @State var alertPresented = false
     @State var alertContent: AlertContent = .error
-    @State var errorMessage = "Error"
-    @State var errorDescription = "Unknown error."
+    @State var errorMessage: LocalizedStringKey = "Error"
+    @State var errorDescription: LocalizedStringKey = "Unknown error."
     
     @EnvironmentObject var store: Store
     @Environment(\.presentationMode) var presentationMode
@@ -218,9 +218,11 @@ struct StickerSetEditor: View {
             VStack(spacing: 4) {
                 Text("Import animated stickers")
                     .font(.headline)
-                Text("Import TGS files created in AfterEffects")
+                Text("Import .tgs files created in AfterEffects")
                     .font(.subheadline)
+                    .multilineTextAlignment(.center)
             }
+            .padding(.horizontal, 16)
             .padding(.vertical, 16)
             .foregroundColor(.primary)
                 .frame(maxWidth: .infinity, alignment: .center)
