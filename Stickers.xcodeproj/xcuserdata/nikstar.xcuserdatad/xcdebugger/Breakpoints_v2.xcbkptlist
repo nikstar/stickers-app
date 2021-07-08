@@ -582,54 +582,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1FEDB75F-056A-4822-8E09-3C31AEF8D5E3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stickers/StickerEditor.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "editOptions"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "1FEDB75F-056A-4822-8E09-3C31AEF8D5E3 - 6e91fb50e5571a5c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in closure #1 () -&gt; SwiftUI.TextField&lt;SwiftUI.Text&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TextField&lt;SwiftUI.Text&gt;, SwiftUI.Text&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(SwiftUI.Toggle&lt;SwiftUI.Text&gt;, Swift.Optional&lt;SwiftUI.Toggle&lt;SwiftUI.Text&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Text)&gt; in Stickers.StickerEditor.editOptions.getter : some"
-                  moduleName = "Stickers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nikstar/Developer/Stickers/Stickers/StickerEditor.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "176">
-               </Location>
-               <Location
-                  uuid = "1FEDB75F-056A-4822-8E09-3C31AEF8D5E3 - c6f705ce323d967a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Character) -&gt; Swift.Bool in closure #2 () -&gt; () in closure #1 () -&gt; SwiftUI.TextField&lt;SwiftUI.Text&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TextField&lt;SwiftUI.Text&gt;, SwiftUI.Text&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(SwiftUI.Toggle&lt;SwiftUI.Text&gt;, Swift.Optional&lt;SwiftUI.Toggle&lt;SwiftUI.Text&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Text)&gt; in Stickers.StickerEditor.editOptions.getter : some"
-                  moduleName = "Stickers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nikstar/Developer/Stickers/Stickers/StickerEditor.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "23">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "583E1CFE-7BCE-48D7-8369-6DFFD2CD8C11"
             shouldBeEnabled = "No"
             ignoreCount = "0"

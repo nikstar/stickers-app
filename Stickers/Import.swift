@@ -15,7 +15,7 @@ extension Store {
         
         for id in stickerSet.stickers {
             guard let sticker = self.getSticker(id: id) else { continue }
-            let emoji = sticker.emoji.map { "\($0)" }
+            let emoji = sticker.emoji.isEmpty ? [String(Character.randomEmoji())] : sticker.emoji.map { "\($0)" }
             
             switch sticker.type {
             case .image:

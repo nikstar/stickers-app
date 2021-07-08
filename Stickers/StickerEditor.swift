@@ -74,16 +74,7 @@ struct StickerEditor: View {
     var editOptions: some View {
         NavigationView {
             List {
-                Section(header: Text("Emoji"), footer: Text("Sticker will be suggested when user types these emoji")) {
-                    TextField("Emoji", text: $sticker.emoji, onEditingChanged: { isEditing in
-                        sticker.emoji = sticker.emoji.filter { $0.isEmoji }
-                        sticker.emoji.removeRepeatingCharacters()
-                    }, onCommit: {
-                        sticker.emoji = sticker.emoji.filter { $0.isEmoji }
-                        sticker.emoji.removeRepeatingCharacters()
-                    })
-                    .keyboardDismissMode(.interactive)                    
-                }
+                emojiOptions
                 
                 if sticker.type != .animated {
                     Section(header: Text("Background")) {
@@ -121,6 +112,25 @@ struct StickerEditor: View {
         }
         
     }
+    
+    var emojiOptions: some View {
+        Section(header: Text("Emoji"), footer: Text("Sticker will be suggested when user types these emoji. At least one is required by Telegram.")) {
+            TextField("Emoji", text: $sticker.emoji, onEditingChanged: { isEditing in
+                sticker.emoji = sticker.emoji.filter { $0.isEmoji }
+                sticker.emoji.removeRepeatingCharacters()
+            }, onCommit: {
+                sticker.emoji = sticker.emoji.filter { $0.isEmoji }
+                sticker.emoji.removeRepeatingCharacters()
+            })
+            .keyboardDismissMode(.interactive)
+            .overlay(
+                SmallButton(text: "Random", color: Color.blue, action: {
+                    sticker.emoji = String(Character.randomEmoji())
+                })
+                .padding(.trailing, -10)
+                , alignment: .trailing)
+        }
+    }
 }
 
 
@@ -132,15 +142,21 @@ struct StickerEditor_Previews: PreviewProvider {
         let binding = store.binding(forSticker: sticker)
         return StickerEditor(sticker: binding)
             .environmentObject(store)
-            
     }
 }
 
 
 extension Character {
+    
+    static var emojis: [Character] = "😀😃😄😁😆😅😂🤣🥲☺️😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎😏🥸🤩🥳😒😞😟😕🙁☹️😣😖😫😩🥺😢😠😡🤬🤯😳🥵🥶😶‍🌫️😱😨😰😥😓🤗🤔🤭🤫🤥😐😑😬🙄😯😦😧😮🥱😴🤤😪😮‍💨😵😵‍💫🤐🥴🤢🤮🤧😷🤒🤕🤑🤠😈👿🤲👐🙌👏✌️🤟🤘👌🤌🖐🖖💪".map { $0 }
+    
     var isEmoji: Bool {
         guard let first = unicodeScalars.first else { return false }
         return first.properties.isEmoji && ( unicodeScalars.count > 1 || first.properties.isEmojiPresentation)
+    }
+    
+    static func randomEmoji() -> Character {
+        return emojis.randomElement()!
     }
 }
 
