@@ -64,8 +64,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
             endingLineNumber = "133"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "binding(forSticker:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -80,8 +80,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "126"
             endingLineNumber = "126"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "binding(forSticker:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -348,8 +348,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
             endingLineNumber = "24"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "stickers"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -364,8 +364,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "19"
             endingLineNumber = "19"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "stickerSets"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -444,8 +444,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
             endingLineNumber = "129"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "binding(forSticker:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "379B9C04-8303-47B9-80A1-727199786E35 - adb15f2d5b0f8820"
@@ -655,8 +655,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
             endingLineNumber = "113"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "removeSticker(id:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1030,15 +1030,15 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "160"
             endingLineNumber = "160"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "getAnimated(id:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "31A5761F-A523-49E8-86FC-4088E13AA1F2"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stickers/Store.swift"
@@ -1046,15 +1046,15 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
             endingLineNumber = "156"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "addNewAnimatedSticker(id:setID:url:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "1FF1983B-D847-4C5D-ACC3-E1625413EB62"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stickers/Store.swift"
@@ -1062,8 +1062,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
             endingLineNumber = "148"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "addNewAnimatedSticker(id:setID:url:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
