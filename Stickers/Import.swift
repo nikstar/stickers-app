@@ -5,7 +5,7 @@
 //  Created by  nikstar on 27.06.2021.
 //
 
-import Foundation
+import UIKit
 import TelegramStickersImport
 
 extension Store {
@@ -20,7 +20,16 @@ extension Store {
             switch sticker.type {
             case .image:
                 let image = foregroundCache.get(id: id)
-                guard let data = image.pngData() else { continue }
+                guard var data = image.pngData() else { continue }
+                if data.count > 512 * 1024 {
+                    data = image.jpegData(compressionQuality: 1.0)!
+                }
+                if data.count > 512 * 1024 {
+                    data = image.jpegData(compressionQuality: 0.9)!
+                }
+                if data.count > 512 * 1024 {
+                    data = image.jpegData(compressionQuality: 0.75)!
+                }
                 try exportSet.addSticker(data: .image(data), emojis: emoji)
                 
             default:

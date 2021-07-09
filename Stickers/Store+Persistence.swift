@@ -39,7 +39,8 @@ extension Store {
         do {
             let dataFile = documents.appendingPathComponent("data.json")
             let data = try Data(contentsOf: dataFile)
-            let store = try JSONDecoder().decode(Store.self, from: data)
+            let decoder = JSONDecoder()
+            let store = try decoder.decode(Store.self, from: data)
             return store
         } catch (let error) {
             print(error)

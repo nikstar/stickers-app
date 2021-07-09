@@ -26,13 +26,16 @@
 "Import animated stickers" = "Импорт анимированных стикеров";
 
 /* No comment provided by engineer. */
-"Import .tgs files created in AfterEffects" = "Добавить файлы .tgs, созданные в After Effects";
+"Import .tgs files created in After Effects" = "Добавить файлы .tgs, созданные в After Effects";
 
 /* No comment provided by engineer. */
-"New Set" = "Новый стикер";
+"New Set" = "Новые стикеры";
 
 /* No comment provided by engineer. */
 "New Sticker Set" = "Новый стикерпак";
+"New Sticker Set" = "Новый набор стикеров";
+"New Sticker Set" = "Новыe стикеры";
+
 
 /* No comment provided by engineer. */
 "OK" = "ОК";

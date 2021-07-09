@@ -218,10 +218,10 @@ struct StickerSetEditor: View {
             VStack(spacing: 4) {
                 Text("Import animated stickers")
                     .font(.headline)
-                Text("Import .tgs files created in AfterEffects")
+                Text("Import .tgs files created in After Effects")
                     .font(.subheadline)
-                    .multilineTextAlignment(.center)
             }
+            .multilineTextAlignment(.center)
             .padding(.horizontal, 16)
             .padding(.vertical, 16)
             .foregroundColor(.primary)
