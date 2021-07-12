@@ -45,13 +45,13 @@ struct FastPicker<Item: Cyclable & LocalizedDescription, Label: View>: View {
                 Spacer()
                 Text(item.wrappedValue.localizedDescription as LocalizedStringKey)
                     .foregroundColor(.primary)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 2)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
                     .background(Color.blue.opacity(0.15))
-                    .cornerRadius(3)
+                    .cornerRadius(8)
                     .padding(.leading, 8)
-                    .padding(.trailing, 2)
-                    .padding(.vertical, 6)
+                    .padding(.trailing, 0)
+                    .padding(.vertical, 2)
                     
             }
         }

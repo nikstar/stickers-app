@@ -90,8 +90,7 @@ struct StickerEditor: View {
         Section(header: Text("Emoji"), footer: Text("Sticker will be suggested when user types these emoji. At least one is required by Telegram.")) {
             
             EmojiTextField(text: $sticker.emoji, isEditing: $emojiKeyboardVisible)
-                .keyboardDismissMode(.interactive)
-                
+                .padding(.vertical, 2)
                 .overlay(
                     Group {
                         if !emojiKeyboardVisible {
@@ -99,19 +98,13 @@ struct StickerEditor: View {
                                 sticker.emoji = String(Character.randomEmoji())
                             })
                         } else {
-                            SmallButton(text: "Done", color: Color.blue, action:
-                                 {
+                            SmallButton(text: "Done", color: Color.blue, action: {
                                     emojiKeyboardVisible = false
-                                }
-                                
-                            )
+                            })
                         }
-                
                     }
                     .padding(.trailing, -10),
                 alignment: .trailing)
-            
-                
         }
     }
     

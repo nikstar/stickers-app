@@ -54,7 +54,7 @@ struct EmojiTextField: UIViewRepresentable {
         if isEditing == false && uiView.isFirstResponder {
             
             // this is a hacky fix for where keyboard gets immediately dismissed after tapping on text field. consistently happens in simulator but not on device. check if still presenet and remove
-            print(beganEditing?.timeIntervalSinceNow)
+//            print(beganEditing?.timeIntervalSinceNow)
             if let beganEditing = self.beganEditing, abs(beganEditing.timeIntervalSinceNow) > 0.3 { // seconds
                 uiView.resignFirstResponder()
             }
