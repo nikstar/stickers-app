@@ -64,6 +64,7 @@
 "Position" = "Position";
 "Top" = "Top";
 "Center" = "Center";
+"Middle" = "Middle";
 "Bottom" = "Bottom";
 
 "Font" = "Font";

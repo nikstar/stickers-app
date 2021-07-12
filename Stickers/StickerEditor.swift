@@ -13,6 +13,7 @@ struct StickerEditor: View {
     
     @State var previewSize: CGSize = CGSize(width: 100, height: 100)
     @State var deleteAlertPresented = false
+    @State var emojiKeyboardVisible = false
 
     @EnvironmentObject var store: Store
     @Environment(\.presentationMode) var presentationMode
@@ -51,22 +52,18 @@ struct StickerEditor: View {
     
     var stickerPreview: some View {
         ZStack {
-            Color.clear
+            backgroundPattern
             StickerViewLarge(sticker: sticker, size: previewSize.height - 36 - 26, showEmoji: false)
-                // .border(Color.blue)
                 .padding(.top, 36)
                 .padding(.bottom, 26)
                 .padding(.horizontal, 24)
-                // .border(Color.red)
         }
-        .aspectRatio(1.5, contentMode: .fit)
-        .background(backgroundPattern)
+        .maxHeight(previewSize.width * 0.75)
         .captureSize(in: $previewSize)
-        // .border(Color.red)
     }
     
     var backgroundPattern: some View {
-        Checkerboard(rows: 16, columns: 24)
+        Checkerboard(columns: 24)
             .fill(Color.secondary.opacity(0.10))
             .background(Color.secondary.opacity(0.06))
     }
@@ -91,20 +88,30 @@ struct StickerEditor: View {
     
     var emojiOptions: some View {
         Section(header: Text("Emoji"), footer: Text("Sticker will be suggested when user types these emoji. At least one is required by Telegram.")) {
-            TextField("Emoji", text: $sticker.emoji, onEditingChanged: { isEditing in
-                sticker.emoji = sticker.emoji.filter { $0.isEmoji }
-                sticker.emoji.removeRepeatingCharacters()
-            }, onCommit: {
-                sticker.emoji = sticker.emoji.filter { $0.isEmoji }
-                sticker.emoji.removeRepeatingCharacters()
-            })
-            .keyboardDismissMode(.interactive)
-            .overlay(
-                SmallButton(text: "Random", color: Color.blue, action: {
-                    sticker.emoji = String(Character.randomEmoji())
-                })
-                .padding(.trailing, -10)
-                , alignment: .trailing)
+            
+            EmojiTextField(text: $sticker.emoji, isEditing: $emojiKeyboardVisible)
+                .keyboardDismissMode(.interactive)
+                
+                .overlay(
+                    Group {
+                        if !emojiKeyboardVisible {
+                            SmallButton(text: "Random", color: Color.blue, action: {
+                                sticker.emoji = String(Character.randomEmoji())
+                            })
+                        } else {
+                            SmallButton(text: "Done", color: Color.blue, action:
+                                 {
+                                    emojiKeyboardVisible = false
+                                }
+                                
+                            )
+                        }
+                
+                    }
+                    .padding(.trailing, -10),
+                alignment: .trailing)
+            
+                
         }
     }
     
@@ -123,21 +130,14 @@ struct StickerEditor: View {
             
             TextField("Text", text: $sticker.foreground.text)
                 .keyboardDismissMode(.interactive)
-            
-            Picker(LocalizedStringKey("Position"), selection: $sticker.foreground.position) {
-                ForEach(Sticker.TextPosition.allCases, id: \.self) { position in
-                    Text(position.localizedDescription).tag(position)
-                }
+            FastPicker($sticker.foreground.position) {
+                Text("Position")
             }
-            Picker(LocalizedStringKey("Font"), selection: $sticker.foreground.font) {
-                ForEach(Sticker.TextFont.allCases, id: \.self) { font in
-                    Text(font.localizedDescription).tag(font)
-                }
+            FastPicker($sticker.foreground.font) {
+                Text("Font")
             }
-            Picker(LocalizedStringKey("Color"), selection: $sticker.foreground.color) {
-                ForEach(Sticker.TextColor.allCases, id: \.self) { color in
-                    Text(color.localizedDescription).tag(color) // Not localized
-                }
+            FastPicker($sticker.foreground.color) {
+                Text("Color")
             }
         }
     }
@@ -156,30 +156,8 @@ struct StickerEditor_Previews: PreviewProvider {
 }
 
 
-extension Character {
-    
-    static var emojis: [Character] = "😀😃😄😁😆😅😂🤣🥲☺️😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎😏🥸🤩🥳😒😞😟😕🙁☹️😣😖😫😩🥺😢😠😡🤬🤯😳🥵🥶😶‍🌫️😱😨😰😥😓🤗🤔🤭🤫🤥😐😑😬🙄😯😦😧😮🥱😴🤤😪😮‍💨😵😵‍💫🤐🥴🤢🤮🤧😷🤒🤕🤑🤠😈👿🤲👐🙌👏✌️🤟🤘👌🤌🖐🖖💪".map { $0 }
-    
-    var isEmoji: Bool {
-        guard let first = unicodeScalars.first else { return false }
-        return first.properties.isEmoji && ( unicodeScalars.count > 1 || first.properties.isEmojiPresentation)
-    }
-    
-    static func randomEmoji() -> Character {
-        return emojis.randomElement()!
-    }
-}
 
 
-extension String {
-    mutating func removeRepeatingCharacters() {
-        var seen: Set<Character> = []
-        self = String(self.filter { character in
-            if !seen.contains(character) { seen.insert(character); return true }
-            return false
-        })
-    }
-}
 
 
 extension Sticker.TextPosition {
@@ -188,23 +166,6 @@ extension Sticker.TextPosition {
     }
 }
 
-
-extension Sticker.TextFont {
-    var localizedDescription: LocalizedStringKey {
-        switch self {
-        case .arial:
-            return "Arial"
-        case .comicSans:
-            return "Comic Sans"
-        case .helvetica:
-            return "Helvetica"
-        case .impact:
-            return "Impact"
-        case .snellRoundhand:
-            return "Fancy"
-        }
-    }
-}
 
 
 extension Sticker.TextColor {

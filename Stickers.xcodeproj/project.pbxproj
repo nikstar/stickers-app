@@ -35,6 +35,11 @@
 		58BBF0AF2690F3A400C8A3A0 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0AE2690F3A400C8A3A0 /* Gzip */; };
 		58BBF0B42691105900C8A3A0 /* TelegramStickersImport in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0B32691105900C8A3A0 /* TelegramStickersImport */; };
 		58BBF0B62691C0D800C8A3A0 /* StickerViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */; };
+		58CB62B6269C59820088F04B /* TextFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB62B5269C59820088F04B /* TextFont.swift */; };
+		58CB62B8269C5CF30088F04B /* FastPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB62B7269C5CF30088F04B /* FastPicker.swift */; };
+		58CB62BB269C76AA0088F04B /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB62BA269C76AA0088F04B /* Protocols.swift */; };
+		58CB62BD269C7AAF0088F04B /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB62BC269C7AAF0088F04B /* EmojiTextField.swift */; };
+		58CB62BF269C7E9C0088F04B /* Character+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB62BE269C7E9C0088F04B /* Character+Emoji.swift */; };
 		58D8A012268A29D000935A31 /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */; };
 		58D8A014268A2E2400935A31 /* BackgroundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A013268A2E2400935A31 /* BackgroundEffect.swift */; };
 		58D8A018268A317F00935A31 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */; };
@@ -63,7 +68,7 @@
 		58A090E12687CDB6005785A0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		58A090E326889625005785A0 /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		58A1E94C268A1224001A93FE /* StickerEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerEditor.swift; sourceTree = "<group>"; };
-		58BB966126876CB200B62A74 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58BB966126876CB200B62A74 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Stickers.app; path = "/Users/nikstar/Developer/Stickers/build/Debug-iphoneos/Stickers.app"; sourceTree = "<absolute>"; };
 		58BB966426876CB200B62A74 /* StickersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickersApp.swift; sourceTree = "<group>"; };
 		58BB966626876CB200B62A74 /* StickerSetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetList.swift; sourceTree = "<group>"; };
 		58BB966826876CB300B62A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +83,11 @@
 		58BBF0A52690EAD900C8A3A0 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieViewUI.swift; sourceTree = "<group>"; };
 		58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerViewLarge.swift; sourceTree = "<group>"; };
+		58CB62B5269C59820088F04B /* TextFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFont.swift; sourceTree = "<group>"; };
+		58CB62B7269C5CF30088F04B /* FastPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastPicker.swift; sourceTree = "<group>"; };
+		58CB62BA269C76AA0088F04B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		58CB62BC269C7AAF0088F04B /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
+		58CB62BE269C7E9C0088F04B /* Character+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+Emoji.swift"; sourceTree = "<group>"; };
 		58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeepLabV3.mlmodel; sourceTree = "<group>"; };
 		58D8A013268A2E2400935A31 /* BackgroundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundEffect.swift; sourceTree = "<group>"; };
 		58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
@@ -111,26 +121,16 @@
 			isa = PBXGroup;
 			children = (
 				58BB966826876CB300B62A74 /* Assets.xcassets */,
-				58BBF096268F960000C8A3A0 /* Impact.ttf */,
-				58BBF098268F970900C8A3A0 /* Comic Sans MS Bold.ttf */,
 				58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */,
+				58CB62C0269C95660088F04B /* Fonts */,
+				58CB62C1269C957B0088F04B /* Helpers */,
 				58BB966D26876CB300B62A74 /* Info.plist */,
-				589C2D672697A76D00674EDE /* Localizable.strings */,
 				589C2D642697A76C00674EDE /* InfoPlist.strings */,
+				589C2D672697A76D00674EDE /* Localizable.strings */,
 				58BB966A26876CB300B62A74 /* Preview Content */,
-				58D8A030268D226E00935A31 /* SmallButton.swift */,
 				58BB966426876CB200B62A74 /* StickersApp.swift */,
-				58A090DF2687AB5F005785A0 /* Style.swift */,
-				58D8A027268A4BAD00935A31 /* Vision */,
 			);
 			name = "Support FIles";
-			sourceTree = "<group>";
-		};
-		582EB09B2687491000F4C2D2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		582EB09F2687747A00F4C2D2 /* List */ = {
@@ -147,6 +147,8 @@
 			children = (
 				582EB0A52687770200F4C2D2 /* Sticker.swift */,
 				582EB0A32687765D00F4C2D2 /* StickerSet.swift */,
+				58CB62B5269C59820088F04B /* TextFont.swift */,
+				58CB62BA269C76AA0088F04B /* Protocols.swift */,
 			);
 			name = "Model types";
 			sourceTree = "<group>";
@@ -164,8 +166,10 @@
 			isa = PBXGroup;
 			children = (
 				58A1E94C268A1224001A93FE /* StickerEditor.swift */,
-				58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */,
 				58D8A02A268B3DCD00935A31 /* Checkerboard.swift */,
+				58CB62BC269C7AAF0088F04B /* EmojiTextField.swift */,
+				58CB62B7269C5CF30088F04B /* FastPicker.swift */,
+				58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */,
 			);
 			name = StickerEditor;
 			sourceTree = "<group>";
@@ -186,17 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				58BB966326876CB200B62A74 /* Stickers */,
-				58BB966226876CB200B62A74 /* Products */,
-				582EB09B2687491000F4C2D2 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		58BB966226876CB200B62A74 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				58BB966126876CB200B62A74 /* Stickers.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		58BB966326876CB200B62A74 /* Stickers */ = {
@@ -264,8 +258,28 @@
 			children = (
 				58BBF0A52690EAD900C8A3A0 /* StickerView.swift */,
 				58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */,
+				58D8A030268D226E00935A31 /* SmallButton.swift */,
+				58A090DF2687AB5F005785A0 /* Style.swift */,
 			);
 			name = Shared;
+			sourceTree = "<group>";
+		};
+		58CB62C0269C95660088F04B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				58BBF096268F960000C8A3A0 /* Impact.ttf */,
+				58BBF098268F970900C8A3A0 /* Comic Sans MS Bold.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		58CB62C1269C957B0088F04B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				58D8A027268A4BAD00935A31 /* Vision */,
+				58CB62BE269C7E9C0088F04B /* Character+Emoji.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		58D8A027268A4BAD00935A31 /* Vision */ = {
@@ -335,7 +349,7 @@
 				58BBF0AD2690F3A400C8A3A0 /* XCRemoteSwiftPackageReference "GzipSwift" */,
 				58BBF0B22691105900C8A3A0 /* XCRemoteSwiftPackageReference "TelegramStickersImport" */,
 			);
-			productRefGroup = 58BB966226876CB200B62A74 /* Products */;
+			productRefGroup = 58BB965826876CB200B62A74;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -368,6 +382,7 @@
 				582EB0A42687765D00F4C2D2 /* StickerSet.swift in Sources */,
 				58D8A031268D226E00935A31 /* SmallButton.swift in Sources */,
 				58BBF0A12690766A00C8A3A0 /* ForegroundConfig.swift in Sources */,
+				58CB62BB269C76AA0088F04B /* Protocols.swift in Sources */,
 				58BB966726876CB200B62A74 /* StickerSetList.swift in Sources */,
 				58BB966526876CB200B62A74 /* StickersApp.swift in Sources */,
 				58D8A01E268A451D00935A31 /* Store+Persistence.swift in Sources */,
@@ -379,6 +394,7 @@
 				58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */,
 				58A090E426889625005785A0 /* Import.swift in Sources */,
 				582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */,
+				58CB62BF269C7E9C0088F04B /* Character+Emoji.swift in Sources */,
 				58BBF0B62691C0D800C8A3A0 /* StickerViewLarge.swift in Sources */,
 				58D8A029268A602400935A31 /* OriginalImages.swift in Sources */,
 				582EB09A2687479000F4C2D2 /* StickerSetRow.swift in Sources */,
@@ -388,7 +404,10 @@
 				58D8A02B268B3DCD00935A31 /* Checkerboard.swift in Sources */,
 				58D8A022268A469500935A31 /* Math.swift in Sources */,
 				58D8A020268A465900935A31 /* CGImage+RawBytes.swift in Sources */,
+				58CB62B8269C5CF30088F04B /* FastPicker.swift in Sources */,
 				58D8A02F268BC72600935A31 /* ResizeEffect.swift in Sources */,
+				58CB62BD269C7AAF0088F04B /* EmojiTextField.swift in Sources */,
+				58CB62B6269C59820088F04B /* TextFont.swift in Sources */,
 				58D8A014268A2E2400935A31 /* BackgroundEffect.swift in Sources */,
 				58BBF0A32690773900C8A3A0 /* ForegroundCache.swift in Sources */,
 				582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */,
@@ -545,7 +564,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Stickers/Preview Content\"";
 				DEVELOPMENT_TEAM = 6RX8GEVB43;
 				ENABLE_PREVIEWS = YES;
@@ -555,7 +574,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = me.nikstar.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -571,7 +590,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"Stickers/Preview Content\"";
 				DEVELOPMENT_TEAM = 6RX8GEVB43;
 				ENABLE_PREVIEWS = YES;
@@ -581,7 +600,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = me.nikstar.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

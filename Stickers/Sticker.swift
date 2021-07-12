@@ -18,13 +18,7 @@ struct Sticker: Hashable, Codable {
         case animated
     }
     
-    enum TextFont: String, Codable, CaseIterable, Hashable {
-        case arial
-        case comicSans
-        case helvetica
-        case impact
-        case snellRoundhand
-    }
+    
     
     enum TextPosition: String, Codable, CaseIterable, Hashable {
         case top
