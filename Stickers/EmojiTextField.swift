@@ -36,6 +36,8 @@ struct EmojiTextField: UIViewRepresentable {
     @Binding var text: String
     @Binding var isEditing: Bool
     
+    @State fileprivate var beganEditing: Date? = nil
+    
     private let placeholder = NSLocalizedString("Emoji", comment: "")
     
     func makeUIView(context: Context) -> _EmojiTextField {
@@ -50,7 +52,12 @@ struct EmojiTextField: UIViewRepresentable {
     func updateUIView(_ uiView: _EmojiTextField, context: Context) {
         print(#function, text, uiView.text!, isEditing, uiView.isFirstResponder)
         if isEditing == false && uiView.isFirstResponder {
-            uiView.resignFirstResponder()
+            
+            // this is a hacky fix for where keyboard gets immediately dismissed after tapping on text field. consistently happens in simulator but not on device. check if still presenet and remove
+            print(beganEditing?.timeIntervalSinceNow)
+            if let beganEditing = self.beganEditing, abs(beganEditing.timeIntervalSinceNow) > 0.3 { // seconds
+                uiView.resignFirstResponder()
+            }
         } else {
             uiView.text = text
         }
@@ -74,6 +81,10 @@ struct EmojiTextField: UIViewRepresentable {
             return true
         }
         
+        func textFieldDidBeginEditing(_ textField: UITextField) {
+            parent.beganEditing = Date()
+        }
+        
         func textFieldDidChangeSelection(_ textField: UITextField) {
             DispatchQueue.main.async {
                 print("changed: \(textField.text!)")
@@ -95,6 +106,7 @@ struct EmojiTextField: UIViewRepresentable {
                 if parent.isEditing {
                     parent.isEditing = false
                 }
+                parent.beganEditing = nil
             }
         }
         
