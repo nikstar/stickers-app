@@ -68,14 +68,16 @@ struct EmojiTextField: UIViewRepresentable {
         }
         
         func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-            parent.isEditing = true
+            DispatchQueue.main.async {
+                self.parent.isEditing = true
+            }
             return true
         }
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 print("changed: \(textField.text!)")
-                self?.parent.text = textField.text ?? ""
+                self.parent.text = textField.text ?? ""
             }
         }
         
@@ -88,14 +90,18 @@ struct EmojiTextField: UIViewRepresentable {
             var text = textField.text ?? ""
             text = text.filter(\.isEmoji)
             text.removeRepeatingCharacters()
-            parent.text = text
-            if parent.isEditing {
-                parent.isEditing = false
+            DispatchQueue.main.async { [self] in
+                parent.text = text
+                if parent.isEditing {
+                    parent.isEditing = false
+                }
             }
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            parent.isEditing = false
+            DispatchQueue.main.async {
+                self.parent.isEditing = false
+            }
             return true
         }
     }

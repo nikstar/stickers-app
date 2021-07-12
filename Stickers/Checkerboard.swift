@@ -14,13 +14,11 @@ struct Checkerboard: Shape {
     func path(in rect: CGRect) -> Path {
         
         let size = rect.width / CGFloat(columns)
-//        let rows = Int((rect.height / size).rounded(.up))
         let rows = columns
-        let offset = rect.height - size * CGFloat(rows)
+        let offset = (rect.height - size * CGFloat(rows)) / 2 // to keep centered
         
         var path = Path()
         
-        // loop over all rows and columns, making alternating squares colored
         for row in 0..<rows {
             for column in 0..<columns {
                 if (row + column) % 2 == 0 {
