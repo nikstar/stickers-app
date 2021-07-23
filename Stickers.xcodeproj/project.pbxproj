@@ -68,7 +68,6 @@
 		58A090E12687CDB6005785A0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		58A090E326889625005785A0 /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		58A1E94C268A1224001A93FE /* StickerEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerEditor.swift; sourceTree = "<group>"; };
-		58BB966126876CB200B62A74 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Stickers.app; path = "/Users/nikstar/Developer/Stickers/build/Debug-iphoneos/Stickers.app"; sourceTree = "<absolute>"; };
 		58BB966426876CB200B62A74 /* StickersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickersApp.swift; sourceTree = "<group>"; };
 		58BB966626876CB200B62A74 /* StickerSetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetList.swift; sourceTree = "<group>"; };
 		58BB966826876CB300B62A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		58BBF0A52690EAD900C8A3A0 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieViewUI.swift; sourceTree = "<group>"; };
 		58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerViewLarge.swift; sourceTree = "<group>"; };
+		58BF275E26AAB7A0008DEB22 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Stickers.app; path = "/Users/nikstar/Developer/Stickers/build/Debug-iphoneos/Stickers.app"; sourceTree = "<absolute>"; };
 		58CB62B5269C59820088F04B /* TextFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFont.swift; sourceTree = "<group>"; };
 		58CB62B7269C5CF30088F04B /* FastPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastPicker.swift; sourceTree = "<group>"; };
 		58CB62BA269C76AA0088F04B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -120,8 +120,8 @@
 		582EB0982687472600F4C2D2 /* Support FIles */ = {
 			isa = PBXGroup;
 			children = (
+				58BF275F26AABA42008DEB22 /* Vision */,
 				58BB966826876CB300B62A74 /* Assets.xcassets */,
-				58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */,
 				58CB62C0269C95660088F04B /* Fonts */,
 				58CB62C1269C957B0088F04B /* Helpers */,
 				58BB966D26876CB300B62A74 /* Info.plist */,
@@ -131,6 +131,7 @@
 				58BB966426876CB200B62A74 /* StickersApp.swift */,
 			);
 			name = "Support FIles";
+			path = Stickers;
 			sourceTree = "<group>";
 		};
 		582EB09F2687747A00F4C2D2 /* List */ = {
@@ -184,23 +185,16 @@
 				58A090E326889625005785A0 /* Import.swift */,
 			);
 			name = Model;
+			path = Stickers;
 			sourceTree = "<group>";
 		};
 		58BB965826876CB200B62A74 = {
-			isa = PBXGroup;
-			children = (
-				58BB966326876CB200B62A74 /* Stickers */,
-			);
-			sourceTree = "<group>";
-		};
-		58BB966326876CB200B62A74 /* Stickers */ = {
 			isa = PBXGroup;
 			children = (
 				582EB0A7268777C500F4C2D2 /* Model */,
 				58BBF0AA2690EFE700C8A3A0 /* Views */,
 				582EB0982687472600F4C2D2 /* Support FIles */,
 			);
-			path = Stickers;
 			sourceTree = "<group>";
 		};
 		58BB966A26876CB300B62A74 /* Preview Content */ = {
@@ -251,6 +245,7 @@
 				582EB0A22687758200F4C2D2 /* StickerEditor */,
 			);
 			name = Views;
+			path = Stickers;
 			sourceTree = "<group>";
 		};
 		58BBF0B02690FEC000C8A3A0 /* Shared */ = {
@@ -262,6 +257,18 @@
 				58A090DF2687AB5F005785A0 /* Style.swift */,
 			);
 			name = Shared;
+			sourceTree = "<group>";
+		};
+		58BF275F26AABA42008DEB22 /* Vision */ = {
+			isa = PBXGroup;
+			children = (
+				58D8A011268A29D000935A31 /* DeepLabV3.mlmodel */,
+				58D8A021268A469500935A31 /* Math.swift */,
+				58D8A019268A31A600935A31 /* UIImage+CustomExtensions.swift */,
+				58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */,
+				58D8A01F268A465900935A31 /* CGImage+RawBytes.swift */,
+			);
+			name = Vision;
 			sourceTree = "<group>";
 		};
 		58CB62C0269C95660088F04B /* Fonts */ = {
@@ -276,21 +283,9 @@
 		58CB62C1269C957B0088F04B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				58D8A027268A4BAD00935A31 /* Vision */,
 				58CB62BE269C7E9C0088F04B /* Character+Emoji.swift */,
 			);
 			name = Helpers;
-			sourceTree = "<group>";
-		};
-		58D8A027268A4BAD00935A31 /* Vision */ = {
-			isa = PBXGroup;
-			children = (
-				58D8A021268A469500935A31 /* Math.swift */,
-				58D8A019268A31A600935A31 /* UIImage+CustomExtensions.swift */,
-				58D8A017268A317F00935A31 /* MLMultiArray+Image.swift */,
-				58D8A01F268A465900935A31 /* CGImage+RawBytes.swift */,
-			);
-			path = Vision;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,7 +311,7 @@
 				58BBF0B32691105900C8A3A0 /* TelegramStickersImport */,
 			);
 			productName = Stickers;
-			productReference = 58BB966126876CB200B62A74 /* Stickers.app */;
+			productReference = 58BF275E26AAB7A0008DEB22 /* Stickers.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

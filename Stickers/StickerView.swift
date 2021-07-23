@@ -73,3 +73,4 @@ struct StickerView: View {
             .padding(10)
     }
 }
+
