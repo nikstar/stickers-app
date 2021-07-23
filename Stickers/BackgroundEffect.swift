@@ -119,7 +119,7 @@ class ColorFilter: CIFilter {
 
     var inputImage: CIImage?
     var inputColor: CIColor?
-
+    
     let kernel: CIColorKernel = {
         let kernelString = """
             kernel vec4 colorize(__sample pixel, vec4 color) {

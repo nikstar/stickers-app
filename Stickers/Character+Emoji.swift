@@ -1,11 +1,3 @@
-//
-//  Character+Emoji.swift
-//  Stickers
-//
-//  Created by  nikstar on 12.07.2021.
-//
-
-import Foundation
 
 
 extension Character {

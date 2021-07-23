@@ -26,6 +26,7 @@ final class Store: ObservableObject {
     }
     
     var originalImages: OriginalImages = OriginalImages()
+    lazy var maskCache = MaskCache(store: self)
     lazy var backgroundCache: BackgroundCache = BackgroundCache(store: self)
     lazy var foregroundCache: ForegroundCache = ForegroundCache(store: self)
     

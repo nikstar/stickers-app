@@ -17,24 +17,6 @@ struct Sticker: Hashable, Codable {
         case image
         case animated
     }
-    
-    
-    
-    enum TextPosition: String, Codable, CaseIterable, Hashable {
-        case top
-        case middle
-        case bottom
-    }
-    
-    enum TextColor: String, Codable, CaseIterable, Hashable {
-        case white
-        case whiteWithBorder
-        case black
-        case blackWithBorder
-        case yellow
-        case orange
-        case blue
-    }
 }
 
 

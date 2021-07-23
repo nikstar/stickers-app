@@ -14,6 +14,7 @@ struct StickerEditor: View {
     @State var previewSize: CGSize = CGSize(width: 100, height: 100)
     @State var deleteAlertPresented = false
     @State var emojiKeyboardVisible = false
+    @State var maskEditorPresented = false
 
     @EnvironmentObject var store: Store
     @Environment(\.presentationMode) var presentationMode
@@ -112,10 +113,14 @@ struct StickerEditor: View {
         Section(header: Text("Background")) {
             Toggle("Remove background", isOn: $sticker.background.removeBackground.animation())
             if sticker.background.removeBackground {
+                Button("Edit background mask", action: { maskEditorPresented = true })
                 Toggle("Just remove white background", isOn: $sticker.background.monochromeBackground)
                 Toggle("Add white border", isOn: $sticker.background.addBorder)
             }
         }
+        .sheet(isPresented: $maskEditorPresented, onDismiss: {}, content: {
+            MaskEditor(sticker: sticker, mask: UIImage())
+        })
     }
     
     var textOptions: some View {
@@ -137,6 +142,7 @@ struct StickerEditor: View {
 }
 
 
+// MARK: - Preview
 
 struct StickerEditor_Previews: PreviewProvider {
     static var previews: some View {
@@ -145,39 +151,5 @@ struct StickerEditor_Previews: PreviewProvider {
         let binding = store.binding(forSticker: sticker)
         return StickerEditor(sticker: binding)
             .environmentObject(store)
-    }
-}
-
-
-
-
-
-
-extension Sticker.TextPosition {
-    var localizedDescription: LocalizedStringKey {
-        return LocalizedStringKey(rawValue.capitalized)
-    }
-}
-
-
-
-extension Sticker.TextColor {
-    var localizedDescription: LocalizedStringKey {
-        switch self {
-        case .white:
-            return "White"
-        case .whiteWithBorder:
-            return  "White with black border"
-        case .black:
-            return "Black"
-        case .blackWithBorder:
-            return "Black with white border"
-        case .yellow:
-            return "Yellow"
-        case .orange:
-            return "Orange"
-        case .blue:
-            return "Blue"
-        }
     }
 }
