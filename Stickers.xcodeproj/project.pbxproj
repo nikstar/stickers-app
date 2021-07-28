@@ -19,6 +19,9 @@
 		58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090E12687CDB6005785A0 /* ImagePicker.swift */; };
 		58A090E426889625005785A0 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090E326889625005785A0 /* Import.swift */; };
 		58A1E94D268A1224001A93FE /* StickerEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1E94C268A1224001A93FE /* StickerEditor.swift */; };
+		58B95AC726B1F4DA009584F8 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B95AC626B1F4DA009584F8 /* CanvasView.swift */; };
+		58B95AC926B2002C009584F8 /* Store+Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B95AC826B2002C009584F8 /* Store+Mask.swift */; };
+		58B95ACB26B20ABD009584F8 /* MaskColoringFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B95ACA26B20ABD009584F8 /* MaskColoringFilter.swift */; };
 		58BB966526876CB200B62A74 /* StickersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB966426876CB200B62A74 /* StickersApp.swift */; };
 		58BB966726876CB200B62A74 /* StickerSetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BB966626876CB200B62A74 /* StickerSetList.swift */; };
 		58BB966926876CB300B62A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58BB966826876CB300B62A74 /* Assets.xcassets */; };
@@ -41,8 +44,6 @@
 		58BF276926AAC7D3008DEB22 /* MaskEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276826AAC7D3008DEB22 /* MaskEditor.swift */; };
 		58BF277226AAF210008DEB22 /* StrokeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276A26AAF210008DEB22 /* StrokeCollection.swift */; };
 		58BF277426AAF210008DEB22 /* CGMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276C26AAF210008DEB22 /* CGMathExtensions.swift */; };
-		58BF277526AAF210008DEB22 /* CanvasContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276D26AAF210008DEB22 /* CanvasContainerView.swift */; };
-		58BF277626AAF210008DEB22 /* CanvasMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276E26AAF210008DEB22 /* CanvasMainViewController.swift */; };
 		58BF277726AAF210008DEB22 /* CGDrawingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276F26AAF210008DEB22 /* CGDrawingEngine.swift */; };
 		58BF277926AAF210008DEB22 /* StrokeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF277126AAF210008DEB22 /* StrokeGestureRecognizer.swift */; };
 		58C0EBBF26B16BB500E79A11 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C0EBBE26B16BB500E79A11 /* With.swift */; };
@@ -64,6 +65,7 @@
 		58D8A02D268B5CB500935A31 /* AddTextEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A02C268B5CB500935A31 /* AddTextEffect.swift */; };
 		58D8A02F268BC72600935A31 /* ResizeEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A02E268BC72600935A31 /* ResizeEffect.swift */; };
 		58D8A031268D226E00935A31 /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D8A030268D226E00935A31 /* SmallButton.swift */; };
+		58FA85F426B2170A00560CB0 /* MaskColoring.metal in Sources */ = {isa = PBXBuildFile; fileRef = 58FA85F326B2170A00560CB0 /* MaskColoring.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,9 @@
 		58A090E12687CDB6005785A0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		58A090E326889625005785A0 /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		58A1E94C268A1224001A93FE /* StickerEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerEditor.swift; sourceTree = "<group>"; };
+		58B95AC626B1F4DA009584F8 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		58B95AC826B2002C009584F8 /* Store+Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+Mask.swift"; sourceTree = "<group>"; };
+		58B95ACA26B20ABD009584F8 /* MaskColoringFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskColoringFilter.swift; sourceTree = "<group>"; };
 		58BB966426876CB200B62A74 /* StickersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickersApp.swift; sourceTree = "<group>"; };
 		58BB966626876CB200B62A74 /* StickerSetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetList.swift; sourceTree = "<group>"; };
 		58BB966826876CB300B62A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,8 +105,6 @@
 		58BF276826AAC7D3008DEB22 /* MaskEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskEditor.swift; sourceTree = "<group>"; };
 		58BF276A26AAF210008DEB22 /* StrokeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeCollection.swift; sourceTree = "<group>"; };
 		58BF276C26AAF210008DEB22 /* CGMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMathExtensions.swift; sourceTree = "<group>"; };
-		58BF276D26AAF210008DEB22 /* CanvasContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasContainerView.swift; sourceTree = "<group>"; };
-		58BF276E26AAF210008DEB22 /* CanvasMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasMainViewController.swift; sourceTree = "<group>"; };
 		58BF276F26AAF210008DEB22 /* CGDrawingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGDrawingEngine.swift; sourceTree = "<group>"; };
 		58BF277126AAF210008DEB22 /* StrokeGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeGestureRecognizer.swift; sourceTree = "<group>"; };
 		58C0EBBD26B1638E00E79A11 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +127,7 @@
 		58D8A02C268B5CB500935A31 /* AddTextEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTextEffect.swift; sourceTree = "<group>"; };
 		58D8A02E268BC72600935A31 /* ResizeEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeEffect.swift; sourceTree = "<group>"; };
 		58D8A030268D226E00935A31 /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
+		58FA85F326B2170A00560CB0 /* MaskColoring.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MaskColoring.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +261,7 @@
 			children = (
 				58D8A028268A602400935A31 /* OriginalImages.swift */,
 				582EB0A8268777CF00F4C2D2 /* Store.swift */,
+				58B95AC826B2002C009584F8 /* Store+Mask.swift */,
 				58D8A01D268A451D00935A31 /* Store+Persistence.swift */,
 			);
 			name = Store;
@@ -313,12 +318,13 @@
 			isa = PBXGroup;
 			children = (
 				58BF276826AAC7D3008DEB22 /* MaskEditor.swift */,
-				58BF276D26AAF210008DEB22 /* CanvasContainerView.swift */,
-				58BF276E26AAF210008DEB22 /* CanvasMainViewController.swift */,
+				58B95AC626B1F4DA009584F8 /* CanvasView.swift */,
 				58BF276F26AAF210008DEB22 /* CGDrawingEngine.swift */,
 				58BF276C26AAF210008DEB22 /* CGMathExtensions.swift */,
 				58BF276A26AAF210008DEB22 /* StrokeCollection.swift */,
 				58BF277126AAF210008DEB22 /* StrokeGestureRecognizer.swift */,
+				58B95ACA26B20ABD009584F8 /* MaskColoringFilter.swift */,
+				58FA85F326B2170A00560CB0 /* MaskColoring.metal */,
 			);
 			name = MaskEditor;
 			sourceTree = "<group>";
@@ -431,9 +437,8 @@
 				58BF277926AAF210008DEB22 /* StrokeGestureRecognizer.swift in Sources */,
 				58C0EBBF26B16BB500E79A11 /* With.swift in Sources */,
 				582EB0A42687765D00F4C2D2 /* StickerSet.swift in Sources */,
-				58BF277626AAF210008DEB22 /* CanvasMainViewController.swift in Sources */,
 				58D8A031268D226E00935A31 /* SmallButton.swift in Sources */,
-				58BF277526AAF210008DEB22 /* CanvasContainerView.swift in Sources */,
+				58FA85F426B2170A00560CB0 /* MaskColoring.metal in Sources */,
 				58BBF0A12690766A00C8A3A0 /* ForegroundConfig.swift in Sources */,
 				58CB62BB269C76AA0088F04B /* Protocols.swift in Sources */,
 				58BB966726876CB200B62A74 /* StickerSetList.swift in Sources */,
@@ -446,7 +451,9 @@
 				58A1E94D268A1224001A93FE /* StickerEditor.swift in Sources */,
 				58BBF0A62690EADA00C8A3A0 /* StickerView.swift in Sources */,
 				58BF276626AABF7A008DEB22 /* MaskEffect.swift in Sources */,
+				58B95AC726B1F4DA009584F8 /* CanvasView.swift in Sources */,
 				58BBF09B26906ABA00C8A3A0 /* BackgroundCache.swift in Sources */,
+				58B95ACB26B20ABD009584F8 /* MaskColoringFilter.swift in Sources */,
 				58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */,
 				58A090E426889625005785A0 /* Import.swift in Sources */,
 				58BF277426AAF210008DEB22 /* CGMathExtensions.swift in Sources */,
@@ -470,6 +477,7 @@
 				58BF276926AAC7D3008DEB22 /* MaskEditor.swift in Sources */,
 				58CB62B6269C59820088F04B /* Text style.swift in Sources */,
 				58D8A014268A2E2400935A31 /* BackgroundEffect.swift in Sources */,
+				58B95AC926B2002C009584F8 /* Store+Mask.swift in Sources */,
 				58BBF0A32690773900C8A3A0 /* ForegroundCache.swift in Sources */,
 				582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */,
 				58D8A02D268B5CB500935A31 /* AddTextEffect.swift in Sources */,

@@ -9,6 +9,8 @@ import UIKit
 
 class StrokeCGView: UIView {
     
+    var image: UIImage?
+    
     var strokeCollection: StrokeCollection? {
         didSet {
             if oldValue !== strokeCollection {
@@ -35,7 +37,7 @@ class StrokeCGView: UIView {
         }
     }
 
-    let strokeColor = UIColor.systemGreen
+    let strokeColor = UIColor.green
 
     // Hold samples when attempting to draw lines that are too short.
     private var heldFromSample: StrokeSample?
@@ -113,7 +115,16 @@ class StrokeCGView: UIView {
     
     // MARK: - Inits
     
-    override init(frame: CGRect) {
+    init(baseMaskImage: UIImage, frame: CGRect) {
+        let ciImage = CIImage(cgImage: baseMaskImage.cgImage!)
+        let filter = MaskColoringFilter().with {
+            $0.inputImage = ciImage
+            $0.inputColor = CIColor(cgColor: UIColor.green.cgColor)
+        }
+        let colored = filter.outputImage!
+        let cgImage = CIContext().createCGImage(colored, from: colored.extent)!
+        self.image = UIImage(cgImage: cgImage, scale: 1.0, orientation: .up)
+        
         super.init(frame: frame)
 
         layer.drawsAsynchronously = true
@@ -141,9 +152,14 @@ class StrokeCGView: UIView {
 extension StrokeCGView {
 
     override func draw(_ rect: CGRect) {
-        UIColor.clear.set()
-        UIRectFill(rect)
-
+        
+        if let image = image {
+            image.draw(in: rect)
+        } else {
+            UIColor.clear.set()
+            UIRectFill(rect)
+        }
+        
         // Optimization opportunity: Draw the existing collection in a different view,
         // and only draw each time we add a stroke.
         if let strokeCollection = strokeCollection {
@@ -210,16 +226,16 @@ private extension StrokeCGView {
             segment.advanceWithSample(incomingSample: tempSampleTo)
             segment.advanceWithSample(incomingSample: nil)
 
-            draw(segment: segment, in: context)
+            draw(segment: segment, eraseMode: stroke.eraseMode, in: context)
         } else {
             for segment in stroke {
-                draw(segment: segment, in: context)
+                draw(segment: segment, eraseMode: stroke.eraseMode, in: context)
             }
         }
 
     }
 
-    func draw(segment: StrokeSegment, in context: CGContext) {
+    func draw(segment: StrokeSegment, eraseMode: Bool, in context: CGContext) {
 
         guard let toSample = segment.toSample else { return }
 
@@ -235,7 +251,7 @@ private extension StrokeCGView {
         }
 
         fillColor(in: context, toSample: toSample, fromSample: fromSample)
-        draw(segment: segment, in: context, toSample: toSample, fromSample: fromSample)
+        draw(segment: segment, eraseMode: eraseMode, in: context, toSample: toSample, fromSample: fromSample)
 
         if heldFromSample != nil {
             heldFromSample = nil
@@ -244,6 +260,7 @@ private extension StrokeCGView {
     }
 
     func draw(segment: StrokeSegment,
+              eraseMode: Bool,
               in context: CGContext,
               toSample: StrokeSample,
               fromSample: StrokeSample) {
@@ -254,6 +271,7 @@ private extension StrokeCGView {
         context.setLineCap(.round)
         context.setLineJoin(.round)
         context.setLineWidth(20.0)
+        context.setBlendMode(eraseMode ? .clear : .normal)
         context.move(to: fromSample.location)
         context.addLine(to: toSample.location)
         context.closePath()

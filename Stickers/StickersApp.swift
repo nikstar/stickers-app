@@ -1,9 +1,3 @@
-//
-//  StickersApp.swift
-//  Stickers
-//
-//  Created by  nikstar on 26.06.2021.
-//
 
 import SwiftUI
 
@@ -16,21 +10,11 @@ struct StickersApp: App {
     var body: some Scene {
         WindowGroup {
 //            StickerSetList()
-            MaskEditor(sticker: store.stickers.first!, mask: UIImage())
+//            let id = store.stickerSets[0].stickers[0]
+//            let sticker = store.getSticker(id: id)!
+            let sticker = store.stickers[0]
+            MaskEditor(sticker: sticker)
                 .environmentObject(store)
         }
-    }
-}
-
-
-struct Wrapper: UIViewControllerRepresentable {
-    
-    func makeUIViewController(context: Context) -> CanvasMainViewController {
-        return CanvasMainViewController()
-    }
-    
-    
-    func updateUIViewController(_ uiViewController: CanvasMainViewController, context: Context) {
-        
     }
 }

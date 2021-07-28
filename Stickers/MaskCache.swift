@@ -1,10 +1,12 @@
 
 import UIKit
 
-fileprivate let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("maskCache.json")
-fileprivate let cacheDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("mask")
 
 final class MaskCache {
+    
+    fileprivate static let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("maskCache.json")
+    fileprivate static let cacheDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("mask")
+
     
     var store: Store
     
@@ -12,7 +14,7 @@ final class MaskCache {
         didSet {
             DispatchQueue.global(qos: .background).async {
                 if let data = try? JSONEncoder().encode(self.cache) {
-                    try? data.write(to: fileURL)
+                    try? data.write(to: Self.fileURL)
                 }
             }
         }
@@ -21,12 +23,12 @@ final class MaskCache {
     
     init(store: Store) {
         self.store = store
-        if let data = try? Data(contentsOf: fileURL), let cache = try? JSONDecoder().decode([UUID: MaskConfig].self, from: data) {
+        if let data = try? Data(contentsOf: Self.fileURL), let cache = try? JSONDecoder().decode([UUID: MaskConfig].self, from: data) {
             self.cache = cache
         } else {
             self.cache = [:]
         }
-        try! FileManager.default.createDirectory(at: cacheDir, withIntermediateDirectories: true, attributes: nil)
+        try! FileManager.default.createDirectory(at: Self.cacheDir, withIntermediateDirectories: true, attributes: nil)
     }
     
     func isCurrent(id: UUID) -> Bool {
@@ -37,18 +39,22 @@ final class MaskCache {
     }
     
     func loadFromDisk(id: UUID) -> UIImage? {
-        if let data = try? Data(contentsOf: cacheDir.appendingPathComponent(id.uuidString)), let image = UIImage(data: data) {
+        if let data = try? Data(contentsOf: url(for: id)), let image = UIImage(data: data) {
             return image
         }
         return nil
     }
     
     private func writeImageToDisk(id: UUID, image: UIImage) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .background).async { [self] in
             if let data = image.pngData() {
-                try? data.write(to: cacheDir.appendingPathComponent(id.uuidString))
+                try? data.write(to: url(for: id))
             }
         }
+    }
+    
+    private func url(for id: UUID) -> URL {
+        Self.cacheDir.appendingPathComponent(id.uuidString + ".png")
     }
     
     func get(id: UUID) -> UIImage {

@@ -11,6 +11,11 @@ import UIKit
 /// - Tag: StrokeGestureRecognizer
 class StrokeGestureRecognizer: UIGestureRecognizer {
     // MARK: - Configuration
+    var eraseMode = false {
+        didSet {
+            self.stroke.eraseMode = eraseMode
+        }
+    }
     var collectsCoalescedTouches = true
     var usesPredictedSamples = true
 
@@ -27,7 +32,7 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
     }
 
     // MARK: - Data
-    var stroke = Stroke()
+    var stroke = Stroke(eraseMode: false)
     var outstandingUpdateIndexes = [Int: (Stroke, Int)]()
     var coordinateSpaceView: UIView?
 
@@ -239,7 +244,7 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
     }
 
     override func reset() {
-        stroke = Stroke()
+        stroke = Stroke(eraseMode: eraseMode)
         trackedTouch = nil
         if let timer = fingerStartTimer {
             timer.invalidate()

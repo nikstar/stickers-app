@@ -119,7 +119,7 @@ struct StickerEditor: View {
             }
         }
         .sheet(isPresented: $maskEditorPresented, onDismiss: {}, content: {
-            MaskEditor(sticker: sticker, mask: UIImage())
+            MaskEditor(sticker: sticker)
         })
     }
     

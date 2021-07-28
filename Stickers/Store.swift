@@ -137,6 +137,11 @@ final class Store: ObservableObject {
     }
     
     
+    func getOriginalImage(sticker: UUID) -> UIImage? {
+        let data = originalImages.get(id: sticker)
+        return UIImage(data: data)
+    }
+    
     func image(for stickerID: UUID) -> UIImage? {
         foregroundCache.get(id: stickerID)
     }

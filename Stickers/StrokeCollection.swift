@@ -96,6 +96,12 @@ enum StrokeState {
 }
 
 class Stroke {
+    
+    var eraseMode: Bool
+    
+    init(eraseMode: Bool) {
+        self.eraseMode = eraseMode
+    }
     static let calligraphyFallbackAzimuthUnitVector = CGVector(dx: 1.0, dy: 1.0).normalized!
     
     var samples: [StrokeSample] = []
