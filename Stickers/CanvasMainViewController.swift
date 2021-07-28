@@ -10,19 +10,12 @@ import UIKit
 class CanvasMainViewController: UIViewController {
 
     var cgView: StrokeCGView!
-    @IBOutlet var leftRingControl: RingControl!
-    @IBOutlet var leftRingControlHeight: NSLayoutConstraint!
-    @IBOutlet var leftRingControlWidth: NSLayoutConstraint!
-    @IBOutlet var leftRingControlLeading: NSLayoutConstraint!
-    @IBOutlet var leftRingControlTop: NSLayoutConstraint!
-
+    
     var fingerStrokeRecognizer: StrokeGestureRecognizer!
     var pencilStrokeRecognizer: StrokeGestureRecognizer!
 
-    @IBOutlet var pencilButton: UIButton!
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var separatorView: UIView!
-
+    var scrollView: UIScrollView = UIScrollView()
+    
     var strokeCollection = StrokeCollection()
     var canvasContainerView: CanvasContainerView!
 
@@ -30,6 +23,18 @@ class CanvasMainViewController: UIViewController {
     /// - Tag: CanvasMainViewController-viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(scrollView)
+        scrollView.with {
+            print($0, type(of: $0))
+            
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            $0.delegate = self
+        }
+        
         let screenBounds = UIScreen.main.bounds
         let maxScreenDimension = max(screenBounds.width, screenBounds.height)
 
@@ -62,7 +67,6 @@ class CanvasMainViewController: UIViewController {
             view.addInteraction(pencilInteraction)
         }
 
-        setupDrawingTools()
         setupPencilUI()
     }
 
@@ -87,29 +91,6 @@ class CanvasMainViewController: UIViewController {
         return recognizer
     }
 
-    func setupDrawingTools() {
-        let ringDiameter = CGFloat(74.0)
-        let ringImageInset = CGFloat(14.0)
-        let borderWidth = CGFloat(1.0)
-        let ringOutset = ringDiameter / 2.0 - (floor(sqrt((ringDiameter * ringDiameter) / 8.0) - borderWidth))
-
-        leftRingControlHeight.constant = ringDiameter
-        leftRingControlWidth.constant = ringDiameter
-        leftRingControlTop.constant = -ringDiameter + (ringOutset * 2)
-        leftRingControlLeading.constant = -ringOutset
-
-        leftRingControl.setupRings(itemCount: StrokeViewDisplayOptions.allCases.count)
-        leftRingControl.setupInitialSelectionState()
-
-        for (index, ringView) in leftRingControl.ringViews.enumerated() {
-            let option = StrokeViewDisplayOptions.allCases[index]
-            ringView.actionClosure = { self.cgView.displayOptions = option }
-            let imageView = UIImageView(frame: ringView.bounds.insetBy(dx: ringImageInset, dy: ringImageInset))
-            imageView.image = UIImage(named: option.description)
-            imageView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
-            ringView.addSubview(imageView)
-        }
-    }
     
     func receivedAllUpdatesForStroke(_ stroke: Stroke) {
         cgView.setNeedsDisplay(for: stroke)
@@ -136,7 +117,6 @@ class CanvasMainViewController: UIViewController {
             if strokeGesture.state == .began ||
                (strokeGesture.state == .ended && strokeCollection.activeStroke == nil) {
                 strokeCollection.activeStroke = stroke
-                leftRingControl.cancelInteraction()
             }
         } else {
             strokeCollection.activeStroke = nil
@@ -202,13 +182,11 @@ class CanvasMainViewController: UIViewController {
         didSet {
             if pencilMode {
                 scrollView.panGestureRecognizer.minimumNumberOfTouches = 1
-                pencilButton.isHidden = false
                 if let view = fingerStrokeRecognizer.view {
                     view.removeGestureRecognizer(fingerStrokeRecognizer)
                 }
             } else {
                 scrollView.panGestureRecognizer.minimumNumberOfTouches = 2
-                pencilButton.isHidden = true
                 if fingerStrokeRecognizer.view == nil {
                     scrollView.addGestureRecognizer(fingerStrokeRecognizer)
                 }
@@ -216,11 +194,10 @@ class CanvasMainViewController: UIViewController {
         }
     }
     
-    @IBAction func stopPencilButtonAction(_ sender: AnyObject?) {
+    func stopPencilButtonAction(_ sender: AnyObject?) {
         lastSeenPencilInteraction = nil
         pencilMode = false
     }
-
 }
 
 // MARK: - UIGestureRecognizerDelegate
@@ -231,9 +208,7 @@ extension CanvasMainViewController: UIGestureRecognizerDelegate {
     // instead of adding failure requirements to the gesture for minimizing the delay
     // to the first action sent and therefore the first lines drawn.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-
-        return leftRingControl.hitTest(touch.location(in: leftRingControl), with: nil) == nil
-        
+        return true
     }
 
     // We want the pencil to recognize simultaniously with all others.
@@ -280,7 +255,7 @@ extension CanvasMainViewController: UIPencilInteractionDelegate {
     /// - Tag: pencilInteractionDidTap
     func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
         if UIPencilInteraction.preferredTapAction == .switchPrevious {
-            leftRingControl.switchToPreviousTool()
+//            leftRingControl?.switchToPreviousTool()
         }
     }
 

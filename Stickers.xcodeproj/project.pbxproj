@@ -40,13 +40,13 @@
 		58BF276626AABF7A008DEB22 /* MaskEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276526AABF7A008DEB22 /* MaskEffect.swift */; };
 		58BF276926AAC7D3008DEB22 /* MaskEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276826AAC7D3008DEB22 /* MaskEditor.swift */; };
 		58BF277226AAF210008DEB22 /* StrokeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276A26AAF210008DEB22 /* StrokeCollection.swift */; };
-		58BF277326AAF210008DEB22 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276B26AAF210008DEB22 /* RingView.swift */; };
 		58BF277426AAF210008DEB22 /* CGMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276C26AAF210008DEB22 /* CGMathExtensions.swift */; };
 		58BF277526AAF210008DEB22 /* CanvasContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276D26AAF210008DEB22 /* CanvasContainerView.swift */; };
 		58BF277626AAF210008DEB22 /* CanvasMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276E26AAF210008DEB22 /* CanvasMainViewController.swift */; };
 		58BF277726AAF210008DEB22 /* CGDrawingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276F26AAF210008DEB22 /* CGDrawingEngine.swift */; };
-		58BF277826AAF210008DEB22 /* RingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF277026AAF210008DEB22 /* RingControl.swift */; };
 		58BF277926AAF210008DEB22 /* StrokeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF277126AAF210008DEB22 /* StrokeGestureRecognizer.swift */; };
+		58C0EBBF26B16BB500E79A11 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C0EBBE26B16BB500E79A11 /* With.swift */; };
+		58C0EBC126B18FB100E79A11 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C0EBC026B18FB100E79A11 /* ErrorView.swift */; };
 		58CB62B6269C59820088F04B /* Text style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB62B5269C59820088F04B /* Text style.swift */; };
 		58CB62B8269C5CF30088F04B /* FastPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB62B7269C5CF30088F04B /* FastPicker.swift */; };
 		58CB62BB269C76AA0088F04B /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CB62BA269C76AA0088F04B /* Protocols.swift */; };
@@ -94,19 +94,19 @@
 		58BBF0A52690EAD900C8A3A0 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieViewUI.swift; sourceTree = "<group>"; };
 		58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerViewLarge.swift; sourceTree = "<group>"; };
-		58BF275E26AAB7A0008DEB22 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Stickers.app; path = "/Users/nikstar/Developer/Stickers/build/Debug-iphoneos/Stickers.app"; sourceTree = "<absolute>"; };
 		58BF276126AABB62008DEB22 /* MaskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskCache.swift; sourceTree = "<group>"; };
 		58BF276326AABBAA008DEB22 /* MaskConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskConfig.swift; sourceTree = "<group>"; };
 		58BF276526AABF7A008DEB22 /* MaskEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskEffect.swift; sourceTree = "<group>"; };
 		58BF276826AAC7D3008DEB22 /* MaskEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskEditor.swift; sourceTree = "<group>"; };
 		58BF276A26AAF210008DEB22 /* StrokeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeCollection.swift; sourceTree = "<group>"; };
-		58BF276B26AAF210008DEB22 /* RingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		58BF276C26AAF210008DEB22 /* CGMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMathExtensions.swift; sourceTree = "<group>"; };
 		58BF276D26AAF210008DEB22 /* CanvasContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasContainerView.swift; sourceTree = "<group>"; };
 		58BF276E26AAF210008DEB22 /* CanvasMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasMainViewController.swift; sourceTree = "<group>"; };
 		58BF276F26AAF210008DEB22 /* CGDrawingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGDrawingEngine.swift; sourceTree = "<group>"; };
-		58BF277026AAF210008DEB22 /* RingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingControl.swift; sourceTree = "<group>"; };
 		58BF277126AAF210008DEB22 /* StrokeGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeGestureRecognizer.swift; sourceTree = "<group>"; };
+		58C0EBBD26B1638E00E79A11 /* Stickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58C0EBBE26B16BB500E79A11 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
+		58C0EBC026B18FB100E79A11 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		58CB62B5269C59820088F04B /* Text style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text style.swift"; sourceTree = "<group>"; };
 		58CB62B7269C5CF30088F04B /* FastPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastPicker.swift; sourceTree = "<group>"; };
 		58CB62BA269C76AA0088F04B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -219,6 +219,7 @@
 				58BBF0AA2690EFE700C8A3A0 /* Views */,
 				58CB62C1269C957B0088F04B /* Helpers */,
 				582EB0982687472600F4C2D2 /* Support FIles */,
+				58C0EBBD26B1638E00E79A11 /* Stickers.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -277,6 +278,7 @@
 		58BBF0B02690FEC000C8A3A0 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				58C0EBC026B18FB100E79A11 /* ErrorView.swift */,
 				58BBF0A52690EAD900C8A3A0 /* StickerView.swift */,
 				58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */,
 				58D8A030268D226E00935A31 /* SmallButton.swift */,
@@ -315,8 +317,6 @@
 				58BF276E26AAF210008DEB22 /* CanvasMainViewController.swift */,
 				58BF276F26AAF210008DEB22 /* CGDrawingEngine.swift */,
 				58BF276C26AAF210008DEB22 /* CGMathExtensions.swift */,
-				58BF277026AAF210008DEB22 /* RingControl.swift */,
-				58BF276B26AAF210008DEB22 /* RingView.swift */,
 				58BF276A26AAF210008DEB22 /* StrokeCollection.swift */,
 				58BF277126AAF210008DEB22 /* StrokeGestureRecognizer.swift */,
 			);
@@ -336,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				58CB62BE269C7E9C0088F04B /* Character+Emoji.swift */,
+				58C0EBBE26B16BB500E79A11 /* With.swift */,
 			);
 			name = Helpers;
 			path = Stickers;
@@ -364,7 +365,7 @@
 				58BBF0B32691105900C8A3A0 /* TelegramStickersImport */,
 			);
 			productName = Stickers;
-			productReference = 58BF275E26AAB7A0008DEB22 /* Stickers.app */;
+			productReference = 58C0EBBD26B1638E00E79A11 /* Stickers.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -428,9 +429,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				58BF277926AAF210008DEB22 /* StrokeGestureRecognizer.swift in Sources */,
+				58C0EBBF26B16BB500E79A11 /* With.swift in Sources */,
 				582EB0A42687765D00F4C2D2 /* StickerSet.swift in Sources */,
 				58BF277626AAF210008DEB22 /* CanvasMainViewController.swift in Sources */,
-				58BF277326AAF210008DEB22 /* RingView.swift in Sources */,
 				58D8A031268D226E00935A31 /* SmallButton.swift in Sources */,
 				58BF277526AAF210008DEB22 /* CanvasContainerView.swift in Sources */,
 				58BBF0A12690766A00C8A3A0 /* ForegroundConfig.swift in Sources */,
@@ -440,6 +441,7 @@
 				58D8A01E268A451D00935A31 /* Store+Persistence.swift in Sources */,
 				58D8A012268A29D000935A31 /* DeepLabV3.mlmodel in Sources */,
 				58BBF09D269075BF00C8A3A0 /* BackgroundConfig.swift in Sources */,
+				58C0EBC126B18FB100E79A11 /* ErrorView.swift in Sources */,
 				58BF276426AABBAA008DEB22 /* MaskConfig.swift in Sources */,
 				58A1E94D268A1224001A93FE /* StickerEditor.swift in Sources */,
 				58BBF0A62690EADA00C8A3A0 /* StickerView.swift in Sources */,
@@ -457,7 +459,6 @@
 				58A090E02687AB5F005785A0 /* Style.swift in Sources */,
 				58D8A018268A317F00935A31 /* MLMultiArray+Image.swift in Sources */,
 				582EB0A62687770200F4C2D2 /* Sticker.swift in Sources */,
-				58BF277826AAF210008DEB22 /* RingControl.swift in Sources */,
 				58D8A02B268B3DCD00935A31 /* Checkerboard.swift in Sources */,
 				58D8A022268A469500935A31 /* Math.swift in Sources */,
 				58D8A020268A465900935A31 /* CGImage+RawBytes.swift in Sources */,

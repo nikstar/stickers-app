@@ -7,39 +7,17 @@ The view that is responsible for the drawing. StrokeCGView can draw a StrokeColl
 
 import UIKit
 
-enum StrokeViewDisplayOptions: CaseIterable, CustomStringConvertible {
-    case calligraphy
-    case ink
-    case debug
-
-    var description: String {
-        switch self {
-        case .calligraphy: return "Calligraphy"
-        case .ink: return "Ink"
-        case .debug: return "Debug"
-        }
-    }
-}
-
 class StrokeCGView: UIView {
-    var displayOptions = StrokeViewDisplayOptions.calligraphy {
-        didSet {
-            if strokeCollection != nil {
-                setNeedsDisplay()
-            }
-            for view in dirtyRectViews {
-                view.isHidden = displayOptions != .debug
-            }
-        }
-    }
     
     var strokeCollection: StrokeCollection? {
         didSet {
             if oldValue !== strokeCollection {
                 setNeedsDisplay()
+                print("needsDisplay")
             }
             if let lastStroke = strokeCollection?.strokes.last {
                 setNeedsDisplay(for: lastStroke)
+                print("needsDisplayStroke")
             }
             strokeToDraw = strokeCollection?.activeStroke
         }
@@ -57,7 +35,7 @@ class StrokeCGView: UIView {
         }
     }
 
-    let strokeColor = UIColor.black
+    let strokeColor = UIColor.systemGreen.withAlphaComponent(0.5)
 
     // Hold samples when attempting to draw lines that are too short.
     private var heldFromSample: StrokeSample?
@@ -163,7 +141,7 @@ class StrokeCGView: UIView {
 extension StrokeCGView {
 
     override func draw(_ rect: CGRect) {
-        UIColor.white.set()
+        UIColor.clear.set()
         UIRectFill(rect)
 
         // Optimization opportunity: Draw the existing collection in a different view,
@@ -192,10 +170,6 @@ private extension StrokeCGView {
      interpolate between the points to get a smooother curve.
      */
     func draw(stroke: Stroke, in rect: CGRect) {
-
-        if displayOptions == .debug {
-            updateDirtyRects(for: stroke)
-        }
 
         stroke.clearUpdateInfo()
 
@@ -262,7 +236,6 @@ private extension StrokeCGView {
 
         fillColor(in: context, toSample: toSample, fromSample: fromSample)
         draw(segment: segment, in: context, toSample: toSample, fromSample: fromSample)
-        drawDebugMarkings(in: context, fromSample: fromSample)
 
         if heldFromSample != nil {
             heldFromSample = nil
@@ -275,127 +248,23 @@ private extension StrokeCGView {
               toSample: StrokeSample,
               fromSample: StrokeSample) {
 
-        let forceAccessBlock = self.forceAccessBlock()
+        let unitVector = heldFromSampleUnitVector != nil ? heldFromSampleUnitVector! : segment.fromSampleUnitNormal
+        let fromUnitVector = unitVector
+        let toUnitVector = segment.toSampleUnitNormal
 
-        if displayOptions == .calligraphy {
-
-            drawCalligraphy(in: context, toSample: toSample, fromSample: fromSample, forceAccessBlock: forceAccessBlock)
-
-        } else {
-
-            let unitVector = heldFromSampleUnitVector != nil ? heldFromSampleUnitVector! : segment.fromSampleUnitNormal
-            let fromUnitVector = unitVector * forceAccessBlock(fromSample)
-            let toUnitVector = segment.toSampleUnitNormal * forceAccessBlock(toSample)
-
-            let isForceEstimated = fromSample.estimatedProperties.contains(.force) || toSample.estimatedProperties.contains(.force)
-            if isForceEstimated {
-                if lastEstimatedSample == nil {
-                    lastEstimatedSample = (segment.fromSampleIndex + 1, toSample)
-                }
-                forceEstimatedLineSettings(in: context)
-            } else {
-                lineSettings(in: context)
-            }
-
-            context.beginPath()
-            context.addLines(between: [
-                fromSample.location + fromUnitVector,
-                toSample.location + toUnitVector,
-                toSample.location - toUnitVector,
-                fromSample.location - fromUnitVector
-                ])
-            context.closePath()
-            context.drawPath(using: .fillStroke)
-
-        }
-
-    }
-
-    /// Renders the stroke in a calligraphy-like style.
-    /// - Tag: drawCalligraphy
-    func drawCalligraphy(in context: CGContext,
-                         toSample: StrokeSample,
-                         fromSample: StrokeSample,
-                         forceAccessBlock: (_ sample: StrokeSample) -> CGFloat) {
-
-        var fromAzimuthUnitVector = Stroke.calligraphyFallbackAzimuthUnitVector
-        var toAzimuthUnitVector = Stroke.calligraphyFallbackAzimuthUnitVector
-
-        if fromSample.azimuth != nil {
-
-            if lockedAzimuthUnitVector == nil {
-                lockedAzimuthUnitVector = fromSample.azimuthUnitVector
-            }
-            fromAzimuthUnitVector = fromSample.azimuthUnitVector
-            toAzimuthUnitVector = toSample.azimuthUnitVector
-            if fromSample.altitude! > azimuthLockAltitudeThreshold {
-                fromAzimuthUnitVector = lockedAzimuthUnitVector!
-            }
-            if toSample.altitude! > azimuthLockAltitudeThreshold {
-                toAzimuthUnitVector = lockedAzimuthUnitVector!
-            } else {
-                lockedAzimuthUnitVector = toAzimuthUnitVector
-            }
-
-        }
-        // Rotate 90 degrees
-        let calligraphyTransform = CGAffineTransform(rotationAngle: CGFloat.pi / 2.0)
-        fromAzimuthUnitVector = fromAzimuthUnitVector.applying(calligraphyTransform)
-        toAzimuthUnitVector = toAzimuthUnitVector.applying(calligraphyTransform)
-
-        let fromUnitVector = fromAzimuthUnitVector * forceAccessBlock(fromSample)
-        let toUnitVector = toAzimuthUnitVector * forceAccessBlock(toSample)
-
+        lineSettings(in: context)
+        
         context.beginPath()
-        context.addLines(between: [
-            fromSample.location + fromUnitVector,
-            toSample.location + toUnitVector,
-            toSample.location - toUnitVector,
-            fromSample.location - fromUnitVector
-            ])
-        context.closePath()
-
-        context.drawPath(using: .fillStroke)
-
-    }
-
-    /// Renders altitude and azimuth markings on the stroke.
-    /// - Tag: drawDebugMarkings
-    func drawDebugMarkings(in context: CGContext, fromSample: StrokeSample) {
-
-        let isEstimated = fromSample.estimatedProperties.contains(.azimuth)
-        guard displayOptions == .debug,
-            fromSample.predicted == false,
-            fromSample.azimuth != nil,
-            (!fromSample.coalesced || isEstimated) else {
-                return
-        }
-
-        let length = CGFloat(20.0)
-        let azimuthUnitVector = fromSample.azimuthUnitVector
-        let azimuthTarget = fromSample.location + azimuthUnitVector * length
-        let altitudeStart = azimuthTarget + (azimuthUnitVector * (length / -2.0))
-        let transformToApply = CGAffineTransform(rotationAngle: fromSample.altitude!)
-        let altitudeTarget = altitudeStart + (azimuthUnitVector * (length / 2.0)).applying(transformToApply)
-
-        // Draw altitude as black line coming from the center of the azimuth.
-        altitudeSettings(in: context)
-        context.beginPath()
-        context.move(to: altitudeStart)
-        context.addLine(to: altitudeTarget)
-        context.strokePath()
-
-        // Draw azimuth as blue (or orange if estimated) line.
-        azimuthSettings(in: context)
-        if isEstimated {
-            context.setStrokeColor(UIColor.orange.cgColor)
-        }
-        context.beginPath()
+        context.setLineCap(.round)
+        context.setLineJoin(.round)
+        context.setLineWidth(20.0)
+        print(contentScaleFactor)
         context.move(to: fromSample.location)
-        context.addLine(to: azimuthTarget)
-        context.strokePath()
-
+        context.addLine(to: toSample.location)
+        context.closePath()
+        context.drawPath(using: .fillStroke)
     }
+
 
     func prepareToDraw() {
         lastEstimatedSample = nil
@@ -405,87 +274,14 @@ private extension StrokeCGView {
     }
 
     func lineSettings(in context: CGContext) {
-
-        if displayOptions == .debug {
-            context.setLineWidth(0.5)
-            context.setStrokeColor(UIColor.white.cgColor)
-        } else {
-            context.setLineWidth(0.25)
-            context.setStrokeColor(strokeColor.cgColor)
-        }
-
-    }
-
-    func forceEstimatedLineSettings(in context: CGContext) {
-
-        if displayOptions == .debug {
-            context.setLineWidth(0.5)
-            context.setStrokeColor(UIColor.blue.cgColor)
-        } else {
-            lineSettings(in: context)
-        }
-
-    }
-
-    func azimuthSettings(in context: CGContext) {
-        context.setLineWidth(1.5)
-        context.setStrokeColor(#colorLiteral(red: 0, green: 0.7445889711, blue: 1, alpha: 1).cgColor)
-    }
-
-    func altitudeSettings(in context: CGContext) {
-        context.setLineWidth(0.5)
+        context.setLineWidth(10)
+        context.setLineCap(.round)
         context.setStrokeColor(strokeColor.cgColor)
     }
 
-    func forceAccessBlock() -> (_ sample: StrokeSample) -> CGFloat {
-
-        var forceMultiplier = CGFloat(2.0)
-        var forceOffset = CGFloat(0.1)
-        var forceAccessBlock = {(sample: StrokeSample) -> CGFloat in
-            return sample.forceWithDefault
-        }
-
-        if displayOptions == .ink {
-            forceAccessBlock = {(sample: StrokeSample) -> CGFloat in
-                return sample.perpendicularForce
-            }
-        }
-
-        // Make the force influence less pronounced for the calligraphy pen.
-        if displayOptions == .calligraphy {
-            let previousGetter = forceAccessBlock
-            forceAccessBlock = {(sample: StrokeSample) -> CGFloat in
-                return max(previousGetter(sample), 1.0)
-            }
-            // make force value less pronounced
-            forceMultiplier = 1.0
-            forceOffset = 10.0
-        }
-
-        let previousGetter = forceAccessBlock
-        forceAccessBlock = {(sample: StrokeSample) -> CGFloat in
-            return previousGetter(sample) * forceMultiplier + forceOffset
-        }
-
-        return forceAccessBlock
-    }
-
     func fillColor(in context: CGContext, toSample: StrokeSample, fromSample: StrokeSample) {
-        let fillColorRegular = UIColor.black.cgColor
-        let fillColorCoalesced = UIColor.lightGray.cgColor
-        let fillColorPredicted = UIColor.red.cgColor
-
-        if toSample.predicted {
-            if displayOptions == .debug {
-                context.setFillColor(fillColorPredicted)
-            }
-        } else {
-            if displayOptions == .debug && fromSample.coalesced {
-                context.setFillColor(fillColorCoalesced)
-            } else {
-                context.setFillColor(fillColorRegular)
-            }
-        }
+        let fillColorRegular = UIColor.systemGreen.withAlphaComponent(0.5).cgColor
+        context.setFillColor(fillColorRegular)
     }
 
 }

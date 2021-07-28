@@ -15,8 +15,22 @@ struct StickersApp: App {
 
     var body: some Scene {
         WindowGroup {
-            StickerSetList()
+//            StickerSetList()
+            MaskEditor(sticker: store.stickers.first!, mask: UIImage())
                 .environmentObject(store)
         }
+    }
+}
+
+
+struct Wrapper: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> CanvasMainViewController {
+        return CanvasMainViewController()
+    }
+    
+    
+    func updateUIViewController(_ uiViewController: CanvasMainViewController, context: Context) {
+        
     }
 }

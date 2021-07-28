@@ -163,6 +163,7 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
     /// A set of functions that track touches.
     /// - Tag: HandleTouches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print(#function)
         if trackedTouch == nil {
             trackedTouch = touches.first
             initialTimestamp = trackedTouch?.timestamp
