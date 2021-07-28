@@ -124,7 +124,8 @@ final class CanvasViewController: UIViewController {
         }
         
         maskView.with {
-            $0.backgroundColor = .white.withAlphaComponent(0.2)
+            $0.backgroundColor = .white.withAlphaComponent(0.4)
+            $0.layer.opacity = 0.5
             
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: canvasView.leadingAnchor).isActive = true
@@ -173,7 +174,7 @@ extension CanvasViewController: UIGestureRecognizerDelegate {
 
     
     func receivedAllUpdatesForStroke(_ stroke: Stroke) {
-        maskView.setNeedsDisplay()
+        maskView.setNeedsDisplay(for: stroke)
         stroke.clearUpdateInfo()
     }
 

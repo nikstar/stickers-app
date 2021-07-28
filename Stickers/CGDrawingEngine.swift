@@ -35,7 +35,7 @@ class StrokeCGView: UIView {
         }
     }
 
-    let strokeColor = UIColor.systemGreen.withAlphaComponent(0.5)
+    let strokeColor = UIColor.systemGreen
 
     // Hold samples when attempting to draw lines that are too short.
     private var heldFromSample: StrokeSample?
@@ -248,17 +248,12 @@ private extension StrokeCGView {
               toSample: StrokeSample,
               fromSample: StrokeSample) {
 
-        let unitVector = heldFromSampleUnitVector != nil ? heldFromSampleUnitVector! : segment.fromSampleUnitNormal
-        let fromUnitVector = unitVector
-        let toUnitVector = segment.toSampleUnitNormal
-
         lineSettings(in: context)
         
         context.beginPath()
         context.setLineCap(.round)
         context.setLineJoin(.round)
         context.setLineWidth(20.0)
-        print(contentScaleFactor)
         context.move(to: fromSample.location)
         context.addLine(to: toSample.location)
         context.closePath()
@@ -280,8 +275,7 @@ private extension StrokeCGView {
     }
 
     func fillColor(in context: CGContext, toSample: StrokeSample, fromSample: StrokeSample) {
-        let fillColorRegular = UIColor.systemGreen.withAlphaComponent(0.5).cgColor
-        context.setFillColor(fillColorRegular)
+        context.setFillColor(strokeColor.cgColor)
     }
 
 }
