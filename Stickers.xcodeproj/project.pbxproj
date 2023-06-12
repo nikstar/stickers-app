@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,8 +13,6 @@
 		582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A8268777CF00F4C2D2 /* Store.swift */; };
 		582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */; };
 		58848C3B268E1EA2003A743D /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 58848C3A268E1EA2003A743D /* SwiftUIX */; };
-		589C2D662697A76D00674EDE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 589C2D642697A76C00674EDE /* InfoPlist.strings */; };
-		589C2D692697A76D00674EDE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 589C2D672697A76D00674EDE /* Localizable.strings */; };
 		58A090E02687AB5F005785A0 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090DF2687AB5F005785A0 /* Style.swift */; };
 		58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090E12687CDB6005785A0 /* ImagePicker.swift */; };
 		58A090E426889625005785A0 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090E326889625005785A0 /* Import.swift */; };
@@ -38,6 +36,8 @@
 		58BBF0AF2690F3A400C8A3A0 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0AE2690F3A400C8A3A0 /* Gzip */; };
 		58BBF0B42691105900C8A3A0 /* TelegramStickersImport in Frameworks */ = {isa = PBXBuildFile; productRef = 58BBF0B32691105900C8A3A0 /* TelegramStickersImport */; };
 		58BBF0B62691C0D800C8A3A0 /* StickerViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */; };
+		58BE86182A3758F100F4E190 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 58BE86172A3758F100F4E190 /* Localizable.xcstrings */; };
+		58BE861A2A37594D00F4E190 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 58BE86192A37594D00F4E190 /* InfoPlist.xcstrings */; };
 		58BF276226AABB62008DEB22 /* MaskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276126AABB62008DEB22 /* MaskCache.swift */; };
 		58BF276426AABBAA008DEB22 /* MaskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276326AABBAA008DEB22 /* MaskConfig.swift */; };
 		58BF276626AABF7A008DEB22 /* MaskEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF276526AABF7A008DEB22 /* MaskEffect.swift */; };
@@ -74,10 +74,6 @@
 		582EB0A52687770200F4C2D2 /* Sticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
 		582EB0A8268777CF00F4C2D2 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSetEditor.swift; sourceTree = "<group>"; };
-		589C2D652697A76C00674EDE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		589C2D682697A76D00674EDE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		589C2D6A2697B11300674EDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		589C2D6B2697B15B00674EDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		58A090DF2687AB5F005785A0 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		58A090E12687CDB6005785A0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		58A090E326889625005785A0 /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
@@ -99,6 +95,8 @@
 		58BBF0A52690EAD900C8A3A0 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		58BBF0AB2690F1FE00C8A3A0 /* LottieViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieViewUI.swift; sourceTree = "<group>"; };
 		58BBF0B52691C0D800C8A3A0 /* StickerViewLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerViewLarge.swift; sourceTree = "<group>"; };
+		58BE86172A3758F100F4E190 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		58BE86192A37594D00F4E190 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		58BF276126AABB62008DEB22 /* MaskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskCache.swift; sourceTree = "<group>"; };
 		58BF276326AABBAA008DEB22 /* MaskConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskConfig.swift; sourceTree = "<group>"; };
 		58BF276526AABF7A008DEB22 /* MaskEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskEffect.swift; sourceTree = "<group>"; };
@@ -152,8 +150,8 @@
 				58BB966826876CB300B62A74 /* Assets.xcassets */,
 				58CB62C0269C95660088F04B /* Fonts */,
 				58BB966D26876CB300B62A74 /* Info.plist */,
-				589C2D642697A76C00674EDE /* InfoPlist.strings */,
-				589C2D672697A76D00674EDE /* Localizable.strings */,
+				58BE86192A37594D00F4E190 /* InfoPlist.xcstrings */,
+				58BE86172A3758F100F4E190 /* Localizable.xcstrings */,
 				58BB966A26876CB300B62A74 /* Preview Content */,
 				58BB966426876CB200B62A74 /* StickersApp.swift */,
 			);
@@ -419,11 +417,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				58BBF097268F960000C8A3A0 /* Impact.ttf in Resources */,
-				589C2D692697A76D00674EDE /* Localizable.strings in Resources */,
+				58BE861A2A37594D00F4E190 /* InfoPlist.xcstrings in Resources */,
 				58BB966C26876CB300B62A74 /* Preview Assets.xcassets in Resources */,
 				58BB966926876CB300B62A74 /* Assets.xcassets in Resources */,
 				58BBF099268F970900C8A3A0 /* Comic Sans MS Bold.ttf in Resources */,
-				589C2D662697A76D00674EDE /* InfoPlist.strings in Resources */,
+				58BE86182A3758F100F4E190 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,27 +486,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		589C2D642697A76C00674EDE /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				589C2D652697A76C00674EDE /* ru */,
-				589C2D6B2697B15B00674EDE /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		589C2D672697A76D00674EDE /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				589C2D682697A76D00674EDE /* ru */,
-				589C2D6A2697B11300674EDE /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		58BB966E26876CB300B62A74 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -562,6 +539,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -617,6 +595,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -647,6 +626,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.nikstar.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -673,6 +653,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.nikstar.Stickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
