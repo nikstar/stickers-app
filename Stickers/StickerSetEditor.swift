@@ -155,7 +155,7 @@ struct StickerSetEditor: View {
                 )
             }
         }
-        .captureSize(in: $containerSize)
+        ._measureAndRecordSize(into: $containerSize)
         .environmentObject(store) // crashes without it. bug in Swift UI?
     }
     
@@ -262,6 +262,12 @@ struct StickerSetEditor: View {
                 case .setIsEmpty:
                     errorMessage = "Empty set"
                     errorDescription = "Looks like this set does not contain any stickers"
+                case .fileIsEmpty:
+                    break
+                case .emojiIsEmpty:
+                    break
+                case .telegramNotInstalled:
+                    break
                 }
                 alertContent = .error
                 alertPresented = true

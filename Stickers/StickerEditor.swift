@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct StickerEditor: View {
     
@@ -59,7 +60,7 @@ struct StickerEditor: View {
                 .padding(.horizontal, 24)
         }
         .maxHeight(previewSize.width * 0.75)
-        .captureSize(in: $previewSize)
+        ._measureAndRecordSize(into: $previewSize)
     }
     
     var backgroundPattern: some View {

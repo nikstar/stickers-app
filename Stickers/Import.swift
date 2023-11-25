@@ -11,7 +11,7 @@ import TelegramStickersImport
 extension Store {
     func export(_ stickerSet: StickerSet) throws {
         
-        let exportSet = TelegramStickersImport.StickerSet(software: "Sticker Maker for Telegram", isAnimated: stickerSet.type == .animated)
+        let exportSet = TelegramStickersImport.StickerSet(software: "Sticker Maker for Telegram", type: stickerSet.type == .animated ? .animation : .image)
         
         for id in stickerSet.stickers {
             guard let sticker = self.getSticker(id: id) else { continue }

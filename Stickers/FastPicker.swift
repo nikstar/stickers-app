@@ -29,7 +29,7 @@ struct FastPicker<Item: Cyclable & LocalizedDescription, Label: View>: View {
                 label()
                     .foregroundColor(.primary)
                 Spacer(minLength: 8)
-                    .maxWidth(20)
+                    .frame(maxWidth: 20)
             }
             .buttonStyle(BorderlessButtonStyle())
             
