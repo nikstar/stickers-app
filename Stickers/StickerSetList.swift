@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIX
+
 
 struct StickerSetList: View {
     

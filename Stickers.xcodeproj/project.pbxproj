@@ -12,7 +12,6 @@
 		582EB0A62687770200F4C2D2 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A52687770200F4C2D2 /* Sticker.swift */; };
 		582EB0A9268777CF00F4C2D2 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0A8268777CF00F4C2D2 /* Store.swift */; };
 		582EB0AB26878F0C00F4C2D2 /* StickerSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EB0AA26878F0B00F4C2D2 /* StickerSetEditor.swift */; };
-		58848C3B268E1EA2003A743D /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 58848C3A268E1EA2003A743D /* SwiftUIX */; };
 		58A090E02687AB5F005785A0 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090DF2687AB5F005785A0 /* Style.swift */; };
 		58A090E22687CDB6005785A0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090E12687CDB6005785A0 /* ImagePicker.swift */; };
 		58A090E426889625005785A0 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A090E326889625005785A0 /* Import.swift */; };
@@ -133,7 +132,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58848C3B268E1EA2003A743D /* SwiftUIX in Frameworks */,
 				58BBF0AF2690F3A400C8A3A0 /* Gzip in Frameworks */,
 				58BBF0B42691105900C8A3A0 /* TelegramStickersImport in Frameworks */,
 				58BBF0A92690EFB000C8A3A0 /* Lottie in Frameworks */,
@@ -363,7 +361,6 @@
 			);
 			name = Stickers;
 			packageProductDependencies = (
-				58848C3A268E1EA2003A743D /* SwiftUIX */,
 				58BBF0A82690EFB000C8A3A0 /* Lottie */,
 				58BBF0AE2690F3A400C8A3A0 /* Gzip */,
 				58BBF0B32691105900C8A3A0 /* TelegramStickersImport */,
@@ -378,8 +375,9 @@
 		58BB965926876CB200B62A74 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					58BB966026876CB200B62A74 = {
 						CreatedOnToolsVersion = 12.5;
@@ -491,6 +489,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -524,6 +524,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -553,6 +554,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -586,6 +589,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -718,11 +722,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		58848C3A268E1EA2003A743D /* SwiftUIX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 58848C39268E1EA2003A743D /* XCRemoteSwiftPackageReference "SwiftUIX" */;
-			productName = SwiftUIX;
-		};
 		58BBF0A82690EFB000C8A3A0 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 58BBF0A72690EFB000C8A3A0 /* XCRemoteSwiftPackageReference "lottie-ios" */;

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIX
+
 import Lottie
 
 
@@ -58,7 +58,7 @@ struct StickerView: View {
             if let animation = store.getAnimated(id: sticker.id) {
                 LottieViewUI(animation: animation, size: size)
                     .aspectRatio(1, contentMode: .fit)
-                    .frame(CGSize(width: size, height: size))
+                    .frame(width: size, height: size)
             } else {
                 errorView
             }
@@ -68,7 +68,7 @@ struct StickerView: View {
     var errorView: some View {
         Image(systemName: "nosign")
             .resizable()
-            .foregroundColor(.tertiaryLabel)
+            .foregroundColor(Color(UIColor.tertiaryLabel))
             .aspectRatio(1, contentMode: .fit)
             .padding(10)
     }

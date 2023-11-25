@@ -7,7 +7,7 @@
 
 import SwiftUI
 import UIKit
-import SwiftUIX
+
 
 struct MaskEditor: View {
     
@@ -31,7 +31,9 @@ struct MaskEditor: View {
             if let image = image {
                 VStack(spacing: 0) {
                     CanvasView(image: image, mask: mask) { newMask in print(newMask) }
-                    Rectangle().foregroundColor(.secondarySystemBackground).height(200)
+                    Rectangle()
+                        .foregroundColor(Color(UIColor.secondarySystemBackground))
+                        .frame(height: 200)
                 }
             } else {
                 ErrorView()
