@@ -37,89 +37,99 @@ struct ImagePicker: UIViewControllerRepresentable {
 
 // MARK: - Coordinaror
 
+
+
+fileprivate func loadImages(_ imageProxies: [PHPickerResult]) async -> [Data] {
+    
+    return await withTaskGroup(of: (Int, Data?).self, returning: [Data].self) { group in
+        for (index, imageProxy) in imageProxies.enumerated() {
+            group.addTask {
+                let data = await loadOneImage(imageProxy: imageProxy)
+                return (index, data)
+            }
+        }
+        var enumeratedImages: [(Int, Data?)] = []
+        for await pair in group {
+            enumeratedImages.append(pair)
+        }
+        return enumeratedImages
+            .sorted(by: { lhs, rhs in lhs.0 < rhs.0 })
+            .compactMap({ pair in pair.1 })
+    }
+}
+
+
+fileprivate func loadOneImage(imageProxy: PHPickerResult) async -> Data? {
+    return await withCheckedContinuation { (continuation: CheckedContinuation<Data?, Never>) in
+        imageProxy.itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { (url, error) in
+            
+            guard let url else {
+                continuation.resume(returning: nil); return
+            }
+            
+            let sourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+            guard let source = CGImageSourceCreateWithURL(url as CFURL, sourceOptions) else {
+                continuation.resume(returning: nil); return
+            }
+            
+            let downsampleOptions = [
+                kCGImageSourceCreateThumbnailFromImageAlways: true,
+                kCGImageSourceCreateThumbnailWithTransform: true,
+                kCGImageSourceThumbnailMaxPixelSize: 1_024,
+            ] as CFDictionary
+            
+            guard let cgImage = CGImageSourceCreateThumbnailAtIndex(source, 0, downsampleOptions) else {
+                continuation.resume(returning: nil); return
+            }
+            
+            let data = NSMutableData()
+            
+            guard let imageDestination = CGImageDestinationCreateWithData(data, UTType.jpeg.identifier as CFString, 1, nil) else {
+                continuation.resume(returning: nil); return
+            }
+            
+            // Don't compress PNGs, they're too pretty
+            let isPNG: Bool = {
+                guard let utType = cgImage.utType else { return false }
+                return (utType as String) == UTType.png.identifier
+            }()
+            
+            let destinationProperties = [
+                kCGImageDestinationLossyCompressionQuality: isPNG ? 1.0 : 0.75
+            ] as CFDictionary
+            
+            CGImageDestinationAddImage(imageDestination, cgImage, destinationProperties)
+            CGImageDestinationFinalize(imageDestination)
+            
+            continuation.resume(returning: Data(data))
+        }
+    }
+}
+
 extension ImagePicker {
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
         
         let parent: ImagePicker
-        
-        private var resultsCount: Int = -1
-        private var totalConversionsCompleted = 0 {
-            didSet {
-                if totalConversionsCompleted == resultsCount {
-                    parent.loadedImagesData = selectedImageDatas.compactMap { $0 }
-                    parent.presentationMode.wrappedValue.dismiss()
-                }
-            }
-        }
-        let queue = DispatchQueue(label: "me.nikstar.Stickers.load")
-        var selectedImageDatas: [Data?] = []
-        
+        private var task: Task<Void, Never>? = nil
         
         init(_ parent: ImagePicker) {
             self.parent = parent
         }
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            resultsCount = results.count
-            totalConversionsCompleted = 0
-            selectedImageDatas = [Data?](repeating: nil, count: results.count) // Awkwardly named, sure
-            
-            for (index, result) in results.enumerated() {
-                result.itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { [queue] (url, error) in
-                    guard let url = url else {
-                        queue.sync { self.totalConversionsCompleted += 1 }
-                        return
-                    }
-                    let sourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
-                    guard let source = CGImageSourceCreateWithURL(url as CFURL, sourceOptions) else {
-                        queue.sync { self.totalConversionsCompleted += 1 }
-                        return
-                    }
-                    let downsampleOptions = [
-                        kCGImageSourceCreateThumbnailFromImageAlways: true,
-                        kCGImageSourceCreateThumbnailWithTransform: true,
-                        kCGImageSourceThumbnailMaxPixelSize: 1_024,
-                    ] as CFDictionary
-
-                    guard let cgImage = CGImageSourceCreateThumbnailAtIndex(source, 0, downsampleOptions) else {
-                        queue.sync { self.totalConversionsCompleted += 1 }
-                        return
-                    }
-
-                    let data = NSMutableData()
-                    
-                    guard let imageDestination = CGImageDestinationCreateWithData(data, UTType.jpeg.identifier as CFString, 1, nil) else {
-                        queue.sync { self.totalConversionsCompleted += 1 }
-                        return
-                    }
-                    
-                    // Don't compress PNGs, they're too pretty
-                    let isPNG: Bool = {
-                        guard let utType = cgImage.utType else { return false }
-                        return (utType as String) == UTType.png.identifier
-                    }()
-
-                    let destinationProperties = [
-                        kCGImageDestinationLossyCompressionQuality: isPNG ? 1.0 : 0.75
-                    ] as CFDictionary
-
-                    CGImageDestinationAddImage(imageDestination, cgImage, destinationProperties)
-                    CGImageDestinationFinalize(imageDestination)
-                    
-                    queue.sync {
-                        self.selectedImageDatas[index] = data as Data
-                        self.totalConversionsCompleted += 1
-                    }
-                }
+            task = Task {
+                let loaded = await loadImages(results)
+                parent.loadedImagesData = loaded
+                parent.presentationMode.wrappedValue.dismiss()
             }
         }
     }
     
 }
 
-
-struct ImagePicker_Previews: PreviewProvider {
-    static var previews: some View {
-        ImagePicker(loadedImagesData: .constant([]))
-    }
-}
+//
+//struct ImagePicker_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImagePicker(loadedImagesData: .constant([]))
+//    }
+//}
