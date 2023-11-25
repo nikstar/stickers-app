@@ -59,7 +59,8 @@ struct StickerSetList: View {
             store.removeEmptyStickerSets()
         }) {
             if let id = presentedStickerSetID {
-                StickerSetEditor(stickerSet: store.binding(forStickerSet: id.0), isNew: id.1).environmentObject(store)
+                StickerSetEditor(stickerSet: store.binding(forStickerSet: id.0), isNew: id.1)
+                    .environmentObject(store)
             }
         }
     }

@@ -171,6 +171,7 @@ struct StickerSetEditor: View {
                         Color.secondary.opacity(0.08)
                             .cornerRadius(12)
                         StickerView(sticker: sticker, size: cellSize - 12, showEmoji: true)    
+                            .environmentObject(store)
                     }
                     .frame(width: cellSize, height: cellSize)
                 }

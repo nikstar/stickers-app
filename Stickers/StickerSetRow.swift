@@ -28,6 +28,7 @@ struct StickerSetRow: View {
                         Group {
                             if let sticker = store.getSticker(id: id) {
                                 StickerView(sticker: sticker, size: 96, showEmoji: false)
+                                    .environmentObject(store)
                             }
                             
                         }
