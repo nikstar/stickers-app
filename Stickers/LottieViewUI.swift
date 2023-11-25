@@ -10,11 +10,11 @@ import Lottie
 
 struct LottieViewUI: UIViewRepresentable {
     
-    var animation: Lottie.Animation
+    var animation: LottieAnimation
     var size: CGFloat
     
     func makeUIView(context: Context) -> UIView {
-        let animation = Lottie.AnimationView(animation: animation)
+        let animation = LottieAnimationView(animation: animation)
         animation.loopMode = .loop
         animation.backgroundBehavior = .pauseAndRestore
         animation.contentMode = .scaleAspectFit
@@ -40,7 +40,7 @@ struct LottieViewUI: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
-        let animation = uiView.subviews[0] as! AnimationView
+        let animation = uiView.subviews[0] as! LottieAnimationView
         if size != context.coordinator.size {
             NSLayoutConstraint.deactivate(context.coordinator.heightConstraints)
             context.coordinator.heightConstraints = [

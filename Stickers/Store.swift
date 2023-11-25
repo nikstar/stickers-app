@@ -72,14 +72,14 @@ final class Store: ObservableObject {
                 return stickerSet
             } else {
                 let stickerSet = StickerSet(id: id, stickers: [])
-                self.stickerSets.insert(stickerSet, at: 0)
+                DispatchQueue.main.async { self.stickerSets.insert(stickerSet, at: 0) }
                 return stickerSet
             }
         } set: { newValue in
             if let idx = self.stickerSets.firstIndex(where: { $0.id == id }) {
-                self.stickerSets[idx] = newValue
+                DispatchQueue.main.async { self.stickerSets[idx] = newValue }
             } else {
-                self.stickerSets.insert(newValue, at: 0)
+                DispatchQueue.main.async { self.stickerSets.insert(newValue, at: 0) }
             }
         }
     }
@@ -156,12 +156,12 @@ final class Store: ObservableObject {
         }
     }
     
-    func getAnimated(id: UUID) -> Lottie.Animation? {
+    func getAnimated(id: UUID) -> LottieAnimation? {
         do {
             let url = originalImages.getURL(id: id)
             let data = try Data(contentsOf: url)
             let unzipped = try data.gunzipped()
-            let animation = try JSONDecoder().decode(Lottie.Animation.self, from: unzipped)
+            let animation = try JSONDecoder().decode(LottieAnimation.self, from: unzipped)
             return animation
         } catch {
             return nil

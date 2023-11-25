@@ -21,8 +21,23 @@ extension Store: Codable {
     
     convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let stickerSets = try container.decode([StickerSet].self, forKey: .stickerSets)
+        
+        let _stickerSets = try container.decode([StickerSet].self, forKey: .stickerSets)
+        
+        // ensure unique ids
+        var ids = Set<UUID>()
+        var stickerSets = [StickerSet]()
+        for stickerSet in _stickerSets {
+            if ids.contains(stickerSet.id) == false {
+                ids.insert(stickerSet.id)
+                stickerSets.append(stickerSet)
+            } else {
+                print("duplicate sticker set!")
+            }
+        }
+        
         let stickers = try container.decode([Sticker].self, forKey: .stickers)
+            
         self.init(stickerSets: stickerSets, stickers: stickers)
     }
     
